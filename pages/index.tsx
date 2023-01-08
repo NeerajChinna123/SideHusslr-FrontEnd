@@ -20,7 +20,6 @@ export default function Home() {
 
         <style></style>
 
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
         <style type="text/css">
           {/* @font-face {
         font-family: Roboto;
