@@ -17,15 +17,6 @@ export default function Home() {
         <meta name="theme-color" content="#000000" />
         <link rel="manifest" href="manifest.json" />
         <title>Side Husslr</title>
-
-        <style></style>
-
-        <style type="text/css">
-          {/* @font-face {
-        font-family: Roboto;
-        src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf");
-      } */}
-        </style>
         <meta
           name="description"
           content="Trydo – Multipurpose React Template is a multi-use React template. It is designed to go well with multi-purpose websites. Trydo React Template will create that various landing Template, Creative Agency, And Corporate Website ."
