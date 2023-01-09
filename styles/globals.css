@@ -24628,3 +24628,8 @@ a.purchase-btn:hover {
   }
 }
 
+
+.my-social-icon .social-svg:hover {
+  color: white;
+
+}

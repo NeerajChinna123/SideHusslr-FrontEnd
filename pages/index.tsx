@@ -403,7 +403,7 @@ export default function Home() {
                     <ul className="social-share rn-lg-size flex justify-center liststyle">
                       <li>
                         <SocialIcon
-                          className="h-3 w-3 transform transition duration-500 text-gray-400 hover:scale-125 "
+                          className="h-3 w-3 transform my-social-icon transition duration-500 text-gray-400 hover:scale-125 "
                           bgColor="transparent"
                           fgColor="rgba(198, 201, 216, 0.75)"
                           url="https://www.facebook.com/"
@@ -411,8 +411,9 @@ export default function Home() {
                       </li>
                       <li>
                         <SocialIcon
-                          className="h-3 w-3 transform transition duration-500 text-gray-400 hover:scale-125 "
+                          className="h-3 w-3 transform my-social-icon transition duration-500 text-gray-400 hover:scale-125 "
                           bgColor="transparent"
+                
                           fgColor="rgba(198, 201, 216, 0.75)"
                           url="https://www.linkedin.com/"
                         />
@@ -420,7 +421,7 @@ export default function Home() {
                       <li>
                        
                         <SocialIcon
-                          className="h-3 w-3 transform transition duration-500 text-gray-400 hover:scale-125 "
+                          className="h-3 w-3 transform my-social-icon transition duration-500 text-gray-400 hover:scale-125 "
                           bgColor="transparent"
                           fgColor="rgba(198, 201, 216, 0.75)"
                           url="https://www.instagram.com/"
@@ -428,7 +429,7 @@ export default function Home() {
                       </li>
                       <li>
                         <SocialIcon
-                          className="h-3 w-3 transform transition duration-500 text-gray-400 hover:scale-125 "
+                          className="h-3 w-3 transform my-social-icon transition duration-500 text-gray-400 hover:scale-125 "
                           bgColor="transparent"
                           fgColor="rgba(198, 201, 216, 0.75)"
                           url="https://twitter.com/"
