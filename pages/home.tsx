@@ -26,7 +26,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="scroll-smooth">
-        <div className="h-screen bg-gradient-to-br from-black via-black  to-[#7e0028] ">
+        <div className="h-screen bg-gradient-to-br from-black via-black  to-[#55001b] ">
             <div className="max-w-7xl mx-auto">
                 <Banner />
             </div>
