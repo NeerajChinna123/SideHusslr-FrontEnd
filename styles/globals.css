@@ -9,3 +9,10 @@
   scroll-behavior: smooth;
 }
 
+
+
+.progressVisualPart {
+  /* Number of the seconds for complete animation */
+  transition: width 2s;
+}
+
