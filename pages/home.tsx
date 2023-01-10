@@ -6,6 +6,7 @@ import animationData from "../lottie-aminations/lottie-animation.json";
 import { SocialIcon } from "react-social-icons";
 import styles from "../styles/Home.module.css";
 import Banner from "../containers/Banner";
+import AboutUs from "../containers/AboutUs";
 
 export default function Home() {
   return (
@@ -27,10 +28,13 @@ export default function Home() {
       </Head>
       <main className="scroll-smooth">
         <div className="h-screen">
-          <div className="bg-gradient-to-br pb-14 from-black via-black  to-[#85002a] ">
-            <div className="max-w-7xl mx-auto">
+          <div className="bg-gradient-to-br pb-16 from-black via-black  to-[#85002a] ">
+            <div className="max-w-[82rem] mx-auto">
               <Banner />
             </div>
+          </div>
+          <div className="max-w-[82rem] mx-auto px-[1.2rem] md:px-6">
+              <AboutUs />
           </div>
         </div>
       </main>

@@ -45,7 +45,7 @@ function Banner() {
             <Cursor cursorColor="red" />
           </div>
           <div className="">
-            <p className="text-[0.8rem] md:text-[1rem] leading-6 md:leading-8 tracking-wide text-gray-300 font-base font-poppins">
+            <p className="text-[0.8rem] text-center md:text-start md:text-[1rem] leading-6 md:leading-8 tracking-wide text-gray-300 font-base font-poppins">
               At SideHusslr, we are dedicated to helping students succeed in
               their academic pursuits. Our team of highly qualified and
               experienced consultants is here to provide personalized support
@@ -55,7 +55,8 @@ function Banner() {
             </p>
           </div>
           <div className="justify-center flex md:justify-start">
-            <motion.div
+            <motion.a
+              href="#aboutUs"
               whileTap={{ scale: 0.96 }}
               className="w-44 group  tracking-wide hover:bg-gray-300 rounded-md px-2 py-2 md:py-0 cursor-pointer justify-center shadow-md shadow-red-600  transition duration-300 ease-in-out  bg-[#f9004d] text-white hover:text-[#f9004d] "
             >
@@ -64,7 +65,7 @@ function Banner() {
                   About Us
                 </p>
               </div>
-            </motion.div>
+            </motion.a>
           </div>
         </div>
         <motion.div className="hidden md:block ">
@@ -72,7 +73,7 @@ function Banner() {
             loop
             animationData={animationData}
             play
-            className="w-[650px] h-[500px]  mr-[-6rem]"
+            className="w-[650px] h-[500px]  mr-[-5rem]"
           />
         </motion.div>
       </motion.div>
