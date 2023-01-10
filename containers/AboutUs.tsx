@@ -92,9 +92,9 @@ function AboutUs() {
 
   return (
     <div className="my-12 md:my-20 flex flex-col md:flex-row">
-      <motion.div
-        whileInView={{ opacity: [0, 1] }}
-        transition={{ duration: 1 }}
+      <div
+        // whileInView={{ opacity: [0, 1] }}
+        // transition={{ duration: 1 }}
         id="aboutUs"
         className="space-y-3 md:space-y-6"
       >
@@ -213,11 +213,11 @@ function AboutUs() {
               loop
               animationData={animationData}
               play
-              className="w-[380px] h-[400px] md:w-[650px] md:h-[500px] md:mt-[-1rem] ml-[-0.2rem]  md:ml-[4rem]"
+              className="w-[23rem] h-[26rem] md:w-[650px] md:h-[500px] md:mt-[-1rem] ml-[-0.2rem]  md:ml-[4rem]"
             />
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

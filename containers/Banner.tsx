@@ -32,9 +32,9 @@ function Banner() {
       <div className="pt-4 md:pt-6">
         <Header />
       </div>
-      <motion.div
-        whileInView={{ opacity: [0, 1] }}
-        transition={{ duration: 1 }}
+      <div
+        // whileInView={{ opacity: [0, 1] }}
+        // transition={{ duration: 1 }}
         className="flex mt-10  md:mt-12 px-[1.2rem] md:px-6"
       >
         <div className="flex flex-col space-y-10">
@@ -76,7 +76,7 @@ function Banner() {
             className="w-[650px] h-[500px]  mr-[-5rem]"
           />
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 }
