@@ -26,10 +26,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="scroll-smooth">
-        <div className="h-screen bg-gradient-to-br from-black via-black  to-[#55001b] ">
+        <div className="h-screen">
+          <div className="bg-gradient-to-br pb-14 from-black via-black  to-[#85002a] ">
             <div className="max-w-7xl mx-auto">
-                <Banner />
+              <Banner />
             </div>
+          </div>
         </div>
       </main>
     </>

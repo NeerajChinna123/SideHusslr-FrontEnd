@@ -7,6 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      poppins: ["Poppins"],
+      montserrat: ["Montserrat"],
+      ubuntu: ["Ubuntu"],
+    },
   },
   plugins: [],
 }
