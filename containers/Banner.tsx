@@ -58,17 +58,17 @@ function Banner() {
             <motion.a
               href="#aboutUs"
               whileTap={{ scale: 0.96 }}
-              className="w-44 group  tracking-wide hover:bg-gray-300 rounded-md px-2 py-2 md:py-0 cursor-pointer justify-center shadow-md shadow-red-600  transition duration-300 ease-in-out  bg-[#f9004d] text-white hover:text-[#f9004d] "
+              className="w-44 group  tracking-wide hover:bg-gray-300 rounded-md px-1 md:px-2 py-2 md:py-0 cursor-pointer justify-center shadow-md shadow-red-600  transition duration-300 ease-in-out  bg-[#f9004d] text-white hover:text-[#f9004d] "
             >
-              <div className="py-4">
-                <p className="transition uppercase duration-100 ease-in-out  text-center group-hover:font-bold tracking-wider font-semibold group-hover:scale-105">
+              <div className="py-2 md:py-4">
+                <p className="transition uppercase duration-100 ease-in-out  text-center group-hover:font-bold tracking-wider font-semibold ">
                   About Us
                 </p>
               </div>
             </motion.a>
           </div>
         </div>
-        <motion.div className="hidden md:block ">
+        <motion.div className="hidden lg:block ">
           <Lottie
             loop
             animationData={animationData}
