@@ -6,7 +6,6 @@ import Lottie from "react-lottie-player";
 import animationData from "../lottie-aminations/Roatating _Planet.json";
 
 function Banner() {
-  const [secondText, setSecondText] = useState(false);
   const text = "Expert Educational Consultants Providing Quality ";
   //   const [text] = useTypewriter({
   //     words: [
@@ -23,9 +22,9 @@ function Banner() {
   const [text2] = useTypewriter({
     words: ["Assignments", "Projects", "and more .."],
     loop: false,
-    typeSpeed: 90,
-    deleteSpeed: 70,
-    delaySpeed: 1600,
+    typeSpeed: 70,
+    deleteSpeed: 40,
+    delaySpeed: 1000,
   });
   return (
     <div>
@@ -38,10 +37,11 @@ function Banner() {
         className="flex mt-10  md:mt-12 px-[1.2rem] md:px-6"
       >
         <div className="flex flex-col space-y-10">
-          <div className="text-white text-center md:text-start text-[3.2rem] md:text-[3.68rem] leading-[4.8rem] md:leading-[5.3rem] font-[800] font-ubuntu tracking-wide capitalize">
-            <span className="">
-              {text} {<span className="text-red-600 font-[800] ">{text2}</span>}
+          <div className="text-white text-center md:text-start text-[2.8rem] md:text-[4rem] leading-[4.4rem] md:leading-[5.4rem] font-[800] md:font-[900] font-poppins tracking-wide capitalize">
+            <span className="md:mr-20">
+              {text} 
             </span>
+            <span className="text-red-600 font-[800] transition duration-100 ease-in-out ">{text2}</span>
             <Cursor cursorColor="red" />
           </div>
           <div className="">
@@ -73,7 +73,7 @@ function Banner() {
             loop
             animationData={animationData}
             play
-            className="w-[650px] h-[500px]  mr-[-5rem]"
+            className="w-[655px] h-[500px]  mr-[-5rem] "
           />
         </motion.div>
       </div>

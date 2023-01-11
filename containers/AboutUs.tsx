@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import animationData from "../lottie-aminations/lottie-animation.json";
 import Lottie from "react-lottie-player";
-import { motion } from "framer-motion";
+
 
 function AboutUs() {
   //Implemented IntersectionObserver inorder to identify whether the progress bar has mounted or not, and update the state of the width to apply the transition animaton for the progress bar
@@ -91,7 +91,7 @@ function AboutUs() {
   }, [isVisibleOtd]);
 
   return (
-    <div className="my-12 md:my-20 flex flex-col md:flex-row">
+    <div className="mt-12 md:mt-20 flex flex-col md:flex-row">
       <div
         // whileInView={{ opacity: [0, 1] }}
         // transition={{ duration: 1 }}
@@ -213,7 +213,7 @@ function AboutUs() {
               loop
               animationData={animationData}
               play
-              className="w-[23rem] h-[26rem] md:w-[650px] md:h-[500px] md:mt-[-1rem] ml-[-0.2rem]  md:ml-[4rem]"
+              className="w-[23rem] h-[26rem] md:w-[650px] md:h-[500px] lg:mt-[-1rem] ml-[-0.2rem]  md:ml-[4rem]"
             />
           </div>
         </div>
