@@ -62,7 +62,7 @@ function Card(props: cardData) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <motion.p className="md:text-gray-700 max-w-[30rem] md:group-hover:text-white  text-white  text-center font-poppins ml-[0.1rem]  text-lg  leading-6 md:leading-7 tracking-wide">
+                <motion.p className="md:text-gray-700 max-w-[30rem] md:group-hover:text-white  text-white  text-center font-poppins ml-[0.1rem]  text-lg  leading-7 tracking-wide">
                   {props?.cardDescription}
                 </motion.p>
               </motion.div>
