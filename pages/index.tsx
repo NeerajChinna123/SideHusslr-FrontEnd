@@ -3,6 +3,8 @@ import Head from "next/head";
 import Banner from "../containers/Banner";
 import AboutUs from "../containers/AboutUs";
 import Services from "../containers/Services";
+import PartneredUniversities from "../containers/PartneredUniversities";
+import Footer from "../containers/Footer";
 
 export default function Home() {
   return (
@@ -28,6 +30,12 @@ export default function Home() {
           <div className="max-w-[82rem] mx-auto px-[1.2rem] md:px-6">
               <AboutUs />
               <Services />
+              <PartneredUniversities />
+          </div>
+          <div className="bg-gradient-to-br mt-8 from-black via-black  to-[#85002a] ">
+            <div className="max-w-[82rem] mx-auto">
+              <Footer />
+            </div>
           </div>
         </div>
       </main>
