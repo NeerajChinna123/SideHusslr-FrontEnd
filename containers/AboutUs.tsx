@@ -93,8 +93,6 @@ function AboutUs() {
   return (
     <div className="mt-12 md:mt-20 flex flex-col md:flex-row">
       <div
-        // whileInView={{ opacity: [0, 1] }}
-        // transition={{ duration: 1 }}
         id="aboutUs"
         className="space-y-3 md:space-y-6"
       >

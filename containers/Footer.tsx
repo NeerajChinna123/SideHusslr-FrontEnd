@@ -4,9 +4,10 @@ import { SocialIcon } from "react-social-icons";
 
 function Footer() {
   const urls = [
-    "https://mobile.twitter.com/Mudassi54424677",
-    "https://www.linkedin.com/in/mudassir-ali-2700/",
-    "https://www.instagram.com/mudassir27/",
+    "https://mobile.twitter.com/SideHusslr",
+    "https://www.linkedin.com/company/sidehusslr/",
+    "https://www.instagram.com/sidehusslr/",
+    "https://www.facebook.com/profile.php?id=100089574185149&mibextid=LQQJ4d"
   ];
   return (
     <div>

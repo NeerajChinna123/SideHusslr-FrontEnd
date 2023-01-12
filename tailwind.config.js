@@ -13,5 +13,5 @@ module.exports = {
       ubuntu: ["Ubuntu"],
     },
   },
-  plugins: [],
+  plugins:[require('tailwind-scrollbar')({ nocompatible: true })],
 }

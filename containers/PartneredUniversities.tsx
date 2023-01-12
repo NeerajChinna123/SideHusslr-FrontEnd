@@ -1,11 +1,10 @@
 import Image from "next/image";
 
+
 function PartneredUniversities() {
   return (
     <div>
       <div
-        // whileInView={{ opacity: [0, 1] }}
-        // transition={{ duration: 1 }}
         className="mt-[4rem] lg:mt-[8rem] lg:px-[12rem]"
       >
         <div className="flex flex-wrap gap-x-6  lg:gap-x-0 justify-center md:space-x-20">
