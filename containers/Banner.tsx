@@ -7,18 +7,6 @@ import animationData from "../lottie-aminations/Roatating _Planet.json";
 
 function Banner() {
   const text = "Expert Educational Consultants Providing Quality ";
-  //   const [text] = useTypewriter({
-  //     words: [
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-  //     ],
-  //     loop: 1,
-  //     typeSpeed: 30,
-  //     deleteSpeed: 50,
-  //     delaySpeed: 1000,
-  //     onLoopDone: () => {
-  //       setSecondText(true);
-  //     },
-  //   });
   const [text2] = useTypewriter({
     words: ["Assignments", "Projects", "and more .."],
     loop: false,
@@ -32,8 +20,6 @@ function Banner() {
         <Header />
       </div>
       <div
-        // whileInView={{ opacity: [0, 1] }}
-        // transition={{ duration: 1 }}
         className="flex mt-10  md:mt-12 px-[1.2rem] md:px-6"
       >
         <div className="flex flex-col space-y-10">
