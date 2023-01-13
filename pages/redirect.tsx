@@ -1,9 +1,9 @@
-import React from 'react'
+import { useSession, signIn, signOut } from "next-auth/react";
 
 function redirect() {
-  return (
-    <div>redirect</div>
-  )
+  const { data: session } = useSession();
+  console.log("ses", session);
+  return <div>redirect</div>;
 }
 
-export default redirect
+export default redirect;
