@@ -4,11 +4,32 @@ import {
   PhoneIcon,
   ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/solid";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useEffect, useRef } from "react";
+import LoadingBar from "react-top-loading-bar";
+
 import { motion } from "framer-motion";
+import { AnyRecord } from "dns";
 
 function Header() {
+  function delay(time: number) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
+  const ref = useRef<any>();
+
+  function signInFun() {
+    ref.current.continuousStart();
+
+    delay(300).then(() => {
+      ref.current.complete();
+      signIn();
+    });
+  }
+
   return (
     <div className="flex items-center px-[0.8rem] md:px-2">
+      <LoadingBar height={4} className="bg-red-600" ref={ref} />
       <div className="flex-1">
         <div className=" relative h-[5rem] w-[5rem] md:h-[7rem] md:w-[7rem]">
           <Image
@@ -34,6 +55,9 @@ function Header() {
         </motion.div>
         <motion.div
           whileTap={{ scale: 0.96 }}
+          onClick={() => {
+            signInFun();
+          }}
           className="flex items-center tracking-wide space-x-2 bg-black border rounded-lg px-2 py-2 md:py-0 cursor-pointer justify-center shadow-md shadow-red-800 border-[#f9004d] transition duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white "
         >
           <div>

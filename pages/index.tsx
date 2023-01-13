@@ -5,6 +5,7 @@ import AboutUs from "../containers/AboutUs";
 import Services from "../containers/Services";
 import PartneredUniversities from "../containers/PartneredUniversities";
 import Footer from "../containers/Footer";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   return (
