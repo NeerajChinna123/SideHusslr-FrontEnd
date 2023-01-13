@@ -6,7 +6,11 @@ module.exports = {
     "./containers/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'bgBlackBlur':'rgba(0,0,0,3)'
+      },
+    },      
     fontFamily: {
       poppins: ["Poppins"],
       montserrat: ["Montserrat"],
