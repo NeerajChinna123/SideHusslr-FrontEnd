@@ -86,23 +86,23 @@ export default function SignIn({ csrfToken }: any) {
               onSubmit={handleSubmit(onSubmit)}
               className="flex-col space-y-2"
             >
-              {!submitting && (
-                <div className="text-red-600 font-semibold text-md text-center  p-2">
-                  {" "}
-                  {error}
-                </div>
-              )}
+              <div className="text-red-600 font-semibold text-md text-center  p-2">
+                {!submitting && error}
+              </div>
+
               <div className="flex flex-col gap-2">
                 <input
                   {...register("csrfToken")}
                   name="csrfToken"
                   type="hidden"
+                  
                 />
                 <div>
                   <p className="text-white text-sm font-poppins tracking-wide mb-2 opacity-80">
                     E-mail or Username
                   </p>
                   <input
+                    autoComplete="off"
                     className={`form-input mt-1 w-full  rounded-sm border border-gray-500 bg-transparent py-3  pl-3 pr-12 font-ubuntu text-white shadow outline-none ring-red-700 focus:none `}
                     type="text"
                     placeholder="Enter your E-mail or Username "
@@ -116,6 +116,7 @@ export default function SignIn({ csrfToken }: any) {
                     Password
                   </p>
                   <input
+                    autoComplete="off"
                     className={`form-input  bg-darkhBgLight  mt-1 w-full rounded-sm border border-gray-500 bg-transparent py-3 pl-3 pr-12 font-ubuntu text-white shadow outline-none ring-red-700 focus:none `}
                     type={passVisible ? "text" : "password"}
                     placeholder="Password"

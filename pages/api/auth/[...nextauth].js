@@ -16,7 +16,7 @@ export default NextAuth({
           },
         };
         const res = await axios.post(
-          "https://sidehusslr.cleverapps.io/login",
+          `${process.env.SIDEHUSSLR_API}/login`,
           payload,
           customConfig
         );
