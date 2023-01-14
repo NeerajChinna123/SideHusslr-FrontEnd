@@ -1,4 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import Header from "../components/Header";
 import { useRouter } from "next/router";
 
 function Student() {
