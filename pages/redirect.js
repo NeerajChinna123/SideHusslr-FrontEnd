@@ -3,7 +3,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import LoadingBar from "react-top-loading-bar";
 
-function redirect() {
+function Redirect() {
   const { data: session, status } = useSession();
 
   const router = useRouter();
@@ -47,4 +47,4 @@ function redirect() {
   );
 }
 
-export default redirect;
+export default Redirect;

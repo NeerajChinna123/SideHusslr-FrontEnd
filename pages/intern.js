@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-function intern() {
+function Intern() {
   const { data: session, status } = useSession();
 
   const router = useRouter();
@@ -48,4 +48,4 @@ function intern() {
   );
 }
 
-export default intern;
+export default Intern;
