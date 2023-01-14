@@ -2,7 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
 
-function admin() {
+function Admin() {
   const { data: session, status } = useSession();
 
   const router = useRouter();
@@ -49,4 +49,4 @@ function admin() {
   );
 }
 
-export default admin;
+export default Admin;
