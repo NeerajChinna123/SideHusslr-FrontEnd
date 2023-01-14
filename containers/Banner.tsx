@@ -17,7 +17,7 @@ function Banner() {
   return (
     <div>
       <div className="pt-4 md:pt-6">
-        <Header />
+        <Header page="Banner" />
       </div>
       <div
         className="flex mt-10  md:mt-12 px-[1.2rem] md:px-6"

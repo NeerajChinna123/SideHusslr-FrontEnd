@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import { useSession } from "next-auth/react";
 
 interface IFormInput {
   csrfToken: any;
@@ -13,8 +14,14 @@ interface IFormInput {
 }
 
 export default function SignIn({ csrfToken }: any) {
+  const { status } = useSession();
   const router = useRouter();
   const [error, setError] = useState<any>();
+  
+  if(status=="authenticated"){
+    router.push('/redirect');
+  }
+
   const {
     register,
     handleSubmit,
