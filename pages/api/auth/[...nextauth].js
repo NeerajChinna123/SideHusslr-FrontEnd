@@ -27,37 +27,32 @@ export default NextAuth({
         }
         // If no error and we have user data, return it
         if (res?.data?.success == true) {
+          console.log("user : ", user);
           return user;
         }
-
         // Return null if user data could not be retrieved
         return null;
       },
     }),
   ],
-   secret: process.env.JWT_SECRET,
+  // jwt: { encryption: false },
+  secret: process.env.JWT_SECRET,
   pages: {
     signIn: "/auth/signIn",
   },
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account}) {
       if (account && user) {
         return {
           ...token,
+          ...user,
           accessToken: user.token,
-          refreshToken: user.refreshToken,
         };
       }
-
       return token;
     },
-
-    async session({ session, token }) {
-      session.user.accessToken = token.accessToken;
-      session.user.refreshToken = token.refreshToken;
-      session.user.accessTokenExpires = token.accessTokenExpires;
-
-      return session;
+    async session({ session,user, token }) {
+      return {...token};
     },
   },
   // Enable debug messages in the console if you are having problems
