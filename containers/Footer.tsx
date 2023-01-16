@@ -26,7 +26,7 @@ function Footer() {
               src={"/logo.png"}
             />
           </div>
-          <div className="flex mx-auto lg:pl-[10rem] space-x-4">
+          <div className="flex mx-auto lg:pl-[7rem] space-x-4">
             {urls.map((url) => (
               <motion.div
                 whileTap={{ scale: 0.96 }}
@@ -43,7 +43,7 @@ function Footer() {
               </motion.div>
             ))}
           </div>
-          <div className="pt-4 lg:pt-0 text-center">
+          <div className="pt-4 lg:pt-0 lg:w-[13rem] lg:leading-6 text-center">
               <p className="text-gray-100 font-poppins text-[0.8rem] tracking-wide">Copyright © 2023 Side Husslr. All Rights Reserved.</p>
           </div>
         </div>

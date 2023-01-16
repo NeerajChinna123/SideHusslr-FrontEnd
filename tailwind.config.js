@@ -15,6 +15,7 @@ module.exports = {
       poppins: ["Poppins"],
       montserrat: ["Montserrat"],
       ubuntu: ["Ubuntu"],
+      sanSerif: ["var(--font-sf)", "system-ui", "sans-serif"],
     },
   },
   plugins:[require('tailwind-scrollbar')({ nocompatible: true })],
