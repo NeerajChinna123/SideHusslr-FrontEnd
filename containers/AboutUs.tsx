@@ -4,7 +4,9 @@ import Lottie from "react-lottie-player";
 
 
 function AboutUs() {
-  //Implemented IntersectionObserver inorder to identify whether the progress bar has mounted or not, and update the state of the width to apply the transition animaton for the progress bar
+
+  //Implemented IntersectionObserver inorder to identify whether the progress bar has mounted or not, 
+  //and update the state of the width to apply the transition animaton for the progress bar
 
   function useIsVisible(ref: any) {
     const [isIntersecting, setIntersecting] = useState(false);
