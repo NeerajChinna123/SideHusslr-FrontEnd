@@ -37,7 +37,7 @@ export default function UserDropdown({signOut}) {
       {openPopover && (
         <motion.div
           {...FADE_IN_ANIMATION_SETTINGS}
-          class="absolute z-100 inline-block w-40 text-sm left-[-2.5rem] bg-black  border rounded-md   cursor-pointer justify-center shadow-md shadow-red-800 border-[#f9004d] transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white"
+          class="absolute z-100 inline-block w-40 text-sm left-[-2.1rem] md:left-[-2.5rem] bg-black  border rounded-md   cursor-pointer justify-center shadow-md shadow-red-800 border-[#f9004d] transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white"
         >
           <motion.div
             onClick={() => {
