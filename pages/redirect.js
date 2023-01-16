@@ -10,16 +10,15 @@ function Redirect() {
   const ref = useRef(null);
 
   useEffect(() => {
-    ref.current.continuousStart();
+    ref?.current?.continuousStart();
+    ref?.current?.complete();
   }, []);
 
   function delay(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
-
   if (session && status == "authenticated") {
-    ref?.current?.complete();
     if (session.data[0].user_status == "ACTIVE") {
       if (session.data[0].user_type == "ADMIN") {
         delay(600).then(() => router.push("/admin"));
@@ -36,7 +35,6 @@ function Redirect() {
   }
 
   if (!session && status == "unauthenticated") {
-    ref?.current?.complete();
     delay(600).then(() => router.push("/"));
   }
 

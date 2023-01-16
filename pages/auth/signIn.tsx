@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
+import { FADE_DOWN_ANIMATION_VARIANTS } from "../../lib/constants";
 
 interface IFormInput {
   csrfToken: any;
@@ -17,9 +18,9 @@ export default function SignIn({ csrfToken }: any) {
   const { status } = useSession();
   const router = useRouter();
   const [error, setError] = useState<any>();
-  
-  if(status=="authenticated"){
-    router.push('/redirect');
+
+  if (status == "authenticated") {
+    router.push("/redirect");
   }
 
   const {
@@ -65,9 +66,26 @@ export default function SignIn({ csrfToken }: any) {
 
   return (
     <>
-      <div className="h-screen relative flex items-center justify-center bg-gradient-to-br from-black via-black  to-[#85002a] ">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        animate="show"
+        viewport={{ once: true }}
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.15,
+            },
+          },
+        }}
+        className="h-screen relative flex items-center justify-center bg-gradient-to-br from-black via-black  to-[#85002a] "
+      >
         <div className="absolute top-16 md:top-10">
-          <div className=" relative h-[5rem] w-[5rem] md:h-[7rem] md:w-[7rem]">
+          <motion.div
+            variants={FADE_DOWN_ANIMATION_VARIANTS}
+            className=" relative h-[5rem] w-[5rem] md:h-[7rem] md:w-[7rem]"
+          >
             <Image
               alt=""
               className=""
@@ -75,10 +93,13 @@ export default function SignIn({ csrfToken }: any) {
               objectFit="contain"
               src={"/logo.png"}
             />
-          </div>
+          </motion.div>
         </div>
-        <div className=" w-[22rem]   md:w-[32rem] mt-10 ">
-          <div className=" shadow-red-600 shadow-md border border-stone-800 rounded-sm p-8 md:p-10">
+        <motion.div className=" w-[22rem]   md:w-[32rem] mt-10 ">
+          <motion.div
+            variants={FADE_DOWN_ANIMATION_VARIANTS}
+            className=" shadow-red-600 shadow-md border border-stone-800 rounded-sm p-8 md:p-10"
+          >
             <div>
               <p className="text-center font-bold  text-lg font-poppins uppercase text-[#f9004d]">
                 Welcome Back
@@ -102,7 +123,6 @@ export default function SignIn({ csrfToken }: any) {
                   {...register("csrfToken")}
                   name="csrfToken"
                   type="hidden"
-                  
                 />
                 <div>
                   <p className="text-white text-sm font-poppins tracking-wide mb-2 opacity-80">
@@ -177,14 +197,15 @@ export default function SignIn({ csrfToken }: any) {
                   value={submitting ? "Logging in ..." : "Login now"}
                   className={
                     `mx-auto flex w-full cursor-pointer justify-center rounded-[0.2rem] bg-[#f9004d] py-4 px-8 font-poppins text-lg font-semibold tracking-wide text-gray-100 shadow-md  transition duration-500 ease-in-out lg:px-8 lg:hover:bg-[#be003c] lg:hover:text-white ` +
-                    (submitting && "cursor-not-allowed opacity-70")
+                    (submitting &&
+                      "cursor-not-allowed animate-pulse opacity-70")
                   }
                 />
               </motion.div>
             </form>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }
