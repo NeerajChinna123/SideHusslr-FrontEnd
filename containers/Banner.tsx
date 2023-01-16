@@ -49,14 +49,14 @@ function Banner() {
             <Cursor cursorColor="red" />
           </motion.div>
           <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="">
-            <Balancer className="text-[0.8rem] text-center md:text-start md:text-[1rem] leading-6 md:leading-8 tracking-wide text-gray-300 font-base font-poppins">
+            <p className="text-[0.8rem] text-center md:text-start md:text-[1rem] leading-6 md:leading-8 tracking-wide text-gray-300 font-base font-poppins">
               At SideHusslr, we are dedicated to helping students succeed in
               their academic pursuits. Our team of highly qualified and
               experienced consultants is here to provide personalized support
               and guidance on a wide range of educational projects, including
               assignments and many more. Contact us today to learn more about
               how we can support your learning journey.
-            </Balancer>
+            </p>
           </motion.div>
           <motion.div
             variants={FADE_DOWN_ANIMATION_VARIANTS}
