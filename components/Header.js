@@ -100,21 +100,35 @@ function Header({ page }) {
               </motion.div>
             ) : (
               status == "authenticated" && (
-                <motion.div
-                  {...FADE_IN_ANIMATION_SETTINGS}
-                  whileTap={{ scale: 0.96 }}
-                  onClick={() => {
-                    router.push("/redirect");
-                  }}
-                  className="flex items-center  tracking-wide space-x-2 bg-black border rounded-lg px-2 cursor-pointer justify-center shadow-md shadow-red-800 border-[#f9004d] transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white "
-                >
-                  <div className="py-2">
-                    <p className=" text-center tracking-wider text-white font-semibold">
-                      Get Started
-                    </p>
-                  </div>
-                  <ArrowRightCircleIcon className="h-6 w-6 animate-pulse text-semibold" />
-                </motion.div>
+                <>
+                  <motion.div
+                    {...FADE_IN_ANIMATION_SETTINGS}
+                    whileTap={{ scale: 0.96 }}
+                    className="flex items-center space-x-2 transition-all duration-200 ease-in-out hover:text-[#f9004d] cursor-pointer p-2"
+                  >
+                    <div>
+                      <p className="hidden md:block text-semibold tracking-wide text-center">
+                        Contact Us
+                      </p>
+                    </div>
+                    <PhoneIcon className="md:h-5 md:w-5 h-6 w-6 animate-pulse text-semibold" />
+                  </motion.div>
+                  <motion.div
+                    {...FADE_IN_ANIMATION_SETTINGS}
+                    whileTap={{ scale: 0.96 }}
+                    onClick={() => {
+                      router.push("/redirect");
+                    }}
+                    className="flex items-center  tracking-wide space-x-2 bg-black border rounded-lg px-2 cursor-pointer justify-center shadow-md shadow-red-800 border-[#f9004d] transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white "
+                  >
+                    <div className="py-2">
+                      <p className=" text-center tracking-wider text-white font-semibold">
+                        Get Started
+                      </p>
+                    </div>
+                    <ArrowRightCircleIcon className="h-6 w-6 animate-pulse text-semibold" />
+                  </motion.div>
+                </>
               )
             ))}
 
