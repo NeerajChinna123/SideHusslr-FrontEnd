@@ -71,7 +71,7 @@ function Header({ page }) {
           </div>
         </div>
         <div className="flex space-x-3 md:space-x-5 text-gray-100">
-          {status != "authenticated" ? (
+          {status && (status != "authenticated" ? (
             <motion.div
             {...FADE_IN_ANIMATION_SETTINGS}
               whileTap={{ scale: 0.96 }}
@@ -113,9 +113,9 @@ function Header({ page }) {
               </div>
               <ArrowRightCircleIcon className="h-6 w-6 animate-pulse text-semibold" />
             </motion.div>
-          )}
+          ))}
 
-          {status != "authenticated" ? (
+          {(status && status != "authenticated" ? (
             <motion.div
               {...FADE_IN_ANIMATION_SETTINGS}
               whileTap={{ scale: 0.96 }}
@@ -149,7 +149,7 @@ function Header({ page }) {
                 </div>
               </motion.div>
             )
-          )}
+          ))}
         </div>
       </div>
       {/* <div

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
 import Header from "../components/Header";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import Lottie from "react-lottie-player";
 import animationData from "../lottie-aminations/Roatating _Planet.json";
-import {FADE_DOWN_ANIMATION_VARIANTS } from "../lib/constants";
+import Balancer from "react-wrap-balancer";
+import { FADE_DOWN_ANIMATION_VARIANTS } from "../lib/constants";
 
 function Banner() {
   const text = "Expert Educational Consultants Providing Quality ";
@@ -21,39 +21,47 @@ function Banner() {
         <Header page="Banner" />
       </div>
       <motion.div
-         initial="hidden"
-         whileInView="show"
-         animate="show"
-         viewport={{ once: true }}
-         variants={{
-           hidden: {},
-           show: {
-             transition: {
-               staggerChildren: 0.15,
-             },
-           },
-         }}
+        initial="hidden"
+        whileInView="show"
+        animate="show"
+        viewport={{ once: true }}
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.15,
+            },
+          },
+        }}
         className="flex mt-6  md:mt-6 px-[1.2rem] md:px-6"
       >
-        <div className="flex flex-col space-y-8">
-          <motion.div  variants={FADE_DOWN_ANIMATION_VARIANTS} className="text-white text-center md:text-start text-[2.8rem] md:text-[4.2rem] leading-[4.4rem] md:leading-[5.4rem] font-[800] md:font-[900] font-sanSerif tracking-wide capitalize">
-            <span className="lg:mr-20">
-              {text} 
+        <motion.div className="flex flex-col space-y-8">
+          <motion.div
+            variants={FADE_DOWN_ANIMATION_VARIANTS}
+            className="text-white text-center md:text-start text-[2.8rem] md:text-[4.2rem] leading-[4rem] md:leading-[5.4rem] font-[800] md:font-[900] font-sanSerif tracking-wide capitalize"
+          >
+            <span className="lg:mr-12">
+              <Balancer>{text}</Balancer>
             </span>
-            <span className="text-red-600 font-[800] transition duration-100 ease-in-out ">{text2}</span>
+            <span className="text-red-600 font-[800] transition duration-100 ease-in-out ">
+              {text2}
+            </span>
             <Cursor cursorColor="red" />
           </motion.div>
           <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="">
-            <p className="text-[0.8rem] text-center md:text-start md:text-[1rem] leading-6 md:leading-8 tracking-wide text-gray-300 font-base font-poppins">
+            <Balancer className="text-[0.8rem] text-center md:text-start md:text-[1rem] leading-6 md:leading-8 tracking-wide text-gray-300 font-base font-poppins">
               At SideHusslr, we are dedicated to helping students succeed in
               their academic pursuits. Our team of highly qualified and
               experienced consultants is here to provide personalized support
               and guidance on a wide range of educational projects, including
               assignments and many more. Contact us today to learn more about
               how we can support your learning journey.
-            </p>
+            </Balancer>
           </motion.div>
-          <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="justify-center flex md:justify-start">
+          <motion.div
+            variants={FADE_DOWN_ANIMATION_VARIANTS}
+            className="justify-center flex md:justify-start"
+          >
             <motion.a
               href="#aboutUs"
               whileTap={{ scale: 0.96 }}
@@ -66,7 +74,7 @@ function Banner() {
               </div>
             </motion.a>
           </motion.div>
-        </div>
+        </motion.div>
         <motion.div className="hidden lg:block ">
           <Lottie
             loop
