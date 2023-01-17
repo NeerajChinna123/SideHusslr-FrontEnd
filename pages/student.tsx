@@ -8,10 +8,13 @@ function Student() {
   const router = useRouter();
 
   if (session && status == "authenticated") {
+    // @ts-ignore
     if (session.data[0].user_status == "ACTIVE") {
+      // @ts-ignore
       if (session.data[0].user_type == "ADMIN") {
         router.push("/admin");
       }
+      // @ts-ignore
       if (session.data[0].user_type == "INTERN") {
         router.push("/intern");
       }
@@ -28,7 +31,9 @@ function Student() {
     <>
       {session &&
         status == "authenticated" &&
+        // @ts-ignore
         session.data[0].user_status == "ACTIVE" &&
+        // @ts-ignore
         session.data[0].user_type == "STUDENT" && (
           <main className="scroll-smooth scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
             <div className="h-screen">

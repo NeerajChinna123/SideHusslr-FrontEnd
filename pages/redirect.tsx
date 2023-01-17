@@ -10,22 +10,28 @@ function Redirect() {
   const ref = useRef(null);
 
   useEffect(() => {
+    // @ts-ignore
     ref?.current?.continuousStart();
+    // @ts-ignore
     ref?.current?.complete();
   }, []);
 
-  function delay(time) {
+  function delay(time: number) {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
   if (session && status == "authenticated") {
+    // @ts-ignore
     if (session.data[0].user_status == "ACTIVE") {
+      // @ts-ignore
       if (session.data[0].user_type == "ADMIN") {
         delay(600).then(() => router.push("/admin"));
       }
+      // @ts-ignore
       if (session.data[0].user_type == "STUDENT") {
         delay(600).then(() => router.push("/student"));
       }
+      // @ts-ignore
       if (session.data[0].user_type == "INTERN") {
         delay(600).then(() => router.push("/intern"));
       }

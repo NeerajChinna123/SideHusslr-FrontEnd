@@ -15,21 +15,23 @@ import LoadingBar from "react-top-loading-bar";
 import useScroll from "../lib/hooks/use-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 
-function Header({ page }) {
+function Header({ page }: any) {
   const { data: session, status } = useSession();
 
   const router = useRouter();
 
-  function delay(time) {
+  function delay(time: number) {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
-  const ref = useRef();
+  const ref = useRef(null);
 
   function signInFun() {
+    //@ts-ignore
     ref.current.continuousStart();
     delay(300).then(() => {
       router.events.on("routeChangeStart", (url) => {
+        //@ts-ignore
         ref.current.complete();
       });
       signIn();
@@ -37,9 +39,11 @@ function Header({ page }) {
   }
 
   function signOutFun() {
+    //@ts-ignore
     ref.current.continuousStart();
     delay(300).then(() => {
       router.events.on("routeChangeStart", (url) => {
+        //@ts-ignore
         ref.current.complete();
       });
       signOut();
@@ -82,7 +86,7 @@ function Header({ page }) {
                 <PhoneIcon className="md:h-5 md:w-5 h-6 w-6 animate-pulse text-semibold" />
               </motion.div>
             ) : page != "Banner" ? (
-              <UserDropdown signOut={signOutFun} />
+              <UserDropdown signOut={signOutFun} page={page} />
             ) : (
               status == "authenticated" && (
                 <>
