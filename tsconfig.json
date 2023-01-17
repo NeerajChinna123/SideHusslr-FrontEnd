@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/auth/[...nextauth].tsx", "pages/auth/signIn.tsx", "pages/redirect.js", "pages/admin.js", "pages/student.js", "components/user-dropdown.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/auth/[...nextauth].tsx", "pages/auth/signIn.tsx", "pages/redirect.tsx", "pages/admin.tsx", "pages/student.tsx", "components/user-dropdown.js", "lib/hooks/use-scroll.js"],
   "exclude": ["node_modules"]
 }

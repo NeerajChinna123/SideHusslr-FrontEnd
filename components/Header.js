@@ -82,7 +82,7 @@ function Header({ page }) {
                 <PhoneIcon className="md:h-5 md:w-5 h-6 w-6 animate-pulse text-semibold" />
               </motion.div>
             ) : page != "Banner" ? (
-              <UserDropdown signOut={signOutFun} />
+              <UserDropdown signOut={signOutFun} page={page} />
             ) : (
               status == "authenticated" && (
                 <>

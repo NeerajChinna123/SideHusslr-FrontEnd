@@ -10,7 +10,7 @@ function Footer() {
     "https://www.facebook.com/profile.php?id=100089574185149&mibextid=LQQJ4d"
   ];
   return (
-    <div>
+    <div className="">
       <div
         // whileInView={{ opacity: [0, 1] }}
         // transition={{ duration: 1 }}
