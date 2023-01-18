@@ -22,12 +22,11 @@ export default NextAuth({
         );
 
         const user = await res.data;
-        if (user?.success == false) {
+        if (res?.data?.success == false) {
           throw new Error(user.error);
         }
         // If no error and we have user data, return it
         if (res?.data?.success == true) {
-          console.log("user : ", user);
           return user;
         }
         // Return null if user data could not be retrieved

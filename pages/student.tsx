@@ -1,8 +1,8 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession, getSession } from "next-auth/react";
 import Header from "../components/Header";
 import { useRouter } from "next/router";
 
-function Student() {
+export default function Student() {
   const { data: session, status } = useSession();
 
   const router = useRouter();
@@ -54,4 +54,53 @@ function Student() {
   );
 }
 
-export default Student;
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signIn",
+        permanent: false,
+      },
+    };
+  }
+
+  if (session) {
+    // @ts-ignore
+    if (session.data[0].user_status == "ACTIVE") {
+      // @ts-ignore
+      if (session.data[0].user_type == "ADMIN") {
+        return {
+          redirect: {
+            destination: "/admin",
+            permanent: false,
+          },
+        };
+      }
+      // @ts-ignore
+      if (session.data[0].user_type == "INTERN") {
+        return {
+          redirect: {
+            destination: "/intern",
+            permanent: false,
+          },
+        };
+      }
+    } else {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
+  }
+
+
+  return {
+    props: {
+      // usersData,
+    },
+  };
+}
+

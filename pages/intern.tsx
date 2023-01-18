@@ -1,27 +1,27 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession, getSession } from "next-auth/react";
 import Header from "../components/Header";
 import { useRouter } from "next/router";
 
-function Intern() {
+export default function Intern() {
   const { data: session, status } = useSession();
 
   const router = useRouter();
 
-  if (session && status == "authenticated") {
-    // @ts-ignore
-    if (session.data[0].user_status == "ACTIVE") {
-      // @ts-ignore
-      if (session.data[0].user_type == "STUDENT") {
-        router.push("/student");
-      }
-       // @ts-ignore
-      if (session.data[0].user_type == "ADMIN") {
-        router.push("/admin");
-      }
-    } else {
-      router.push("/");
-    }
-  }
+  // if (session && status == "authenticated") {
+  //   // @ts-ignore
+  //   if (session.data[0].user_status == "ACTIVE") {
+  //     // @ts-ignore
+  //     if (session.data[0].user_type == "STUDENT") {
+  //       router.push("/student");
+  //     }
+  //      // @ts-ignore
+  //     if (session.data[0].user_type == "ADMIN") {
+  //       router.push("/admin");
+  //     }
+  //   } else {
+  //     router.push("/");
+  //   }
+  // }
 
   if (!session && status == "unauthenticated") {
     router.push("/");
@@ -54,4 +54,53 @@ function Intern() {
   );
 }
 
-export default Intern;
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signIn",
+        permanent: false,
+      },
+    };
+  }
+
+  if (session) {
+    // @ts-ignore
+    if (session.data[0].user_status == "ACTIVE") {
+      // @ts-ignore
+      if (session.data[0].user_type == "ADMIN") {
+        return {
+          redirect: {
+            destination: "/admin",
+            permanent: false,
+          },
+        };
+      }
+      // @ts-ignore
+      if (session.data[0].user_type == "STUDENT") {
+        return {
+          redirect: {
+            destination: "/student",
+            permanent: false,
+          },
+        };
+      }
+    } else {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
+  }
+
+
+  return {
+    props: {
+      // usersData,
+    },
+  };
+}
