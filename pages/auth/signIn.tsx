@@ -62,8 +62,6 @@ export default function SignIn({ csrfToken }: any) {
     setPassVisible(passVisible ? false : true);
   };
 
-  console.log("pa-v", passVisible);
-
   return (
     <>
       <motion.div
@@ -81,9 +79,12 @@ export default function SignIn({ csrfToken }: any) {
         }}
         className="h-screen relative flex items-center justify-center bg-gradient-to-br from-black via-black  to-[#85002a] "
       >
-        <div className="absolute top-16 md:top-10">
+        <div className="absolute cursor-pointer top-16 md:top-10">
           <motion.div
             variants={FADE_DOWN_ANIMATION_VARIANTS}
+            onClick={() => {
+              router.push("/");
+            }}
             className=" relative h-[5rem] w-[5rem] md:h-[7rem] md:w-[7rem]"
           >
             <Image

@@ -10,10 +10,8 @@ function Footer() {
     "https://www.facebook.com/profile.php?id=100089574185149&mibextid=LQQJ4d"
   ];
   return (
-    <div className="">
+    <div>
       <div
-        // whileInView={{ opacity: [0, 1] }}
-        // transition={{ duration: 1 }}
         className="mt-[4rem] lg:mt-[8rem] py-10 lg:py-14 px-[0.8rem] lg:pl-2 lg:pr-0"
       >
         <div className="flex flex-col space-y-4 lg:flex-row items-center">

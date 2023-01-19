@@ -12,8 +12,7 @@ import { useRouter } from "next/router";
 import { FADE_IN_ANIMATION_SETTINGS } from "../lib/constants";
 
 import LoadingBar from "react-top-loading-bar";
-import useScroll from "../lib/hooks/use-scroll";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 function Header({ page }: any) {
   const { data: session, status } = useSession();
