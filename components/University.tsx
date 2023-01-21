@@ -5,7 +5,6 @@ import {
   MapPinIcon,
   CalendarIcon,
   ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import useWindowSize from "../lib/hooks/use-window-size";
@@ -17,7 +16,7 @@ export interface UniversityData {
 function University(props: UniversityData) {
   const [decs, setDesFull] = useState(true);
   const { isMobile, isDesktop } = useWindowSize();
-  const date1 = new Date(props?.data?.created_date);
+  const date1 = new Date(props?.data?.createdAt);
   //   const date2 = Math.round(date1.getTime());
   //   const date3 = Date.now();
 
@@ -53,13 +52,13 @@ function University(props: UniversityData) {
             className=""
             layout="fill"
             objectFit="contain"
-            src={props.data.logo}
+            src={props.data.image}
           />
         </div>
         <div className="border-l self-center h-[6rem] ml-2 border-solid border-gray-200" />
         <div className="ml-5 w-[95%] space-y-2">
           <p className="font-bold capitalize tracking-wide font-poppins text-[1.5rem] text-red-700">
-            {props?.data?.university_name}
+            {props?.data?.name}
           </p>
           {/* <p className="tracking-wide text-sm font-poppins text-gray-700">
             {props?.data?.description}

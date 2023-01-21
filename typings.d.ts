@@ -17,12 +17,13 @@ export interface usersDataType {
 
 export interface universityDataType {
   university_id: string;
-  university_name: string;
+  name: string;
   description: string;
   country: string;
-  created_date: number;
-  created_by: string;
-  modified_date: number;
-  modified_by: string;
-  logo:string;
+  is_delete:boolean;
+  createdAt: number;
+  createdBy: string;
+  modifiedAt: number;
+  modifiedBy: string;
+  image:string;
 }

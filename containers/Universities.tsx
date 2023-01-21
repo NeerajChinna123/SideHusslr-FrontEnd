@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { universityDataType } from "../typings";
 import { useAppSelector } from "../hooks";
 import University from "../components/University";
+import UniversityFormModal from "../components/UniversityFormModal";
 
 function Universities() {
   const universityDataSt = useAppSelector(
@@ -12,14 +13,17 @@ function Universities() {
 
   const [pageSize, setPageSize] = useState(10);
 
+  const [universityModal, setUniversityModal] = useState(false);
   return (
     <div>
+       <UniversityFormModal showUniversityModal={universityModal} setShowUniversityModal={setUniversityModal}  />
       <div className="py-6 px-4  flex items-center">
-        <p className="font-[900] flex-1 font-sanSerif  tracking-wide text-4xl md:text-5xl">
+        <p className="font-[900] flex-1 font-sanSerif  tracking-wider text-4xl md:text-5xl">
           Universities
         </p>
         <motion.div
           whileTap={{ scale: 0.96 }}
+          onClick={()=>{setUniversityModal(true)}}
           className="bg-red-600 p-5 shadow-md shadow-gray-400 cursor-pointer rounded-full"
         >
           <PlusIcon className="text-white h-5 w-5 md:h-7 md:w-7" />
@@ -46,9 +50,11 @@ function Universities() {
             onClick={() => {
               setPageSize(pageSize + 4);
             }}
-            className="mt-8 flex cursor-pointer group justify-center rounded-[0.2rem] bg-red-600 py-4 px-8 font-ubuntu text-lg font-semibold tracking-wide text-white shadow-md shadow-black transition duration-500 ease-in-out lg:px-8"
+            className="mt-8 flex cursor-pointer group justify-center rounded-[0.2rem] bg-red-600 py-4 px-8 font-ubuntu text-lg font-semibold tracking-wide text-white shadow-md shadow-gray-400 transition duration-500 ease-in-out lg:px-8"
           >
-            <p className="group-hover:scale-105  transition-transform duration-300 ease-in-out">Show More</p>
+            <p className="group-hover:scale-105  transition-transform duration-300 ease-in-out">
+              Show More
+            </p>
           </motion.div>
         </motion.div>
       )}
