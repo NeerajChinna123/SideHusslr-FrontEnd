@@ -47,7 +47,7 @@ export default function UserDropdown({ signOut, page }:any) {
       {openPopover && (
         <motion.div
           {...FADE_IN_ANIMATION_SETTINGS}
-          className="absolute z-100 inline-block w-40 text-sm left-[-2.1rem] md:left-[-2.5rem] bg-black  border rounded-md   cursor-pointer justify-center shadow-md shadow-red-800 border-[#f9004d] transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white"
+          className="absolute overflow-cover z-100 inline-block w-40 text-sm left-[-2.1rem] md:left-[-2.5rem] bg-black  border rounded-md   cursor-pointer justify-center shadow-md shadow-red-800 border-[#f9004d] transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white"
         >
           <motion.div
             onClick={() => {
@@ -56,7 +56,7 @@ export default function UserDropdown({ signOut, page }:any) {
             className="flex items-center tracking-wide bg-black rounded-t-md border border-red-600 space-x-2 py-3 justify-center cursor-pointer transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white "
           >
             <HomeIcon className="h-6 w-6 animate-pulse text-semibold" />
-            <div>
+            <div className="">
               <p className=" text-center tracking-wider text-[0.9rem] text-white font-semibold">
                 Home
               </p>
@@ -70,7 +70,7 @@ export default function UserDropdown({ signOut, page }:any) {
             className="flex items-center tracking-wide bg-black border-red-600 border rounded-b-md space-x-2 py-3 cursor-pointer justify-center transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white "
           >
             <ArrowLeftOnRectangleIcon className="h-6 w-6 animate-pulse text-semibold" />
-            <div>
+            <div className="">
               <p className=" text-center tracking-wider text-[0.9rem] text-white font-semibold">
                 Sign Out
               </p>

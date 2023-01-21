@@ -25,23 +25,23 @@ function Redirect() {
     if (session.data[0].user_status == "ACTIVE") {
       // @ts-ignore
       if (session.data[0].user_type == "ADMIN") {
-        delay(600).then(() => router.push("/admin"));
+        delay(100).then(() => router.push("/admin"));
       }
       // @ts-ignore
       if (session.data[0].user_type == "STUDENT") {
-        delay(600).then(() => router.push("/student"));
+        delay(100).then(() => router.push("/student"));
       }
       // @ts-ignore
       if (session.data[0].user_type == "INTERN") {
-        delay(600).then(() => router.push("/intern"));
+        delay(100).then(() => router.push("/intern"));
       }
     } else {
-      delay(600).then(() => router.push("/"));
+      delay(100).then(() => router.push("/"));
     }
   }
 
   if (!session && status == "unauthenticated") {
-    delay(600).then(() => router.push("/"));
+    delay(100).then(() => router.push("/"));
   }
 
   return (

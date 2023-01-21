@@ -12,7 +12,7 @@ function Footer() {
   return (
     <div>
       <div
-        className="mt-[4rem] lg:mt-[8rem] py-10 lg:py-14 px-[0.8rem] lg:pl-2 lg:pr-0"
+        className=" py-10 lg:py-14 px-[0.8rem] lg:pl-2 lg:pr-0"
       >
         <div className="flex flex-col space-y-4 lg:flex-row items-center">
           <div className="justify-start relative h-[6rem] w-[6rem]">

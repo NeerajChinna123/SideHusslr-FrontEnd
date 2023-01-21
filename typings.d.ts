@@ -14,3 +14,15 @@ export interface usersDataType {
   modified_by: string;
   user_status: string;
 }
+
+export interface universityDataType {
+  university_id: string;
+  university_name: string;
+  description: string;
+  country: string;
+  created_date: number;
+  created_by: string;
+  modified_date: number;
+  modified_by: string;
+  logo:string;
+}
