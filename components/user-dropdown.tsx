@@ -49,7 +49,7 @@ export default function UserDropdown({ signOut, page }:any) {
           {...FADE_IN_ANIMATION_SETTINGS}
           className="absolute overflow-cover z-100 inline-block w-40 text-sm left-[-2.1rem] md:left-[-2.5rem] bg-black  border rounded-md   cursor-pointer justify-center shadow-md shadow-red-800 border-[#f9004d] transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white"
         >
-          <motion.div
+          {/* <motion.div
             onClick={() => {
               router.push("/");
             }}
@@ -61,7 +61,7 @@ export default function UserDropdown({ signOut, page }:any) {
                 Home
               </p>
             </div>
-          </motion.div>
+          </motion.div> */}
 
           <motion.div
             onClick={() => {

@@ -15,20 +15,29 @@ export default NextAuth({
             "Content-Type": "application/json",
           },
         };
-        const res = await axios.post(
-          `${process.env.SIDEHUSSLR_API}/login`,
-          payload,
-          customConfig
-        );
 
-        const user = await res.data;
-        if (res?.data?.success == false) {
-          throw new Error(user.error);
+        try {
+          const res = await axios.post(
+            `${process.env.SIDEHUSSLR_API}/login`,
+            payload,
+            customConfig
+          );
+
+          const user = await res.data;
+          if (res?.data?.success == false) {
+            throw new Error(user.error);
+          }
+          // If no error and we have user data, return it
+          if (res?.data?.success == true) {
+            return user;
+          }
+          // Work with the response...
+        } catch (err) {
+          // Handle error
+          console.log(err);
+          return null;
         }
-        // If no error and we have user data, return it
-        if (res?.data?.success == true) {
-          return user;
-        }
+
         // Return null if user data could not be retrieved
         return null;
       },
@@ -40,7 +49,7 @@ export default NextAuth({
     signIn: "/auth/signIn",
   },
   callbacks: {
-    async jwt({ token, user, account}) {
+    async jwt({ token, user, account }) {
       if (account && user) {
         return {
           ...token,
@@ -50,8 +59,8 @@ export default NextAuth({
       }
       return token;
     },
-    async session({ session,user, token }) {
-      return {...token};
+    async session({ session, user, token }) {
+      return { ...token };
     },
   },
   // Enable debug messages in the console if you are having problems

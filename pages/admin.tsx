@@ -1,5 +1,5 @@
 import { useSession, getSession } from "next-auth/react";
-import { useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
@@ -33,7 +33,6 @@ export default function Admin(props: propsData) {
   // const universityDataSt = useAppSelector(
   //   (state) => state.universityData.universitiesData
   // );
-
 
   // console.log("user-d", userDataSt);
 
@@ -129,26 +128,51 @@ export async function getServerSideProps(context: any) {
           Authorization: `Bearer ${session.accessToken}`,
         },
       };
-      const userRes = await axios.get(
-        `${process.env.SIDEHUSSLR_API}/allUser`,
-        customConfig
-      );
+
       let usersData = null;
-      if (userRes?.data?.success == true) {
-        usersData = await userRes.data.data;
+      try {
+        const userRes = await axios.get(
+          `${process.env.SIDEHUSSLR_API}/allUser`,
+          customConfig
+        );
+        let usersData = null;
+        if (userRes?.data?.success == true) {
+          usersData = await userRes.data.data;
+        }
+
+        // Work with the response...
+      } catch (err) {
+        // Handle error
+        console.log(err);
       }
 
       //JSON WEB SERVER API
-      const uniRes = await axios.get(
-        `http://localhost:3002/universities`,
-        customConfig
-      );
-      // let universitiesData = null;
-      // if (uniRes?.data?.success == true) {
-      //   universitiesData = await uniRes.data.data;
-      // }v
-      let universitiesData = await uniRes.data;
-      // console.log('u-dat : ',uniRes.data)
+
+      let universitiesData = null;
+      const customConfig1 = {
+        headers: {
+          "Content-Type": "application/json",
+          // @ts-ignore
+          // Authorization: `Bearer ${session.accessToken}`,
+        },
+      };
+      try {
+        const uniRes = await axios.get(
+          `${process.env.SIDEHUSSLR_TEST_API}/university`,
+          customConfig1
+        );
+
+        console.log("uni :", uniRes);
+        if (uniRes?.data?.status == "201") {
+          universitiesData = await uniRes.data.data;
+        }
+        // Work with the response...
+      } catch (err) {
+        // Handle error
+        console.log(err);
+      }
+
+      console.log("u-dat : ", universitiesData);
 
       return {
         props: {

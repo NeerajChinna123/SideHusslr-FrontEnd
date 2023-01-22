@@ -27,6 +27,7 @@ function Footer() {
           <div className="flex mx-auto lg:pl-[7rem] space-x-4">
             {urls.map((url) => (
               <motion.div
+                key={url}
                 whileTap={{ scale: 0.96 }}
                 className="flex items-center tracking-wide space-x-1 border rounded-full  p-1 cursor-pointer justify-center shadow-md shadow-red-800 border-[#f9004d] transition duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white "
               >

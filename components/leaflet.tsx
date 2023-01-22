@@ -6,11 +6,13 @@ export default function Leaflet({
   successDataMob,
   resetDataMob,
   children,
+  setSuccessDataMob
 }: {
   setShow: Dispatch<SetStateAction<boolean>>;
   successDataMob:boolean;
   resetDataMob: () => void;
   children: ReactNode;
+  setSuccessDataMob : Dispatch<SetStateAction<boolean>>;
 }) {
   const leafletRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
@@ -22,6 +24,12 @@ export default function Leaflet({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if(successDataMob){
+    setShow(false);
+    resetDataMob();
+    setSuccessDataMob(false)
+  }
 
   async function handleDragEnd(_: any, info: any) {
     const offset = info.offset.y;
@@ -66,7 +74,7 @@ export default function Leaflet({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={() => {setShow(false), resetDataMob()}}
+        onClick={() => {setShow(false); resetDataMob();}}
       />
     </AnimatePresence>
   );

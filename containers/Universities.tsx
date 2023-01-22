@@ -32,7 +32,7 @@ function Universities() {
 
       <div className="px-5 py-4 md:py-6  grid grid-cols-1 grid-flow-row-dense lg:grid-cols-2 gap-x-8 gap-y-8 ">
         {universityDataSt
-          .slice(0, pageSize)
+          ?.slice(0, pageSize)
           ?.map((university: universityDataType) => (
             <div className="w-full " key={university?.university_id}>
               <University data={university} />
