@@ -13,8 +13,8 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   BuildingLibraryIcon,
+  UserIcon,
 } from "@heroicons/react/24/outline";
-import { setUniversitiesData } from "../slice/universitySlice";
 
 export interface userModalData {
   showUserModal: boolean;
@@ -24,8 +24,6 @@ export interface userModalData {
 
 interface UserFormInput {
   jwtToken: string;
-  //   username: string;
-  //   password: string;
   first_name: string;
   last_name: string;
   contact: string;
@@ -47,9 +45,15 @@ function UserFormModal(props: userModalData) {
     reset,
   } = useForm<UserFormInput>();
 
+  const [role, setRole] = useState(null);
+
+  const roles = ["ADMIN", "STUDENT", "INTERN"];
+
   const [submitting, setSubmitting] = useState(false);
 
   const [success, setSuccess] = useState(false);
+
+  const [rolePopover, setRolePopover] = useState(false);
 
   const [universityPopOver, setUniversityPopOver] = useState(false);
 
@@ -68,16 +72,25 @@ function UserFormModal(props: userModalData) {
 
   const onSubmit: SubmitHandler<UserFormInput> = async (data) => {
     setSubmitting(true);
-    console.log("data", data);
+
     //post request
+    //@ts-ignore
+    if (universityD.university_id) {
+      //@ts-ignore
+      data.university_id = universityD.university_id;
+    }
+    //@ts-ignore
+    data.user_type = role;
 
     const payload = data;
+
+    console.log("data", data);
+
     const customConfig = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    console.log("s-c", success);
 
     try {
       const res = await axios.post(
@@ -161,7 +174,7 @@ function UserFormModal(props: userModalData) {
               <div className="mt-4 flex space-x-3">
                 <div>
                   <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                    First Name
+                    First Name *
                   </p>
                   <input
                     className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
@@ -174,7 +187,7 @@ function UserFormModal(props: userModalData) {
                 </div>
                 <div>
                   <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                    Last Name
+                    Last Name *
                   </p>
                   <input
                     className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
@@ -187,19 +200,87 @@ function UserFormModal(props: userModalData) {
                 </div>
               </div>
               {/* <div className="mt-4"></div> */}
+
               <div className="mt-3">
-                <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  User Role
+                <p className="text-gray-600  text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
+                  User Role *
                 </p>
-                <input
+                {/* <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
                   type="text"
-                  placeholder="Select User Role"
-                  {...register("user_type", {
-                    required: true,
-                  })}
-                ></input>
+                  placeholder="Select University"
+                  {...register("university_id")}
+                ></input> */}
+
+                <motion.div
+                  onClick={() => {
+                    !rolePopover ? setRolePopover(true) : setRolePopover(false);
+                  }}
+                  className={
+                    `mt-2  w-full cursor-pointer flex items-cente rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu shadow ` +
+                    (rolePopover && ` rounded-b-none `)
+                  }
+                >
+                  {role != null ? (
+                    /* @ts-ignore */
+                    <p className="text-black flex-1">{role}</p>
+                  ) : (
+                    <p className="text-gray-400 flex-1">Select Role</p>
+                  )}
+                  <div>
+                    {rolePopover ? (
+                      <ChevronUpIcon className="h-6 w-6 text-gray-400" />
+                    ) : (
+                      <ChevronDownIcon className="h-6 w-6 text-gray-400" />
+                    )}
+                  </div>
+                </motion.div>
+                <div className="relative">
+                  {rolePopover && (
+                    <motion.div
+                      {...FADE_IN_ANIMATION_SETTINGS}
+                      className="w-full  absolute left-0 z-50 rounded-b-md bg-white border border-t-0 border-gray-300 "
+                    >
+                      <div className=" flex  flex-col max-h-[13.5rem] overflow-scroll ">
+                        <>
+                          <div
+                            onClick={() => {
+                              setRole(null), setRolePopover(false);
+                            }}
+                            className="border-b w-full px-4 py-2 group lg:hover:bg-red-600 transition-all duration-200 ease-in-out cursor-pointer"
+                          >
+                            <div className="self-center text-black text-sm lg:group-hover:text-white transition-all duration-200 ease-in-out font-poppins ">
+                              {/* @ts-ignore */}
+                              Select
+                            </div>
+                          </div>
+                          {roles.map((ro) => (
+                            <div
+                              key={ro}
+                              onClick={() => {
+                                //@ts-ignore
+                                setRole(ro), setRolePopover(false);
+                              }}
+                              className="border-b w-full px-4 py-2 group lg:hover:bg-red-600 transition-all duration-200 ease-in-out cursor-pointer"
+                            >
+                              <div className="flex justify-start space-x-4">
+                                {/* @ts-ignore */}
+                                <UserIcon className="h-[2rem] w-[2rem] text-red-600 lg:group-hover:text-black transition-all duration-200 ease-in-out" />
+
+                                <div className="self-center text-black text-sm lg:group-hover:text-white transition-all duration-200 ease-in-out font-poppins ">
+                                  {/* @ts-ignore */}
+                                  {ro}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
               </div>
+
               <div className="mt-3">
                 <p className="text-gray-600  text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
                   University
@@ -222,9 +303,12 @@ function UserFormModal(props: userModalData) {
                     (universityPopOver && ` rounded-b-none `)
                   }
                 >
-                    {/* @ts-ignore */}
-                    {universityD!=null ?  <p className="text-black flex-1">{universityD?.name}</p>:
-                  <p className="text-gray-400 flex-1">Select University</p> }
+                  {universityD != null ? (
+                    /* @ts-ignore */
+                    <p className="text-black flex-1">{universityD?.name}</p>
+                  ) : (
+                    <p className="text-gray-400 flex-1">Select University</p>
+                  )}
                   <div>
                     {universityPopOver ? (
                       <ChevronUpIcon className="h-6 w-6 text-gray-400" />
@@ -240,46 +324,83 @@ function UserFormModal(props: userModalData) {
                       className="w-full  absolute left-0 z-50 rounded-b-md bg-white border border-t-0 border-gray-300 "
                     >
                       <div className=" flex  flex-col max-h-[13.5rem] overflow-scroll ">
-                        {props?.universityDataStProp?.map((uni) => (
-                          <div onClick={()=>{setUniversityD(uni),setUniversityPopOver(false);}} className="border-b w-full px-4 py-2 group hover:bg-red-600 transition-all duration-200 ease-in-out cursor-pointer">
-                            <div className="flex justify-start space-x-4">
+                        <>
+                          <div
+                            onClick={() => {
+                              setUniversityD(null), setUniversityPopOver(false);
+                            }}
+                            className="border-b w-full px-4 py-2 group lg:hover:bg-red-600 transition-all duration-200 ease-in-out cursor-pointer"
+                          >
+                            <div className="self-center text-black text-sm lg:group-hover:text-white transition-all duration-200 ease-in-out font-poppins ">
                               {/* @ts-ignore */}
-                              {uni.image ? (
-                                <div className=" relative object-contain self-center h-[2rem] w-[2rem]">
-                                  <img
-                                    alt=""
-                                    className=""
-                                    src={
-                                      /* @ts-ignore */
-                                      uni.image
-                                    }
-                                  />
-                                </div>
-                              ) : (
-                                <BuildingLibraryIcon className="h-[2rem] w-[2rem] text-red-600 group-hover:text-black transition-all duration-200 ease-in-out" />
-                              )}
-                              <div className="self-center text-black text-sm group-hover:text-white transition-all duration-200 ease-in-out font-poppins ">
-                                {/* @ts-ignore */}
-                                {uni.name}
-                              </div>
+                              Select
                             </div>
                           </div>
-                        ))}
+                          {props?.universityDataStProp?.map((uni) => (
+                            <div
+                              //@ts-ignore
+                              key={uni.university_id}
+                              onClick={() => {
+                                setUniversityD(uni),
+                                  setUniversityPopOver(false);
+                              }}
+                              className="border-b w-full px-4 py-2 group lg:hover:bg-red-600 transition-all duration-200 ease-in-out cursor-pointer"
+                            >
+                              <div className="flex justify-start space-x-4">
+                                {/* @ts-ignore */}
+                                {uni.image ? (
+                                  <div className=" relative object-contain self-center h-[2rem] w-[2rem]">
+                                    <img
+                                      alt=""
+                                      className=""
+                                      src={
+                                        /* @ts-ignore */
+                                        uni.image
+                                      }
+                                    />
+                                  </div>
+                                ) : (
+                                  <BuildingLibraryIcon className="h-[2rem] w-[2rem] text-red-600 lg:group-hover:text-black transition-all duration-200 ease-in-out" />
+                                )}
+                                <div className="self-center text-black text-sm lg:group-hover:text-white transition-all duration-200 ease-in-out font-poppins ">
+                                  {/* @ts-ignore */}
+                                  {uni.name}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </>
                       </div>
                     </motion.div>
                   )}
                 </div>
               </div>
-              <div className="mt-3">
-                <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  Location
-                </p>
-                <input
-                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
-                  type="text"
-                  placeholder="Enter Location"
-                  {...register("location")}
-                ></input>
+
+              <div className="mt-3 flex space-x-3">
+                <div>
+                  <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
+                    Location
+                  </p>
+                  <input
+                    className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
+                    type="text"
+                    placeholder="Enter Location"
+                    {...register("location")}
+                  ></input>
+                </div>
+                <div>
+                  <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
+                    Contact *
+                  </p>
+                  <input
+                    className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
+                    type="text"
+                    placeholder="Enter Contact No."
+                    {...register("contact", {
+                      required: true,
+                    })}
+                  ></input>
+                </div>
               </div>
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
@@ -295,7 +416,7 @@ function UserFormModal(props: userModalData) {
               <motion.div className="mt-5 md:mt-6">
                 <motion.button
                   whileTap={{ scale: 0.97 }}
-                  onClick={handleSubmit(onSubmit)}
+                  onClick={role ? handleSubmit(onSubmit) : () => {}}
                   disabled={submitting}
                   className={
                     `mx-auto flex w-full cursor-pointer justify-center rounded-[0.2rem] h-[3rem] items-center bg-red-600 py-4 px-8 font-poppins text-md font-semibold tracking-wide text-gray-100 shadow-md  transition duration-500 ease-in-out lg:px-8 lg:hover:bg-red-800 lg:hover:text-white ` +
@@ -303,11 +424,7 @@ function UserFormModal(props: userModalData) {
                       "cursor-not-allowed animate-pulse opacity-70")
                   }
                 >
-                  {submitting ? (
-                    <LoadingDots color="#ffffff" />
-                  ) : (
-                    "Create University"
-                  )}
+                  {submitting ? <LoadingDots color="#ffffff" /> : "Create User"}
                 </motion.button>
               </motion.div>
             </div>

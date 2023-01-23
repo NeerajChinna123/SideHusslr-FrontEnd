@@ -139,7 +139,7 @@ function UniversityFormModal(props: universityModalData) {
               />
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  University Name
+                  University Name *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
@@ -152,7 +152,7 @@ function UniversityFormModal(props: universityModalData) {
               </div>
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  Description
+                  Description *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
@@ -165,7 +165,7 @@ function UniversityFormModal(props: universityModalData) {
               </div>
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  Country
+                  Country *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
