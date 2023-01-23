@@ -4,6 +4,7 @@ import { motion, AnimateSharedLayout } from "framer-motion";
 import { usersDataType } from "../typings";
 import { useAppSelector } from "../hooks";
 import User from "../components/User";
+import UserFormModal from "../components/UserFormModal";
 
 // import UniversityFormModal from "../components/UniversityFormModal";
 
@@ -14,14 +15,20 @@ function Users() {
 
   const [userModal, setUserModal] = useState(false);
 
+  const universityDataSt = useAppSelector(
+    (state) => state.universityData.universitiesData
+  );
+
+
   return (
     <AnimateSharedLayout>
       <div>
-        {/* <UniversityFormModal
-        showUniversityModal={universityModal}
-        setShowUniversityModal={setUniversityModal}
-      /> */}
-        <div className="py-6 px-4  flex items-center">
+        <UserFormModal
+          showUserModal={userModal}
+          setShowUserModal={setUserModal}
+          universityDataStProp={universityDataSt}
+        />
+        <div className="py-6 px-5 pl-6  flex items-center">
           <p className="font-[900] flex-1 font-sanSerif  tracking-wider text-4xl md:text-5xl">
             Users
           </p>
@@ -39,7 +46,7 @@ function Users() {
         <div className="px-5 py-4 space-y-5 md:py-6 flex flex-col items-center justify-center ">
           {usersDataSt?.slice(0, pageSize)?.map((user: usersDataType) => (
             <div className="w-full md:w-[70%]" key={user?.user_id}>
-              <User data={user} />
+              <User data={user} universityDataStProp={universityDataSt} />
             </div>
           ))}
         </div>

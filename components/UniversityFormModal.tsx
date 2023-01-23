@@ -7,6 +7,7 @@ import axios from "axios";
 import LoadingDots from "../icons/loading-dots";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FADE_IN_ANIMATION_SETTINGS } from "../lib/constants";
 import { useRouter } from "next/router";
 
 export interface universityModalData {
@@ -136,12 +137,12 @@ function UniversityFormModal(props: universityModalData) {
                 //@ts-ignore
                 value={`${session?.accessToken}`}
               />
-              <div className="mt-4">
+              <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
                   University Name
                 </p>
                 <input
-                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-12 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
+                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
                   type="text"
                   placeholder="Enter University Name"
                   {...register("name", {
@@ -149,12 +150,12 @@ function UniversityFormModal(props: universityModalData) {
                   })}
                 ></input>
               </div>
-              <div className="mt-4">
+              <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
                   Description
                 </p>
                 <input
-                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-12 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
+                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
                   type="text"
                   placeholder="Enter Description"
                   {...register("description", {
@@ -162,12 +163,12 @@ function UniversityFormModal(props: universityModalData) {
                   })}
                 ></input>
               </div>
-              <div className="mt-4">
+              <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
                   Country
                 </p>
                 <input
-                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-12 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
+                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
                   type="text"
                   placeholder="Enter Country Name"
                   {...register("country", {
@@ -175,18 +176,18 @@ function UniversityFormModal(props: universityModalData) {
                   })}
                 ></input>
               </div>
-              <div className="mt-4">
+              <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
                   Image
                 </p>
                 <input
-                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-12 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
+                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
                   type="text"
                   placeholder="Enter Logo URL"
                   {...register("image")}
                 ></input>
               </div>
-              <motion.div className="mt-5 md:mt-8">
+              <motion.div className="mt-5 md:mt-6">
                 <motion.button
                   whileTap={{ scale: 0.97 }}
                   onClick={handleSubmit(onSubmit)}

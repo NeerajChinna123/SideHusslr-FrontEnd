@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { motion } from "framer-motion";
+import { motion, AnimateSharedLayout } from "framer-motion";
 import { universityDataType } from "../typings";
 import { useAppSelector } from "../hooks";
 import University from "../components/University";
@@ -15,12 +15,13 @@ function Universities() {
 
   const [universityModal, setUniversityModal] = useState(false);
   return (
+    <AnimateSharedLayout>
     <div>
       <UniversityFormModal
         showUniversityModal={universityModal}
         setShowUniversityModal={setUniversityModal}
       />
-      <div className="py-6 px-4  flex items-center">
+      <div className="py-6 px-5  flex items-center">
         <p className="font-[900] flex-1 font-sanSerif  tracking-wider text-4xl md:text-5xl">
           Universities
         </p>
@@ -51,6 +52,7 @@ function Universities() {
           className="flex justify-center"
         >
           <motion.div
+            layout
             whileTap={{ scale: 0.2 }}
             onClick={() => {
               setPageSize(pageSize + 10);
@@ -64,6 +66,7 @@ function Universities() {
         </motion.div>
       )}
     </div>
+    </AnimateSharedLayout>
   );
 }
 
