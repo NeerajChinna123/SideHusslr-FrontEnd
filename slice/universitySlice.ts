@@ -10,7 +10,7 @@ interface universitiesDataState {
 
 // Define the initial state using that type
 const initialState: universitiesDataState = {
-    universitiesData: [],
+  universitiesData: [],
 };
 
 export const universityDataSlice = createSlice({
@@ -27,6 +27,7 @@ export const universityDataSlice = createSlice({
 export const { setUniversitiesData } = universityDataSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectUniversitiesData = (state: RootState) => state.universityData.universitiesData;
+export const selectUniversitiesData = (state: RootState) =>
+  state.universityData.universitiesData;
 
 export default universityDataSlice.reducer;

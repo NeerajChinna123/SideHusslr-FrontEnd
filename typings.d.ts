@@ -2,17 +2,20 @@ export interface usersDataType {
   user_id: string;
   university_id: string;
   username: string;
+  password: string;
   first_name: string;
   last_name: string;
   location: string;
   email: string;
+  is_delete:boolean;
   contact: string;
   user_type: string;
-  created_date: number;
-  created_by: string;
-  modified_date: number;
-  modified_by: string;
+  createdAt: number;
+  createdBy: string;
+  modifiedAt: number;
+  modifiedBy: string;
   user_status: string;
+  image:string;
 }
 
 export interface universityDataType {

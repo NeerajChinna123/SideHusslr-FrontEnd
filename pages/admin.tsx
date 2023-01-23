@@ -1,5 +1,4 @@
 import { useSession, getSession } from "next-auth/react";
-import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
@@ -8,6 +7,7 @@ import { useAppSelector, useAppDispatch } from "../hooks";
 import { setUsersData } from "../slice/usersSlice";
 import { setUniversitiesData } from "../slice/universitySlice";
 import Footer from "../containers/Footer";
+import { motion, AnimateSharedLayout } from "framer-motion";
 import UniversityUserTabs from "../containers/UniversityUserTabs";
 
 export interface propsData {
@@ -39,38 +39,43 @@ export default function Admin(props: propsData) {
   // console.log("universi-d", universityDataSt);
 
   return (
-    <div className="h-screen ">
-      {session &&
-        status == "authenticated" &&
-        // @ts-ignore
-        session.data[0].user_status == "ACTIVE" &&
-        // @ts-ignore
-        session.data[0].user_type == "ADMIN" && (
-          <>
-            <main className="scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50 h-screen scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
-              <div className="">
-                <div className="bg-gradient-to-br  from-black via-black  to-[#85002a] shadow-md shadow-red-600">
-                  <div className="max-w-[82rem]   mx-auto ">
-                    <div>
-                      <div className="py-2">
-                        <Header page="admin" />
+    <AnimateSharedLayout>
+      <div className=" h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
+        {session &&
+          status == "authenticated" &&
+          // @ts-ignore
+          session.data[0].user_status == "ACTIVE" &&
+          // @ts-ignore
+          session.data[0].user_type == "ADMIN" && (
+            <>
+              <main className="">
+                <div className="">
+                  <div className="bg-gradient-to-br  from-black via-black  to-[#85002a] shadow-md shadow-red-600">
+                    <div className="max-w-[82rem]   mx-auto ">
+                      <div>
+                        <div className="py-2">
+                          <Header page="admin" />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="mb-[2rem] lg:mb-[4rem]">
-                  <UniversityUserTabs />
-                </div>
-                <div className="bg-gradient-to-br from-black via-black  to-[#85002a] ">
-                  <div className="max-w-[82rem] mx-auto">
-                    <Footer />
+                  <div className="mb-[2rem] lg:mb-[4rem]">
+                    <UniversityUserTabs />
                   </div>
                 </div>
-              </div>
-            </main>
-          </>
-        )}
-    </div>
+              </main>
+            </>
+          )}
+        <motion.div
+          layout
+          className="bg-gradient-to-br from-black via-black  to-[#85002a] "
+        >
+          <div className="max-w-[82rem] mx-auto">
+            <Footer />
+          </div>
+        </motion.div>
+      </div>
+    </AnimateSharedLayout>
   );
 }
 
@@ -121,26 +126,24 @@ export async function getServerSideProps(context: any) {
     // @ts-ignore
     if (session.data[0].user_status == "ACTIVE") {
       //getUsers API
+      let usersData = null;
       const customConfig = {
         headers: {
           "Content-Type": "application/json",
           // @ts-ignore
-          Authorization: `Bearer ${session.accessToken}`,
+          // Authorization: `Bearer ${session.accessToken}`,
         },
       };
 
-      let usersData = null;
       try {
         const userRes = await axios.get(
-          `${process.env.SIDEHUSSLR_API}/allUser`,
+          `${process.env.SIDEHUSSLR_TEST_API}/users`,
           customConfig
         );
-        let usersData = null;
-        if (userRes?.data?.success == true) {
+
+        if (userRes?.data?.status < "300") {
           usersData = await userRes.data.data;
         }
-
-        // Work with the response...
       } catch (err) {
         // Handle error
         console.log(err);
@@ -163,16 +166,16 @@ export async function getServerSideProps(context: any) {
         );
 
         console.log("uni :", uniRes);
-        if (uniRes?.data?.status == "201") {
+        if (uniRes?.data?.status < "300") {
           universitiesData = await uniRes.data.data;
         }
-        // Work with the response...
       } catch (err) {
         // Handle error
         console.log(err);
       }
 
       console.log("u-dat : ", universitiesData);
+      console.log("uni :", usersData);
 
       return {
         props: {

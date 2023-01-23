@@ -7,7 +7,7 @@ import axios from "axios";
 import LoadingDots from "../icons/loading-dots";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 export interface universityModalData {
   showUniversityModal: boolean;
@@ -47,7 +47,7 @@ function UniversityFormModal(props: universityModalData) {
   // refresh props!
   const refreshData = () => {
     router.replace(router.asPath);
-  }
+  };
 
   const onSubmit: SubmitHandler<UniversityFormInput> = async (data) => {
     setSubmitting(true);

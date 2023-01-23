@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import { universityDataType } from "../typings";
@@ -16,14 +16,19 @@ function Universities() {
   const [universityModal, setUniversityModal] = useState(false);
   return (
     <div>
-       <UniversityFormModal showUniversityModal={universityModal} setShowUniversityModal={setUniversityModal}  />
+      <UniversityFormModal
+        showUniversityModal={universityModal}
+        setShowUniversityModal={setUniversityModal}
+      />
       <div className="py-6 px-4  flex items-center">
         <p className="font-[900] flex-1 font-sanSerif  tracking-wider text-4xl md:text-5xl">
           Universities
         </p>
         <motion.div
           whileTap={{ scale: 0.96 }}
-          onClick={()=>{setUniversityModal(true)}}
+          onClick={() => {
+            setUniversityModal(true);
+          }}
           className="bg-red-600 p-5 shadow-md shadow-gray-400 cursor-pointer rounded-full"
         >
           <PlusIcon className="text-white h-5 w-5 md:h-7 md:w-7" />
@@ -48,7 +53,7 @@ function Universities() {
           <motion.div
             whileTap={{ scale: 0.2 }}
             onClick={() => {
-              setPageSize(pageSize + 4);
+              setPageSize(pageSize + 10);
             }}
             className="mt-8 flex cursor-pointer group justify-center rounded-[0.2rem] bg-red-600 py-4 px-8 font-ubuntu text-lg font-semibold tracking-wide text-white shadow-md shadow-gray-400 transition duration-500 ease-in-out lg:px-8"
           >

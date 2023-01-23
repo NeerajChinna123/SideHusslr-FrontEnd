@@ -5,6 +5,7 @@ import {
   MapPinIcon,
   CalendarIcon,
   ArrowsPointingOutIcon,
+  BuildingLibraryIcon,
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import useWindowSize from "../lib/hooks/use-window-size";
@@ -46,13 +47,13 @@ function University(props: UniversityData) {
         </div>
       )}
       <div className="flex flex-row">
-        <div className=" relative object-contain self-center h-[5rem] w-[5rem] md:h-[6rem] md:w-[6rem]">
-          <img
-            alt=""
-            className=""
-            src={props.data.image ? props.data.image : 'https://www.completeuniversityinfo.com/images/university_placeholder.png' }
-          />
-        </div>
+        {props.data.image ? (
+          <div className=" relative object-contain self-center h-[5rem] w-[5rem] md:h-[6rem] md:w-[6rem]">
+            <img alt="" className="" src={props.data.image} />
+          </div>
+        ) : (
+          <BuildingLibraryIcon className="h-[5rem] w-[5rem] text-red-600 md:h-[6rem] md:w-[6rem]" />
+        )}
         <div className="border-l self-center h-[6rem] ml-2 border-solid border-gray-200" />
         <div className="ml-5 mt-1 md:mt-0 w-[95%] space-y-2">
           <p className="font-bold capitalize tracking-wide font-poppins text-[1.5rem] text-red-700">
