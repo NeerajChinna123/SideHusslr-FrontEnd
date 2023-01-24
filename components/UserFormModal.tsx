@@ -32,7 +32,7 @@ interface UserFormInput {
   password: string;
   location: string;
   image: string;
-  university_id: string;
+  university_id: string | null;
   username: string;
 }
 
@@ -156,7 +156,7 @@ function UserFormModal(props: userModalData) {
             image: "",
             location: "",
             password: "",
-            university_id: "",
+            university_id: null,
           }),
             setRole(null),
             setUniversityD(null);
