@@ -48,8 +48,8 @@ function University(props: UniversityData) {
       )}
       <div className="flex flex-row">
         {props.data.image ? (
-          <div className=" relative object-contain self-center h-[5rem] w-[5rem] md:h-[6rem] md:w-[6rem]">
-            <img alt="" className="" src={props.data.image} />
+          <div className=" relative self-center">
+            <img alt="" className="object-contain  h-[5rem] w-[5rem] md:h-[6rem] md:w-[6rem]" src={props.data.image} />
           </div>
         ) : (
           <BuildingLibraryIcon className="h-[5rem] w-[5rem] text-red-600 md:h-[6rem] md:w-[6rem]" />

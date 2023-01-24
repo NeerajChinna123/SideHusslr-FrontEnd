@@ -40,9 +40,13 @@ function User(props: UserData) {
         {props.data.image ? (
           <motion.div
             layout
-            className=" relative object-contain self-center h-[3rem] w-[3rem] rounded-lg md:h-[5rem] md:w-[5rem]"
+            className=" relative self-center rounded-lg md:h-[5rem] md:w-[5rem]"
           >
-            <img alt="" className="" src={props.data.image} />
+            <img
+              alt=""
+              className="object-contain  h-[3rem] w-[3rem] md:h-[5rem] md:w-[5rem]"
+              src={props.data.image}
+            />
           </motion.div>
         ) : (
           <UserIcon className="h-[4rem] w-[4rem] self-center text-white bg-red-600 p-3 rounded-lg md:h-[5rem] md:w-[5rem]" />
