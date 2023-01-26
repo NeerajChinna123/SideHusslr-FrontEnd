@@ -160,7 +160,7 @@ function UserFormModal(props: userModalData) {
           }),
             setRole(null),
             setUniversityD(null);
-            setError(null);
+          setError(null);
         }}
         setSuccessData={setSuccess}
       >

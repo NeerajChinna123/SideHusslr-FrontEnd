@@ -67,7 +67,7 @@ export default function UserDropdown({ signOut, page }:any) {
             onClick={() => {
               signOut();
             }}
-            className="flex items-center tracking-wide bg-black border-red-600 border rounded-b-md space-x-2 py-3 cursor-pointer justify-center transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white "
+            className="flex items-center tracking-wide bg-black  rounded-md space-x-2 py-3 cursor-pointer justify-center transition-all duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white "
           >
             <ArrowLeftOnRectangleIcon className="h-6 w-6 animate-pulse text-semibold" />
             <div className="">
