@@ -50,7 +50,7 @@ export default function Admin(props: propsData) {
             <>
               <main className="">
                 <div className="">
-                  <div className="bg-gradient-to-br  from-black via-black  to-[#85002a] shadow-md shadow-red-600">
+                  <div className="bg-gradient-to-br from-black via-black  to-[#85002a] shadow-md shadow-red-600">
                     <div className="max-w-[82rem]   mx-auto ">
                       <div>
                         <div className="py-2">
