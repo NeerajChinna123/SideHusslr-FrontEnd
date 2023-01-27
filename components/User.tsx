@@ -9,7 +9,6 @@ import {
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { universityDataType } from "../typings";
-import { useAppSelector } from "../hooks";
 
 export interface UserData {
   data: usersDataType;

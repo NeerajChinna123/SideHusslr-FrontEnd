@@ -1,4 +1,3 @@
-import Header from "../components/Header";
 import { motion } from "framer-motion";
 import Lottie from "react-lottie-player";
 import animationData from "../lottie-aminations/husslr.json";
@@ -10,7 +9,7 @@ function StudentBanner() {
     "Our platform provides easy access to your course information and assignment status, allowing you to stay organized and on top of your work. Never miss a deadline again!. You can focus on what really matters - learning and achieving your academic goals";
 
   return (
-    <div className="max-w-[82rem] mx-auto px-[1.2rem] md:px-6 mb-[4rem] lg:mb-[8rem]">
+    <div className="max-w-[82rem] mx-auto px-[1.2rem] md:px-6 mb-[1rem] lg:mb-[4rem]">
       <motion.div
         initial="hidden"
         whileInView="show"
@@ -35,7 +34,7 @@ function StudentBanner() {
               <span className="">
                 <Balancer>
                   Your one-stop hub for all your{" "}
-                  <span className="text-red-600">academic needs .</span>
+                  <span className="text-red-600">academic needs</span>
                 </Balancer>
               </span>
             </motion.div>
