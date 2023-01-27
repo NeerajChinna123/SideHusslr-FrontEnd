@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images : {
-    domains : [''],
+    domains : ['images.unsplash.com','plus.unsplash.com'],
   },
   env: {
     SIDEHUSSLR_TEST_API: 'http://localhost:5000',

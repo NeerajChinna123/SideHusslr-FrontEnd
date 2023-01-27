@@ -45,6 +45,8 @@ export interface studentDataType {
   course_id: string;
   StudentAssignmentInstructors: [StudentAssignmentInstructorsType];
   Assignments: [Assignment];
+  Course:CourseDataType
+
 }
 
 export interface StudentAssignmentInstructorsType {
@@ -62,10 +64,10 @@ export interface StudentAssignmentInstructorsType {
   student_course_id: string;
   assignment_id: string;
   user_id: string;
-  Assignment: Assignment;
+  Assignment: AssignmentDataType;
 }
 
-export interface Assignment {
+export interface AssignmentDataType {
   assignment_id: string;
   name: string;
   description: string;
@@ -77,4 +79,17 @@ export interface Assignment {
   modifiedAt: string;
   modifiedBy: string;
   course_id: string;
+}
+
+export interface CourseDataType {
+  course_id: string,
+  name: string,
+  description: string,
+  duration: string,
+  is_delete: boolean,
+  createdAt: string,
+  createdBy: string,
+  modifiedAt: string,
+  modifiedBy: string,
+  university_id: string
 }

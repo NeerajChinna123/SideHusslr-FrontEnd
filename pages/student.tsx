@@ -7,13 +7,14 @@ import { setStudentsData } from "../slice/studentSlice";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { studentDataType } from "../typings";
 import StudentBanner from "../containers/StudentBanner";
+import CourseAssignmentTabs from "../containers/CourseAssignmentTabs";
 
 export interface propsData {
   studentData: [studentDataType];
 }
 
 export default function Student(props: propsData) {
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
   const router = useRouter();
 
@@ -82,8 +83,11 @@ export default function Student(props: propsData) {
                 </div>
               </div>
             </div>
-            <div className="mb-[2rem] lg:mb-[4rem] text-9xl">
+            <div className="">
               <StudentBanner />
+            </div>
+            <div>
+              <CourseAssignmentTabs />
             </div>
           </div>
         </main>
