@@ -8,6 +8,7 @@ import { motion, AnimateSharedLayout } from "framer-motion";
 import { studentDataType } from "../typings";
 import StudentBanner from "../containers/StudentBanner";
 import CourseAssignmentTabs from "../containers/CourseAssignmentTabs";
+import Courses from "../containers/Courses";
 
 export interface propsData {
   studentData: [studentDataType];
@@ -74,7 +75,7 @@ export default function Student(props: propsData) {
       <AnimateSharedLayout>
         <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
           <div className="">
-            <div className="bg-gradient-to-br sticky top-0 z-50 from-black via-black  to-[#85002a] shadow-md shadow-red-600">
+            <div className="bg-gradient-to-br from-black via-black  to-[#85002a] shadow-md shadow-red-600">
               <div className="max-w-[82rem]   mx-auto ">
                 <div>
                   <div className="py-2">

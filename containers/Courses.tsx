@@ -5,11 +5,18 @@ import { useEffect, useRef, useState } from "react";
 import { studentDataType, CourseDataType } from "../typings";
 
 import Course from "../components/Course";
+import Link from "next/link";
 
-function Courses() {
-  const studentDataSt = useAppSelector(
-    (state) => state.studentData.studentsData
-  );
+
+export interface StudentData {
+  data: [];
+}
+
+
+function Courses(props:StudentData) {
+  // const studentDataSt = useAppSelector(
+  //   (state) => state.studentData.studentsData
+  // );
 
   const myArray = [
     "https://images.unsplash.com/photo-1661961110671-77b71b929d52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
@@ -19,9 +26,6 @@ function Courses() {
     "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNsb3VkJTIwY29tcHV0aW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
     "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Ym9va3MlMjB0ZWNofGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
   ];
-
-  
-
 
   const [pageSize, setPageSize] = useState(3);
 
@@ -35,15 +39,18 @@ function Courses() {
         </div>
 
         <div className="px-5 py-4 md:py-6  grid grid-cols-1 grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10 ">
-          {studentDataSt
+          {props?.data
             ?.slice(0, pageSize)
             ?.map((studentD: studentDataType) => (
               <div className="w-full " key={studentD?.course_id}>
-                <Course data={studentD} image={myArray[Math.floor(Math.random() * myArray.length)]} />
+                <Course
+                  data={studentD}
+                  image={myArray[Math.floor(Math.random() * myArray.length)]}
+                />
               </div>
             ))}
         </div>
-        {pageSize < studentDataSt?.length && (
+        {pageSize < props?.data?.length && (
           <motion.div
             //   variants={scaleVariants}
             //   whileInView={scaleVariants.whileInView}

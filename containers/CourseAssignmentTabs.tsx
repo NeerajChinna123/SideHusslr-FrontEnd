@@ -1,17 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Assignments from "../containers/Assignments";
 import Courses from "../containers/Courses";
-
-const tabsData = [
-  {
-    label: "Courses",
-    content: "Courses",
-  },
-  {
-    label: "Assignments",
-    content: "Assignments",
-  },
-];
+import { useAppSelector } from "../hooks";
 
 export default function CourseAssignmentTabs() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -35,6 +25,21 @@ export default function CourseAssignmentTabs() {
     return () => window.removeEventListener("resize", setTabPosition);
   }, [activeTabIndex]);
 
+  const studentDataSt = useAppSelector(
+    (state) => state.studentData.studentsData
+  );
+
+  const tabsData = [
+    {
+      label: `Courses (${studentDataSt.length})`,
+      content: "Courses",
+    },
+    {
+      label: "Assignments",
+      content: "Assignments",
+    },
+  ];
+
   return (
     <div className="max-w-7xl mx-auto mt-4 lg:mt-12 ">
       <div className="relative">
@@ -46,7 +51,7 @@ export default function CourseAssignmentTabs() {
                 //@ts-ignore
                 ref={(el) => (tabsRef.current[idx] = el)}
                 className={
-                  `pt-2 pb-3 px-[3rem] md:px-[10rem] text-md font-poppins tracking-wide ` +
+                  `pt-2 pb-3 px-[3rem] md:px-[10rem] text-sm md:text-md font-poppins tracking-wide ` +
                   `${
                     tabsRef.current[idx] == tabsRef.current[activeTabIndex] &&
                     "text-red-500 font-semibold"
@@ -68,7 +73,7 @@ export default function CourseAssignmentTabs() {
       </div>
       <div className="py-4 md:px-1">
         {tabsData[activeTabIndex].content == "Courses" ? (
-          <Courses />
+          <Courses data={studentDataSt} />
         ) : (
           <Assignments />
         )}
