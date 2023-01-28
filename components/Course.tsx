@@ -8,16 +8,17 @@ import {
   ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 export interface StudentData {
   data: studentDataType;
-  image : string;
+  image: string;
 }
 
 function Course(props: StudentData) {
- 
-
   const [decs, setDesFull] = useState(true);
+
+  const router = useRouter();
 
   const assignmentsCount = props?.data?.StudentAssignmentInstructors.length;
 
@@ -84,6 +85,7 @@ function Course(props: StudentData) {
     <motion.div
       variants={scaleVariants}
       whileInView={scaleVariants.whileInView}
+      onClick={()=>{router.push(`/course/${props?.data?.student_course_id}`)}}
     >
       <motion.div className="bg-white shadow-lg shadow-gray-300 px-[1.1rem] py-6 group flex flex-col rounded-2xl cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 border border-gray-200">
         <div className="relative w-full h-64 md:h-64 ">
@@ -110,15 +112,15 @@ function Course(props: StudentData) {
               {props?.data?.Course?.description.length > 97 && decs ? (
                 <>
                   <p className="tracking-wide text-[0.9rem] font-poppins text-stone-600 pr-[0.4rem]">
-                    {props?.data?.Course?.description.slice(0, 96) + "..."}{" "}
-                    <span
+                    {props?.data?.Course?.description.slice(0, 96) + " ..."}{" "}
+                    {/* <span
                       onClick={() => {
                         setDesFull(false);
                       }}
                       className="text-[0.9rem] text-gray-600 font-bold hover:cursor-pointer"
                     >
                       {"       "}more{" "}
-                    </span>
+                    </span> */}
                   </p>{" "}
                 </>
               ) : (
