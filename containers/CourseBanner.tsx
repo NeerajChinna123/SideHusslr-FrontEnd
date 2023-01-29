@@ -133,7 +133,7 @@ function CourseBanner(props: StudentData) {
           <CircularProgress
             size={220}
             strokeWidth={18}
-            percentage={20}
+            percentage={completedPercent}
             color="#16A34A"
           />
         </div>
