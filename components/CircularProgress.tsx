@@ -27,7 +27,8 @@ const CircularProgress = ({
     <svg width={size} height={size} viewBox={viewBox}>
       <circle
         fill="none"
-        stroke="#cccc"
+        stroke="#DC2626"
+        opacity="90%"
         cx={size / 2}
         cy={size / 2}
         r={radius}
@@ -36,6 +37,7 @@ const CircularProgress = ({
       <circle
         fill="none"
         stroke={color}
+        opacity="90%"
         cx={size / 2}
         cy={size / 2}
         r={radius}

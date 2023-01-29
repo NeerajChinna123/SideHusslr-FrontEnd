@@ -85,9 +85,11 @@ function Course(props: StudentData) {
     <motion.div
       variants={scaleVariants}
       whileInView={scaleVariants.whileInView}
-      onClick={()=>{router.push(`/course/${props?.data?.student_course_id}`)}}
+      onClick={() => {
+        router.push(`/course/${props?.data?.student_course_id}`);
+      }}
     >
-      <motion.div className="bg-white shadow-lg shadow-gray-300 px-[1.1rem] py-6 group flex flex-col rounded-2xl cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 border border-gray-200">
+      <motion.div className="bg-white md:h-[35rem] md:max-h-[35rem] shadow-lg shadow-gray-300 px-[1.1rem] py-6 group flex flex-col rounded-2xl cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 border border-gray-200">
         <div className="relative w-full h-64 md:h-64 ">
           <Image
             alt=""
@@ -102,13 +104,29 @@ function Course(props: StudentData) {
           </div>
         </div>
         <div className="px-3 mt-4">
-          <div className="space-y-2">
+          <div className=" md:h-[3rem">
             <div>
-              <Balancer className="text-black font-bold font-poppins tracking-wide text-xl">
-                {props?.data?.Course?.name}
-              </Balancer>
+              {props?.data?.Course?.name.length > 20 && decs ? (
+                <>
+                  <p className="text-black font-bold font-poppins tracking-wide text-xl">
+                    {props?.data?.Course?.name.slice(0, 19) + " ..."}{" "}
+                    {/* <span
+                      onClick={() => {
+                        setDesFull(false);
+                      }}
+                      className="text-[0.9rem] text-gray-600 font-bold hover:cursor-pointer"
+                    >
+                      {"       "}more{" "}
+                    </span> */}
+                  </p>{" "}
+                </>
+              ) : (
+                <p className="text-black font-bold font-poppins tracking-wide text-xl">
+                  {props?.data?.Course?.name}
+                </p>
+              )}
             </div>
-            <div className="md:max-h-[4.1rem] max-h-[5.8rem] overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-full scrollbar-track-rounded-full  scrollbar-thumb-h-[2rem]  scrollbar-w-[0.3rem] md:scrollbar-w-[0.2rem]">
+            <div className="md:max-h-[4.1rem] mt-2 max-h-[5.8rem] md:h-[4.1rem] overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-full scrollbar-track-rounded-full  scrollbar-thumb-h-[2rem]  scrollbar-w-[0.3rem] md:scrollbar-w-[0.2rem]">
               {props?.data?.Course?.description.length > 97 && decs ? (
                 <>
                   <p className="tracking-wide text-[0.9rem] font-poppins text-stone-600 pr-[0.4rem]">
@@ -130,7 +148,7 @@ function Course(props: StudentData) {
               )}
             </div>
           </div>
-          <div className="flex flex-wrap justify-between mt-6">
+          <div className="flex flex-wrap justify-between pt-6">
             <div className="flex items-center space-x-2 bg-gray-100 rounded-full px-5 py-[0.4rem] border-gray-300 border">
               <DocumentTextIcon className="h-6 w-6 font-bold text-black" />
               <p className="font-semibold text-md  tracking-wide">

@@ -7,13 +7,11 @@ import { studentDataType, CourseDataType } from "../typings";
 import Course from "../components/Course";
 import Link from "next/link";
 
-
 export interface StudentData {
   data: [];
 }
 
-
-function Courses(props:StudentData) {
+function Courses(props: StudentData) {
   // const studentDataSt = useAppSelector(
   //   (state) => state.studentData.studentsData
   // );
@@ -38,17 +36,14 @@ function Courses(props:StudentData) {
           </p>
         </div>
 
-        <div className="px-5 py-4 md:py-6  grid grid-cols-1 grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10 ">
-          {props?.data
-            ?.slice(0, pageSize)
-            ?.map((studentD: studentDataType) => (
-              <div className="w-full " key={studentD?.course_id}>
-                <Course
-                  data={studentD}
-                  image={myArray[Math.floor(Math.random() * myArray.length)]}
-                />
-              </div>
-            ))}
+        <div className="px-5 py-4 md:py-6 grid-cols-1 grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10 ">
+          {props?.data?.slice(0, pageSize)?.map((studentD: studentDataType) => (
+            <Course
+              data={studentD}
+              key={studentD?.course_id}
+              image={myArray[Math.floor(Math.random() * myArray.length)]}
+            />
+          ))}
         </div>
         {pageSize < props?.data?.length && (
           <motion.div
