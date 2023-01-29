@@ -4,6 +4,8 @@ import { motion, AnimateSharedLayout } from "framer-motion";
 import { useRouter } from "next/router";
 import Header from "../../components/Header";
 import CourseBanner from "../../containers/CourseBanner";
+import CourseAssignmentTabs from "../../containers/CourseAssignmentTabs";
+import CourseAssignments from "../../containers/CourseAssignments";
 
 function CourseDetails() {
   const router = useRouter();
@@ -88,7 +90,10 @@ function CourseDetails() {
             <div className="">
               <CourseBanner data={courseDetails[0]} image={image} />
             </div>
-            <div>{/* <CourseAssignmentTabs /> */}</div>
+            <div className="">
+              {/* @ts-ignore */}
+              <CourseAssignments data={courseDetails[0]?.StudentAssignmentInstructors} />
+            </div>
           </div>
         </main>
       </AnimateSharedLayout>
