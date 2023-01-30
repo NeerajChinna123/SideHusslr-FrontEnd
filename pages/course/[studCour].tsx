@@ -1,16 +1,19 @@
 import { useAppSelector } from "../../hooks";
 import { studentDataType } from "../../typings";
 import { motion, AnimateSharedLayout } from "framer-motion";
+import axios from "axios";
 import { useRouter } from "next/router";
 import Header from "../../components/Header";
 import Footer from "../../containers/Footer";
 import CourseBanner from "../../containers/CourseBanner";
-import CourseAssignmentTabs from "../../containers/CourseAssignmentTabs";
 import CourseAssignments from "../../containers/CourseAssignments";
 
-function CourseDetails() {
+export interface propsData {
+  courseDetails: studentDataType;
+}
+
+function CourseDetails(props: propsData) {
   const router = useRouter();
-  const { studCour } = router.query;
 
   // if (session && status == "authenticated") {
   //   // @ts-ignore
@@ -32,15 +35,13 @@ function CourseDetails() {
   //   router.push("/");
   // }
 
-  const studentDataSt = useAppSelector(
-    (state) => state.studentData.studentsData
-  );
+  // const studentDataSt = useAppSelector(
+  //   (state) => state.studentData.studentsData
+  // );
 
-  const courseDetails = studentDataSt?.filter(
-    (studCourse: studentDataType) => studCour == studCourse?.student_course_id
-  );
-
-  console.log('c-d : ',courseDetails);
+  // const courseDetails = studentDataSt?.filter(
+  //   (studCourse: studentDataType) => studCour == studCourse?.student_course_id
+  // );
 
   const myArray = [
     "https://images.unsplash.com/photo-1661961110671-77b71b929d52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
@@ -89,26 +90,102 @@ function CourseDetails() {
               </div>
             </div>
             <div className="">
-              <CourseBanner data={courseDetails[0]} image={image} />
+              <CourseBanner data={props?.courseDetails} image={image} />
             </div>
             <div className="mb-0 md:mb-12 md:px-4 lg:px-0">
               {/* @ts-ignore */}
-              <CourseAssignments data={courseDetails[0]?.StudentAssignmentInstructors} />
+              <CourseAssignments
+                data={props?.courseDetails?.StudentAssignmentInstructors}
+                heading="Assignments / Projects"
+              />
             </div>
           </div>
           <motion.div
-          layout
-          className="bg-gradient-to-br from-black via-black  to-[#85002a] "
-        >
-          <div className="max-w-[82rem] mx-auto">
-            <Footer />
-          </div>
-        </motion.div>
+            layout
+            className="bg-gradient-to-br from-black via-black  to-[#85002a] "
+          >
+            <div className="max-w-[82rem] mx-auto">
+              <Footer />
+            </div>
+          </motion.div>
         </main>
-       
       </AnimateSharedLayout>
     </>
   );
 }
 
 export default CourseDetails;
+
+export async function getServerSideProps(context: any) {
+  // const session = await getSession(context);
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/auth/signIn",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
+
+  // if (session) {
+  //   // @ts-ignore
+  //   if (session.data[0].user_status == "ACTIVE") {
+  //     // @ts-ignore
+  //     if (session.data[0].user_type == "ADMIN") {
+  //       return {
+  //         redirect: {
+  //           destination: "/admin",
+  //           permanent: false,
+  //         },
+  //       };
+  //     }
+  //     // @ts-ignore
+  //     if (session.data[0].user_type == "INTERN") {
+  //       return {
+  //         redirect: {
+  //           destination: "/intern",
+  //           permanent: false,
+  //         },
+  //       };
+  //     }
+  //   } else {
+  //     return {
+  //       redirect: {
+  //         destination: "/",
+  //         permanent: false,
+  //       },
+  //     };
+  //   }
+  // }
+
+  let courseDetails = null;
+
+  const { studCour } = context.query;
+
+  const customConfig = {
+    headers: {
+      "Content-Type": "application/json",
+      // @ts-ignore
+      // Authorization: `Bearer ${session.accessToken}`,
+    },
+  };
+  try {
+    const courseDetailsRes = await axios.get(
+      `${process.env.SIDEHUSSLR_TEST_API}/university/course/enrolled/assignment/student/${studCour}`,
+      customConfig
+    );
+
+    if (courseDetailsRes?.data?.status < "300") {
+      courseDetails = await courseDetailsRes.data.data;
+    }
+  } catch (err) {
+    // Handle error
+    console.log(err);
+  }
+
+  return {
+    props: {
+      courseDetails,
+    },
+  };
+}

@@ -156,7 +156,7 @@ export async function getServerSideProps(context: any) {
         headers: {
           "Content-Type": "application/json",
           // @ts-ignore
-          // Authorization: `Bearer ${session.accessToken}`,
+          //Authorization: `Bearer ${session.accessToken}`,
         },
       };
       try {

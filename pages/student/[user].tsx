@@ -1,14 +1,14 @@
 import { signIn, signOut, useSession, getSession } from "next-auth/react";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useAppSelector, useAppDispatch } from "../hooks";
-import { setStudentsData } from "../slice/studentSlice";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { setStudentsData } from "../../slice/studentSlice";
 import { motion, AnimateSharedLayout } from "framer-motion";
-import { studentDataType } from "../typings";
-import StudentBanner from "../containers/StudentBanner";
-import CourseAssignmentTabs from "../containers/CourseAssignmentTabs";
-import Courses from "../containers/Courses";
+import { studentDataType } from "../../typings";
+import StudentBanner from "../../containers/StudentBanner";
+import CourseAssignmentTabs from "../../containers/CourseAssignmentTabs";
+import Footer from "../../containers/Footer";
 
 export interface propsData {
   studentData: [studentDataType];
@@ -91,6 +91,14 @@ export default function Student(props: propsData) {
               <CourseAssignmentTabs />
             </div>
           </div>
+          <motion.div
+            layout
+            className="bg-gradient-to-br from-black via-black  to-[#85002a] "
+          >
+            <div className="max-w-[82rem] mx-auto">
+              <Footer />
+            </div>
+          </motion.div>
         </main>
       </AnimateSharedLayout>
     </>
@@ -141,7 +149,7 @@ export async function getServerSideProps(context: any) {
 
   let studentData = null;
 
-  const userId = context.query.userId;
+  const { user } = context.query;
 
   const customConfig = {
     headers: {
@@ -152,7 +160,7 @@ export async function getServerSideProps(context: any) {
   };
   try {
     const studentRes = await axios.get(
-      `${process.env.SIDEHUSSLR_TEST_API}/university/course/assignment/student/${userId}`,
+      `${process.env.SIDEHUSSLR_TEST_API}/university/course/assignment/student/${user}`,
       customConfig
     );
 

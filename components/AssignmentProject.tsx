@@ -5,11 +5,13 @@ import {
   ChevronUpIcon,
   CheckIcon,
 } from "@heroicons/react/24/solid";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 
 import { motion, AnimatePresence } from "framer-motion";
 
 export interface AssignmentProjectData {
   data: StudentAssignmentInstructorsType;
+  edit: boolean;
 }
 
 function AssignmentProject(props: AssignmentProjectData) {
@@ -39,11 +41,11 @@ function AssignmentProject(props: AssignmentProjectData) {
 
   var assignmentStatusString = props?.data?.assignment_status;
 
-  if (assignmentStatusString == "IN-PROGRESS") {
+  if (assignmentStatusString == "IN PROGRESS") {
     status = 2;
   } else if (assignmentStatusString == "COMPLETED") {
     status = 3;
-  } else if (assignmentStatusString == "IN-REVIEW") {
+  } else if (assignmentStatusString == "IN REVIEW") {
     status = 4;
   } else if (assignmentStatusString == "DELIVERED") {
     status = 5;
@@ -53,6 +55,8 @@ function AssignmentProject(props: AssignmentProjectData) {
 
   var AssignmentCompletionPer = (status / 5) * 100;
 
+  console.log("interndata prop :", props);
+
   return (
     <motion.div layout className="py-6">
       <motion.div layout className="flex justify-center mb-6">
@@ -61,6 +65,13 @@ function AssignmentProject(props: AssignmentProjectData) {
           className="border-bottom  border shadow-md shadow-gray-200 w-full"
         ></motion.div>
       </motion.div>
+      {props?.edit && (
+        <motion.div layout className="flex justify-end my-3 md:my-6 ">
+          <motion.div layout className="cursor-pointer">
+            <PencilSquareIcon className="text-red-600 font-bold h-10 w-10" />
+          </motion.div>
+        </motion.div>
+      )}
       <motion.div
         layout
         className=" px-2 flex justify-between flex-col lg:flex-row"
@@ -82,14 +93,23 @@ function AssignmentProject(props: AssignmentProjectData) {
               {props?.data?.Assignment?.description}
             </p>
           </motion.div>
-          <motion.div layout className="flex flex-row space-x-2">
-            <p className="font-poppins font-semibold tracking-wide text-[0.9rem] text-gray-600">
-              Type :{" "}
-            </p>
-            <p className="font-poppins tracking-wide text-[0.9rem] text-gray-600">
-              Assignment
-            </p>
-          </motion.div>
+          {props?.data?.Assignment?.assignment_type == "PROJECT" ? (
+            <motion.div layout className="pt-1">
+              <p className="font-poppins tracking-wide text-[1rem]  text-white w-[7rem] bg-red-600  text-center rounded-md shadow-md shadow-gray-200 p-2">
+                <span className="animate-pulse">
+                  {props?.data?.Assignment?.assignment_type}
+                </span>
+              </p>
+            </motion.div>
+          ) : (
+            <motion.div layout className="pt-1">
+              <p className="font-poppins text-center tracking-wide text-[1rem] text-red-600 border border-red-500 rounded-md p-2 w-[8rem] shadow-red-200  shadow-md">
+                <span className="animate-pulse">
+                  {props?.data?.Assignment?.assignment_type}
+                </span>
+              </p>
+            </motion.div>
+          )}
         </motion.div>
 
         <motion.div

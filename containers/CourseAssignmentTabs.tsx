@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import Assignments from "../containers/Assignments";
+import OnGoingAssignments from "./OnGoingAssignments";
 import Courses from "../containers/Courses";
 import { useAppSelector } from "../hooks";
+import { StudentAssignmentInstructorsType, studentDataType } from "../typings";
 
 export default function CourseAssignmentTabs() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -29,14 +30,34 @@ export default function CourseAssignmentTabs() {
     (state) => state.studentData.studentsData
   );
 
+  //@ts-ignore
+  const assignmentsOngoing = [];
+
+  studentDataSt.forEach((course: studentDataType) => {
+    course?.StudentAssignmentInstructors.forEach(
+      (ass: StudentAssignmentInstructorsType) => {
+        if (
+          // ass?.assignment_status == "IN PROGRESS" ||
+          // ass?.assignment_status == "COMPLETED" ||
+          // ass?.assignment_status == "IN REVIEW"
+          ass?.assignment_status == "OPEN"
+        ) {
+          assignmentsOngoing.push(ass);
+        }
+      }
+    );
+  });
+  //@ts-ignore
+  console.log("ass : ", assignmentsOngoing);
+
   const tabsData = [
     {
-      label: `Courses (${studentDataSt.length})`,
+      label: `Courses (${studentDataSt?.length})`,
       content: "Courses",
     },
     {
-      label: "Assignments",
-      content: "Assignments",
+      label: `On-going (${assignmentsOngoing?.length})`,
+      content: "On-going",
     },
   ];
 
@@ -71,13 +92,16 @@ export default function CourseAssignmentTabs() {
           />
         </div>
       </div>
-      <div className="py-4 md:px-1">
+     
         {tabsData[activeTabIndex].content == "Courses" ? (
+           <div className="py-4 md:px-1">
           <Courses data={studentDataSt} />
+          </div>
         ) : (
-          <Assignments />
+          //@ts-ignore
+          <OnGoingAssignments data={assignmentsOngoing} />
         )}
-      </div>
+      
     </div>
   );
 }

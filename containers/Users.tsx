@@ -29,7 +29,7 @@ function Users() {
           universityDataStProp={universityDataSt}
         />
         <div className="py-6 px-5 pl-6  flex items-center">
-          <p className="font-[900] flex-1 font-sanSerif  tracking-wider text-4xl md:text-5xl">
+          <p className="font-[900] flex-1 font-sanSerif  tracking-wide text-4xl md:text-5xl">
             Users
           </p>
           <motion.div
