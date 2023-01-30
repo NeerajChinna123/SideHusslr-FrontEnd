@@ -156,9 +156,11 @@ export async function getServerSideProps(context: any) {
       const customConfig1 = {
         headers: {
           "Content-Type": "application/json",
+          Cookie: context.req.headers.cookie,
           // @ts-ignore
-          Authorization: `Bearer ${session.accessToken}`,
+          Authorization: `Bearer ${session.token}`,
         },
+        withCredentials: true,
       };
       try {
         const uniRes = await axios.get(
