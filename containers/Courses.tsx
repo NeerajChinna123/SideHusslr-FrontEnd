@@ -31,7 +31,7 @@ function Courses(props: StudentData) {
     <AnimateSharedLayout>
       <div className="mb-10">
         <div className="py-8 px-5  flex items-center">
-          <p className="font-[900] flex-1 font-sanSerif  tracking-wider text-4xl md:text-5xl">
+          <p className="font-[900] flex-1 font-sanSerif  tracking-wide text-4xl md:text-5xl">
             Your Courses
           </p>
         </div>
@@ -47,8 +47,6 @@ function Courses(props: StudentData) {
         </div>
         {pageSize < props?.data?.length && (
           <motion.div
-            //   variants={scaleVariants}
-            //   whileInView={scaleVariants.whileInView}
             className="flex justify-center"
           >
             <motion.div

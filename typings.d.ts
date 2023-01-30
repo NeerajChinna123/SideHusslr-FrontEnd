@@ -72,7 +72,10 @@ export interface AssignmentDataType {
   name: string;
   description: string;
   status: string;
+  assignment_type:string;
   start_date: string;
+  primary_tag:string;
+  tags:Array;
   end_date: string;
   createdAt: string;
   createdBy: string;
