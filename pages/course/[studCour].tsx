@@ -3,6 +3,7 @@ import { studentDataType } from "../../typings";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { useRouter } from "next/router";
 import Header from "../../components/Header";
+import Footer from "../../containers/Footer";
 import CourseBanner from "../../containers/CourseBanner";
 import CourseAssignmentTabs from "../../containers/CourseAssignmentTabs";
 import CourseAssignments from "../../containers/CourseAssignments";
@@ -90,12 +91,21 @@ function CourseDetails() {
             <div className="">
               <CourseBanner data={courseDetails[0]} image={image} />
             </div>
-            <div className="">
+            <div className="mb-0 md:mb-12 md:px-4 lg:px-0">
               {/* @ts-ignore */}
               <CourseAssignments data={courseDetails[0]?.StudentAssignmentInstructors} />
             </div>
           </div>
+          <motion.div
+          layout
+          className="bg-gradient-to-br from-black via-black  to-[#85002a] "
+        >
+          <div className="max-w-[82rem] mx-auto">
+            <Footer />
+          </div>
+        </motion.div>
         </main>
+       
       </AnimateSharedLayout>
     </>
   );
