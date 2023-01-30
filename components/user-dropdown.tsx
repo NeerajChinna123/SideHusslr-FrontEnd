@@ -40,7 +40,7 @@ export default function UserDropdown({ signOut, page }:any) {
             
             {
              //@ts-ignore
-             session?.data[0]?.first_name}
+             session?.data?.username}
           </p>
         </div>
       </motion.div>

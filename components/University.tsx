@@ -1,6 +1,6 @@
 import { universityDataType } from "../typings";
 import { useState } from "react";
-import Image from "next/image";
+
 import {
   MapPinIcon,
   CalendarIcon,

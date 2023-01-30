@@ -17,80 +17,66 @@ export default function Intern(props: propsData) {
 
   const router = useRouter();
 
-  // if (session && status == "authenticated") {
-  //   // @ts-ignore
-  //   if (session.data[0].user_status == "ACTIVE") {
-  //     // @ts-ignore
-  //     if (session.data[0].user_type == "STUDENT") {
-  //       router.push("/student");
-  //     }
-  //      // @ts-ignore
-  //     if (session.data[0].user_type == "ADMIN") {
-  //       router.push("/admin");
-  //     }
-  //   } else {
-  //     router.push("/");
-  //   }
-  // }
+//   if (session && status == "authenticated") {
+//     // @ts-ignore
+//     if (session.data.user_status == "ACTIVE") {
+//       // @ts-ignore
+//       if (session.data.user_type == "STUDENT") {
+//           //@ts-ignore
+//         router.push(`/student/${session.data.user_id}`);
+//       }
+//        // @ts-ignore
+//       if (session.data.user_type == "ADMIN") {
+//         router.push("/admin");
+//       }
+//     } else {
+//       router.push("/");
+//     }
+//   }
 
-  //   if (!session && status == "unauthenticated") {
-  //     router.push("/");
-  //   }
-
-  console.log("intern-d : ", props?.internData);
+    if (!session && status == "unauthenticated") {
+      router.push("/auth/signIn");
+    }
 
   return (
     <>
-      {/* {session &&
+      {session &&
         status == "authenticated" &&
          // @ts-ignore
-        session.data[0].user_status == "ACTIVE" &&
+        session.data.user_status == "ACTIVE" &&
          // @ts-ignore
-        session.data[0].user_type == "INTERN" && (
-          <main className="scroll-smooth scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
-            <div className="h-screen">
-              <div className="bg-gradient-to-br pb-4 from-black via-black  to-[#85002a] ">
-                <div className="max-w-[82rem] mx-auto">
-                  <div>
-                    <div className="pt-4 md:pt-6">
-                      <Header page="intern" />
+        session.data.user_type == "INTERN" && (
+            <main>
+            <AnimateSharedLayout>
+              <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
+                <div className="">
+                  <div className="bg-gradient-to-br from-black via-black  to-[#85002a] shadow-md shadow-red-600">
+                    <div className="max-w-[82rem]   mx-auto ">
+                      <div>
+                        <div className="py-2">
+                          <Header page="student" />
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <div>
+                    <InternAssignments data={props?.internData} />
+                  </div>
                 </div>
-              </div>
-              Intern
-            </div>
+                <motion.div
+                  layout
+                  className="bg-gradient-to-br from-black via-black  to-[#85002a] "
+                >
+                  <div className="max-w-[82rem] mx-auto">
+                    <Footer />
+                  </div>
+                </motion.div>
+              </main>
+            </AnimateSharedLayout>
           </main>
-        )} */}
+        )}
 
-      <main>
-        <AnimateSharedLayout>
-          <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
-            <div className="">
-              <div className="bg-gradient-to-br from-black via-black  to-[#85002a] shadow-md shadow-red-600">
-                <div className="max-w-[82rem]   mx-auto ">
-                  <div>
-                    <div className="py-2">
-                      <Header page="student" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <InternAssignments data={props?.internData} />
-              </div>
-            </div>
-            <motion.div
-              layout
-              className="bg-gradient-to-br from-black via-black  to-[#85002a] "
-            >
-              <div className="max-w-[82rem] mx-auto">
-                <Footer />
-              </div>
-            </motion.div>
-          </main>
-        </AnimateSharedLayout>
-      </main>
+     
     </>
   );
 }
@@ -98,45 +84,46 @@ export default function Intern(props: propsData) {
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
 
-  //   if (!session) {
-  //     return {
-  //       redirect: {
-  //         destination: "/auth/signIn",
-  //         permanent: false,
-  //       },
-  //     };
-  //   }
+    if (!session) {
+      return {
+        redirect: {
+          destination: "/auth/signIn",
+          permanent: false,
+        },
+      };
+    }
 
-  //   if (session) {
-  //     // @ts-ignore
-  //     if (session.data[0].user_status == "ACTIVE") {
-  //       // @ts-ignore
-  //       if (session.data[0].user_type == "ADMIN") {
-  //         return {
-  //           redirect: {
-  //             destination: "/admin",
-  //             permanent: false,
-  //           },
-  //         };
-  //       }
-  //       // @ts-ignore
-  //       if (session.data[0].user_type == "STUDENT") {
-  //         return {
-  //           redirect: {
-  //             destination: "/student",
-  //             permanent: false,
-  //           },
-  //         };
-  //       }
-  //     } else {
-  //       return {
-  //         redirect: {
-  //           destination: "/",
-  //           permanent: false,
-  //         },
-  //       };
-  //     }
-  //   }
+    if (session) {
+      // @ts-ignore
+      if (session.data.user_status == "ACTIVE") {
+        // @ts-ignore
+        if (session.data.user_type == "ADMIN") {
+          return {
+            redirect: {
+              destination: "/admin",
+              permanent: false,
+            },
+          };
+        }
+        // @ts-ignore
+        if (session.data.user_type == "STUDENT") {
+          return {
+            redirect: {
+              // @ts-ignore
+              destination: `/student/${session.data.user_id}`,
+              permanent: false,
+            },
+          };
+        }
+      } else {
+        return {
+          redirect: {
+            destination: "/",
+            permanent: false,
+          },
+        };
+      }
+    }
 
   let internData = null;
 
