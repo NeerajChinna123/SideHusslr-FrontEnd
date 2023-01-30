@@ -4,6 +4,28 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 
 
+async function refreshAccessToken(tokenObject) {
+  try {
+      // Get a new set of tokens with a refreshToken
+      const tokenResponse = await axios.post(YOUR_API_URL + 'auth/refreshToken', {
+          token: tokenObject.refreshToken
+      });
+
+      return {
+          ...tokenObject,
+          accessToken: tokenResponse.data.accessToken,
+          accessTokenExpiry: tokenResponse.data.accessTokenExpiry,
+          refreshToken: tokenResponse.data.refreshToken
+      }
+  } catch (error) {
+      return {
+          ...tokenObject,
+          error: "RefreshAccessTokenError",
+      }
+  }
+}
+
+
 const nextAuthOptions = (req, res) => {
   return {
     providers: [
@@ -21,7 +43,7 @@ const nextAuthOptions = (req, res) => {
   
           try {
             const res = await axios.post(
-              `${process.env.SIDEHUSSLR_API}/login`,
+              `${process.env.SIDEHUSSLR_TEST_API}/auth/login`,
               payload,
               customConfig
             );

@@ -44,9 +44,9 @@ export default function Admin(props: propsData) {
         {session &&
           status == "authenticated" &&
           // @ts-ignore
-          session.data[0].user_status == "ACTIVE" &&
+          session.data.user_status == "ACTIVE" &&
           // @ts-ignore
-          session.data[0].user_type == "ADMIN" && (
+          session.data.user_type == "ADMIN" && (
             <>
               <main className="">
                 <div className="">
@@ -82,6 +82,7 @@ export default function Admin(props: propsData) {
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
   // security at server side to check the authentication status of the user
+
   if (!session) {
     return {
       redirect: {
@@ -93,21 +94,23 @@ export async function getServerSideProps(context: any) {
 
   if (session) {
     // @ts-ignore
-    if (session.data[0].user_status == "ACTIVE") {
+    if (session.data.user_status == "ACTIVE") {
       // @ts-ignore
-      if (session.data[0].user_type == "STUDENT") {
+      if (session.data.user_type == "STUDENT") {
         return {
           redirect: {
-            destination: "/student",
+            //@ts-ignore
+            destination: `/student/${session.data.user_id}`,
             permanent: false,
           },
         };
       }
       // @ts-ignore
-      if (session.data[0].user_type == "INTERN") {
+      if (session.data.user_type == "INTERN") {
         return {
           redirect: {
-            destination: "/intern",
+            //@ts-ignore
+            destination: `/intern/${session.data.user_id}`,
             permanent: false,
           },
         };
@@ -124,7 +127,7 @@ export async function getServerSideProps(context: any) {
 
   if (session) {
     // @ts-ignore
-    if (session.data[0].user_status == "ACTIVE") {
+    if (session.data.user_status == "ACTIVE") {
       //getUsers API
       let usersData = null;
       const customConfig = {
@@ -149,14 +152,12 @@ export async function getServerSideProps(context: any) {
         console.log(err);
       }
 
-      //JSON WEB SERVER API
-
       let universitiesData = null;
       const customConfig1 = {
         headers: {
           "Content-Type": "application/json",
           // @ts-ignore
-          //Authorization: `Bearer ${session.accessToken}`,
+          Authorization: `Bearer ${session.accessToken}`,
         },
       };
       try {
@@ -166,8 +167,13 @@ export async function getServerSideProps(context: any) {
         );
 
         console.log("uni :", uniRes);
+
         if (uniRes?.data?.status < "300") {
-          universitiesData = await uniRes.data.data;
+          if (uniRes?.data?.success) {
+            universitiesData = await uniRes.data.data;
+          } else if (uniRes?.data?.refresh) {
+            universitiesData = null;
+          }
         }
       } catch (err) {
         // Handle error

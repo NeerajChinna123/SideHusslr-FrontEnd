@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../hooks";
+import { signIn, signOut, useSession, getSession } from "next-auth/react";
 import { studentDataType } from "../../typings";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import axios from "axios";
@@ -15,33 +16,27 @@ export interface propsData {
 function CourseDetails(props: propsData) {
   const router = useRouter();
 
+  const { data: session, status } = useSession();
+
   // if (session && status == "authenticated") {
   //   // @ts-ignore
-  //   if (session.data[0].user_status == "ACTIVE") {
+  //   if (session.data.user_status == "ACTIVE") {
   //     // @ts-ignore
-  //     if (session.data[0].user_type == "ADMIN") {
+  //     if (session.data.user_type == "ADMIN") {
   //       router.push("/admin");
   //     }
   //     // @ts-ignore
-  //     if (session.data[0].user_type == "INTERN") {
-  //       router.push("/intern");
+  //     if (session.data.user_type == "INTERN") {
+  //       router.push(`/intern/${session.data.user_id}`);
   //     }
   //   } else {
   //     router.push("/");
   //   }
   // }
 
-  // if (!session && status == "unauthenticated") {
-  //   router.push("/");
-  // }
-
-  // const studentDataSt = useAppSelector(
-  //   (state) => state.studentData.studentsData
-  // );
-
-  // const courseDetails = studentDataSt?.filter(
-  //   (studCourse: studentDataType) => studCour == studCourse?.student_course_id
-  // );
+  if (!session && status == "unauthenticated") {
+    router.push("/auth/signIn");
+  }
 
   const myArray = [
     "https://images.unsplash.com/photo-1661961110671-77b71b929d52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
@@ -56,60 +51,47 @@ function CourseDetails(props: propsData) {
 
   return (
     <>
-      {/* {session &&
+      {session &&
         status == "authenticated" &&
         // @ts-ignore
-        session.data[0].user_status == "ACTIVE" &&
+        session.data.user_status == "ACTIVE" &&
         // @ts-ignore
-        session.data[0].user_type == "STUDENT" && (
-          <main className="scroll-smooth scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
-            <div className="h-screen">
-              <div className="bg-gradient-to-br pb-4 from-black via-black  to-[#85002a] ">
-                <div className="max-w-[82rem] mx-auto">
+        session.data.user_type == "STUDENT" && (
+          <AnimateSharedLayout>
+          <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
+            <div className="">
+              <div className="bg-gradient-to-br from-black via-black  to-[#85002a] shadow-md shadow-red-600">
+                <div className="max-w-[82rem]   mx-auto ">
                   <div>
-                    <div className="pt-4 md:pt-6">
+                    <div className="py-2">
                       <Header page="student" />
                     </div>
                   </div>
                 </div>
               </div>
-              STUDENT
-            </div>
-          </main>
-        )} */}
-      <AnimateSharedLayout>
-        <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
-          <div className="">
-            <div className="bg-gradient-to-br from-black via-black  to-[#85002a] shadow-md shadow-red-600">
-              <div className="max-w-[82rem]   mx-auto ">
-                <div>
-                  <div className="py-2">
-                    <Header page="student" />
-                  </div>
-                </div>
+              <div className="">
+                <CourseBanner data={props?.courseDetails} image={image} />
+              </div>
+              <div className="mb-0 md:mb-12 md:px-4 lg:px-0">
+                {/* @ts-ignore */}
+                <CourseAssignments
+                  data={props?.courseDetails?.StudentAssignmentInstructors}
+                  heading="Assignments / Projects"
+                />
               </div>
             </div>
-            <div className="">
-              <CourseBanner data={props?.courseDetails} image={image} />
-            </div>
-            <div className="mb-0 md:mb-12 md:px-4 lg:px-0">
-              {/* @ts-ignore */}
-              <CourseAssignments
-                data={props?.courseDetails?.StudentAssignmentInstructors}
-                heading="Assignments / Projects"
-              />
-            </div>
-          </div>
-          <motion.div
-            layout
-            className="bg-gradient-to-br from-black via-black  to-[#85002a] "
-          >
-            <div className="max-w-[82rem] mx-auto">
-              <Footer />
-            </div>
-          </motion.div>
-        </main>
-      </AnimateSharedLayout>
+            <motion.div
+              layout
+              className="bg-gradient-to-br from-black via-black  to-[#85002a] "
+            >
+              <div className="max-w-[82rem] mx-auto">
+                <Footer />
+              </div>
+            </motion.div>
+          </main>
+        </AnimateSharedLayout>
+        )}
+      
     </>
   );
 }
@@ -117,46 +99,47 @@ function CourseDetails(props: propsData) {
 export default CourseDetails;
 
 export async function getServerSideProps(context: any) {
-  // const session = await getSession(context);
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth/signIn",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signIn",
+        permanent: false,
+      },
+    };
+  }
 
-  // if (session) {
-  //   // @ts-ignore
-  //   if (session.data[0].user_status == "ACTIVE") {
-  //     // @ts-ignore
-  //     if (session.data[0].user_type == "ADMIN") {
-  //       return {
-  //         redirect: {
-  //           destination: "/admin",
-  //           permanent: false,
-  //         },
-  //       };
-  //     }
-  //     // @ts-ignore
-  //     if (session.data[0].user_type == "INTERN") {
-  //       return {
-  //         redirect: {
-  //           destination: "/intern",
-  //           permanent: false,
-  //         },
-  //       };
-  //     }
-  //   } else {
-  //     return {
-  //       redirect: {
-  //         destination: "/",
-  //         permanent: false,
-  //       },
-  //     };
-  //   }
-  // }
+  if (session) {
+    // @ts-ignore
+    if (session.data.user_status == "ACTIVE") {
+      // @ts-ignore
+      if (session.data.user_type == "ADMIN") {
+        return {
+          redirect: {
+            destination: "/admin",
+            permanent: false,
+          },
+        };
+      }
+      // @ts-ignore
+      if (session.data.user_type == "INTERN") {
+        return {
+          redirect: {
+             // @ts-ignore
+            destination: `/intern/${session.data.user_id}`,
+            permanent: false,
+          },
+        };
+      }
+    } else {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
+  }
 
   let courseDetails = null;
 

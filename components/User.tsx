@@ -19,7 +19,7 @@ function User(props: UserData) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
-  var filteredUniversity = props?.universityDataStProp.find(
+  var filteredUniversity = props?.universityDataStProp?.find(
     (university: universityDataType) => {
       return university.university_id === props.data.university_id;
     }
