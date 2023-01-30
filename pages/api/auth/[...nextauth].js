@@ -2,35 +2,32 @@ import NextAuth from "next-auth";
 import axios from "axios";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-
-
 async function refreshAccessToken(tokenObject) {
   try {
-      // Get a new set of tokens with a refreshToken
-      const tokenResponse = await axios.post(YOUR_API_URL + 'auth/refreshToken', {
-          token: tokenObject.refreshToken
-      });
+    // Get a new set of tokens with a refreshToken
+    const tokenResponse = await axios.post(YOUR_API_URL + "auth/refreshToken", {
+      token: tokenObject.refreshToken,
+    });
 
-      return {
-          ...tokenObject,
-          accessToken: tokenResponse.data.accessToken,
-          accessTokenExpiry: tokenResponse.data.accessTokenExpiry,
-          refreshToken: tokenResponse.data.refreshToken
-      }
+    return {
+      ...tokenObject,
+      accessToken: tokenResponse.data.accessToken,
+      accessTokenExpiry: tokenResponse.data.accessTokenExpiry,
+      refreshToken: tokenResponse.data.refreshToken,
+    };
   } catch (error) {
-      return {
-          ...tokenObject,
-          error: "RefreshAccessTokenError",
-      }
+    return {
+      ...tokenObject,
+      error: "RefreshAccessTokenError",
+    };
   }
 }
-
 
 const nextAuthOptions = (req, res) => {
   return {
     providers: [
       CredentialsProvider({
-        async authorize(credentials, req,res) {
+        async authorize(credentials) {
           const payload = {
             username: credentials.username,
             password: credentials.password,
@@ -40,29 +37,38 @@ const nextAuthOptions = (req, res) => {
               "Content-Type": "application/json",
             },
           };
-  
+
           try {
-            const res = await axios.post(
+            const response = await axios.post(
               `${process.env.SIDEHUSSLR_TEST_API}/auth/login`,
               payload,
               customConfig
             );
-  
-            const user = await res.data;
-            if (res?.data?.success == false) {
-              throw new Error(user.error);
+
+        
+            const cookies = response.headers["set-cookie"];
+
+            res.setHeader("Set-Cookie", cookies);
+
+            console.log('re', response);
+           
+        
+            const user = await response.data;
+
+            if (response?.data?.success == false) {
+              throw new Error(user.message);
             }
             // If no error and we have user data, return it
-            if (res?.data?.success == true) {
+            if (response?.data?.success == true) {
               return user;
             }
             // Work with the response...
           } catch (err) {
             // Handle error
-            console.log(err);
-            return null;
+            console.log('err', err.response);
+            throw new Error(err.response.data.message);
           }
-  
+
           // Return null if user data could not be retrieved
           return null;
         },
@@ -90,9 +96,9 @@ const nextAuthOptions = (req, res) => {
     },
     // Enable debug messages in the console if you are having problems
     debug: process.env.NODE_ENV === "development",
-  }
-}
+  };
+};
 
 export default (req, res) => {
-  return NextAuth(req, res, nextAuthOptions(req, res))
-}
+  return NextAuth(req, res, nextAuthOptions(req, res));
+};
