@@ -83,6 +83,9 @@ export async function getServerSideProps(context: any) {
   const session = await getSession(context);
   // security at server side to check the authentication status of the user
 
+  //@ts-ignore
+  console.log('session-server : ',session);
+
   if (!session) {
     return {
       redirect: {
@@ -158,7 +161,7 @@ export async function getServerSideProps(context: any) {
           "Content-Type": "application/json",
           Cookie: context.req.headers.cookie,
           // @ts-ignore
-          Authorization: `Bearer ${session.token}`,
+          Authorization: `Bearer ${session.accessToken}`,
         },
         withCredentials: true,
       };
