@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 async function refreshAccessToken(tokenObject) {
   try {
     // Get a new set of tokens with a refreshToken
-    const tokenResponse = await axios.post(YOUR_API_URL + "auth/refreshToken", {
+    const tokenResponse = await axios.post( `${process.env.SIDEHUSSLR_TEST_API}/auth/refresh`, {
       token: tokenObject.refreshToken,
     });
 
@@ -45,14 +45,12 @@ const nextAuthOptions = (req, res) => {
               customConfig
             );
 
-        
             const cookies = response.headers["set-cookie"];
 
             res.setHeader("Set-Cookie", cookies);
 
-            console.log('re', response);
-           
-        
+            console.log("re", response);
+
             const user = await response.data;
 
             if (response?.data?.success == false) {
@@ -65,9 +63,11 @@ const nextAuthOptions = (req, res) => {
             // Work with the response...
           } catch (err) {
             // Handle error
-            console.log('err', err.response);
+            console.log("err", err.response);
             throw new Error(err.response.data.message);
           }
+
+          
 
           // Return null if user data could not be retrieved
           return null;
@@ -81,13 +81,29 @@ const nextAuthOptions = (req, res) => {
     },
     callbacks: {
       async jwt({ token, user, account }) {
+        console.log("acc-to-u :", user);
         if (account && user) {
           return {
             ...token,
             ...user,
             accessToken: user.token,
+            refreshToken: user.refreshToken,
+            accessTokenExpiry: user.accessTokenExpiry,
           };
         }
+
+        const shouldRefreshTime = Math.round(
+          token.accessTokenExpiry - Date.now()
+        );
+
+        // if (shouldRefreshTime > 0) {
+        //   return token;
+        // }
+
+        
+
+        // token = refreshAccessToken(token);
+
         return token;
       },
       async session({ session, user, token }) {
