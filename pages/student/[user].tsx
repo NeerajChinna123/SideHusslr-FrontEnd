@@ -40,6 +40,11 @@ export default function Student(props: propsData) {
     router.push("/auth/signIn");
   }
 
+  // @ts-ignore
+  if (session?.error === "RefreshAccessTokenError") {
+    signOut({ callbackUrl: "/auth/signIn", redirect: true });
+  }
+
   const dispatch = useAppDispatch();
 
   dispatch(setStudentsData(props?.studentData));
@@ -104,6 +109,10 @@ export async function getServerSideProps(context: any) {
   }
 
   if (session) {
+    // @ts-ignore
+    if (session?.error === "RefreshAccessTokenError") {
+      signOut({ callbackUrl: "/auth/signIn", redirect: true });
+    }
     // @ts-ignore
     if (session.data.user_status == "ACTIVE") {
       // @ts-ignore

@@ -17,36 +17,41 @@ export default function Intern(props: propsData) {
 
   const router = useRouter();
 
-//   if (session && status == "authenticated") {
-//     // @ts-ignore
-//     if (session.data.user_status == "ACTIVE") {
-//       // @ts-ignore
-//       if (session.data.user_type == "STUDENT") {
-//           //@ts-ignore
-//         router.push(`/student/${session.data.user_id}`);
-//       }
-//        // @ts-ignore
-//       if (session.data.user_type == "ADMIN") {
-//         router.push("/admin");
-//       }
-//     } else {
-//       router.push("/");
-//     }
-//   }
+  //   if (session && status == "authenticated") {
+  //     // @ts-ignore
+  //     if (session.data.user_status == "ACTIVE") {
+  //       // @ts-ignore
+  //       if (session.data.user_type == "STUDENT") {
+  //           //@ts-ignore
+  //         router.push(`/student/${session.data.user_id}`);
+  //       }
+  //        // @ts-ignore
+  //       if (session.data.user_type == "ADMIN") {
+  //         router.push("/admin");
+  //       }
+  //     } else {
+  //       router.push("/");
+  //     }
+  //   }
 
-    if (!session && status == "unauthenticated") {
-      router.push("/auth/signIn");
-    }
+  if (!session && status == "unauthenticated") {
+    router.push("/auth/signIn");
+  }
+
+  // @ts-ignore
+  if (session?.error === "RefreshAccessTokenError") {
+    signOut({ callbackUrl: "/auth/signIn", redirect: true });
+  }
 
   return (
     <>
       {session &&
         status == "authenticated" &&
-         // @ts-ignore
+        // @ts-ignore
         session.data.user_status == "ACTIVE" &&
-         // @ts-ignore
+        // @ts-ignore
         session.data.user_type == "INTERN" && (
-            <main>
+          <main>
             <AnimateSharedLayout>
               <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
                 <div className="">
@@ -75,8 +80,6 @@ export default function Intern(props: propsData) {
             </AnimateSharedLayout>
           </main>
         )}
-
-     
     </>
   );
 }
@@ -84,46 +87,50 @@ export default function Intern(props: propsData) {
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
 
-    if (!session) {
-      return {
-        redirect: {
-          destination: "/auth/signIn",
-          permanent: false,
-        },
-      };
-    }
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signIn",
+        permanent: false,
+      },
+    };
+  }
 
-    if (session) {
+  if (session) {
+    // @ts-ignore
+    if (session?.error === "RefreshAccessTokenError") {
+      signOut({ callbackUrl: "/auth/signIn", redirect: true });
+    }
+    // @ts-ignore
+    if (session.data.user_status == "ACTIVE") {
       // @ts-ignore
-      if (session.data.user_status == "ACTIVE") {
-        // @ts-ignore
-        if (session.data.user_type == "ADMIN") {
-          return {
-            redirect: {
-              destination: "/admin",
-              permanent: false,
-            },
-          };
-        }
-        // @ts-ignore
-        if (session.data.user_type == "STUDENT") {
-          return {
-            redirect: {
-              // @ts-ignore
-              destination: `/student/${session.data.user_id}`,
-              permanent: false,
-            },
-          };
-        }
-      } else {
+      if (session.data.user_type == "ADMIN") {
         return {
           redirect: {
-            destination: "/",
+            destination: "/admin",
             permanent: false,
           },
         };
       }
+      // @ts-ignore
+      if (session.data.user_type == "STUDENT") {
+        return {
+          redirect: {
+            // @ts-ignore
+            destination: `/student/${session.data.user_id}`,
+            permanent: false,
+          },
+        };
+      }
+    } else {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
     }
+  }
 
   let internData = null;
 

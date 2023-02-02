@@ -38,6 +38,12 @@ function CourseDetails(props: propsData) {
     router.push("/auth/signIn");
   }
 
+  //@ts-ignore
+
+  if (session?.error === "RefreshAccessTokenError") {
+    signOut({ callbackUrl: "/auth/signIn", redirect: true });
+  }
+
   const myArray = [
     "https://images.unsplash.com/photo-1661961110671-77b71b929d52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
     "https://images.unsplash.com/photo-1560732488-6b0df240254a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c2VydmVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
@@ -58,40 +64,39 @@ function CourseDetails(props: propsData) {
         // @ts-ignore
         session.data.user_type == "STUDENT" && (
           <AnimateSharedLayout>
-          <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
-            <div className="">
-              <div className="bg-gradient-to-br from-black via-black  to-[#85002a] shadow-md shadow-red-600">
-                <div className="max-w-[82rem]   mx-auto ">
-                  <div>
-                    <div className="py-2">
-                      <Header page="student" />
+            <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
+              <div className="">
+                <div className="bg-gradient-to-br from-black via-black  to-[#85002a] shadow-md shadow-red-600">
+                  <div className="max-w-[82rem]   mx-auto ">
+                    <div>
+                      <div className="py-2">
+                        <Header page="student" />
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div className="">
+                  <CourseBanner data={props?.courseDetails} image={image} />
+                </div>
+                <div className="mb-0 md:mb-12 md:px-4 lg:px-0">
+                  {/* @ts-ignore */}
+                  <CourseAssignments
+                    data={props?.courseDetails?.StudentAssignmentInstructors}
+                    heading="Assignments / Projects"
+                  />
+                </div>
               </div>
-              <div className="">
-                <CourseBanner data={props?.courseDetails} image={image} />
-              </div>
-              <div className="mb-0 md:mb-12 md:px-4 lg:px-0">
-                {/* @ts-ignore */}
-                <CourseAssignments
-                  data={props?.courseDetails?.StudentAssignmentInstructors}
-                  heading="Assignments / Projects"
-                />
-              </div>
-            </div>
-            <motion.div
-              layout
-              className="bg-gradient-to-br from-black via-black  to-[#85002a] "
-            >
-              <div className="max-w-[82rem] mx-auto">
-                <Footer />
-              </div>
-            </motion.div>
-          </main>
-        </AnimateSharedLayout>
+              <motion.div
+                layout
+                className="bg-gradient-to-br from-black via-black  to-[#85002a] "
+              >
+                <div className="max-w-[82rem] mx-auto">
+                  <Footer />
+                </div>
+              </motion.div>
+            </main>
+          </AnimateSharedLayout>
         )}
-      
     </>
   );
 }
@@ -111,6 +116,10 @@ export async function getServerSideProps(context: any) {
 
   if (session) {
     // @ts-ignore
+    if (session?.error === "RefreshAccessTokenError") {
+      signOut({ callbackUrl: "/auth/signIn", redirect: true });
+    }
+    // @ts-ignore
     if (session.data.user_status == "ACTIVE") {
       // @ts-ignore
       if (session.data.user_type == "ADMIN") {
@@ -125,7 +134,7 @@ export async function getServerSideProps(context: any) {
       if (session.data.user_type == "INTERN") {
         return {
           redirect: {
-             // @ts-ignore
+            // @ts-ignore
             destination: `/intern/${session.data.user_id}`,
             permanent: false,
           },
