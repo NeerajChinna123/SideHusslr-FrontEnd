@@ -3,22 +3,43 @@ import axios from "axios";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 async function refreshAccessToken(tokenObject) {
+
+
   try {
     // Get a new set of tokens with a refreshToken
-    const tokenResponse = await axios.post( `${process.env.SIDEHUSSLR_TEST_API}/auth/refresh`, {
-      token: tokenObject.refreshToken,
-    });
 
+    axios.defaults.withCredentials = true;
+
+    const payload = {
+      accessToken: tokenObject.accessToken,
+      refreshToken: tokenObject.refreshToken,
+    };
+
+    const customConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        // @ts-ignore
+        Authorization: `Bearer ${tokenObject.accessToken}`
+      }
+    };
+
+    
+    const tokenResponse = await axios.post(`${process.env.SIDEHUSSLR_TEST_API}/auth/refresh`,{}, customConfig);
+
+    
+    console.log('token-res : ',tokenResponse);
     return {
       ...tokenObject,
-      accessToken: tokenResponse.data.accessToken,
+      accessToken: tokenResponse.data.token,
       accessTokenExpiry: tokenResponse.data.accessTokenExpiry,
       refreshToken: tokenResponse.data.refreshToken,
     };
   } catch (error) {
+
+    console.log('err - message',error.message);
     return {
       ...tokenObject,
-      error: "RefreshAccessTokenError",
+       error: "RefreshAccessTokenError",
     };
   }
 }
@@ -96,13 +117,16 @@ const nextAuthOptions = (req, res) => {
           token.accessTokenExpiry - Date.now()
         );
 
-        // if (shouldRefreshTime > 0) {
-        //   return token;
-        // }
+        // const shouldRefreshTime = Math.round((token.accessTokenExpiry - 60 * 60 * 1000) - Date.now());
 
+        if (shouldRefreshTime > 0) {
+          return token;
+        }       
+
+        console.log('reque ');
         
 
-        // token = refreshAccessToken(token);
+        token = refreshAccessToken(token);
 
         return token;
       },

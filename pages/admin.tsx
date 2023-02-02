@@ -9,6 +9,7 @@ import { setUniversitiesData } from "../slice/universitySlice";
 import Footer from "../containers/Footer";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import UniversityUserTabs from "../containers/UniversityUserTabs";
+import { signOut } from "next-auth/react";
 
 export interface propsData {
   usersData: [usersDataType];
@@ -24,6 +25,12 @@ export default function Admin(props: propsData) {
     router.push("/auth/signIn");
   }
 
+  //@ts-ignore
+
+  if (session?.error === "RefreshAccessTokenError") {
+    signOut({ callbackUrl: "/auth/signIn", redirect: true });
+  }
+
   const dispatch = useAppDispatch();
 
   dispatch(setUsersData(props?.usersData));
@@ -37,6 +44,15 @@ export default function Admin(props: propsData) {
   // console.log("user-d", userDataSt);
 
   // console.log("universi-d", universityDataSt);
+
+  if (!session && status == "unauthenticated") {
+    router.push("/auth/signIn");
+  }
+
+  // @ts-ignore
+  if (session?.error === "RefreshAccessTokenError") {
+    signOut({ callbackUrl: "/auth/signIn", redirect: true });
+  }
 
   return (
     <AnimateSharedLayout>
@@ -84,7 +100,7 @@ export async function getServerSideProps(context: any) {
   // security at server side to check the authentication status of the user
 
   //@ts-ignore
-  console.log('session-server : ',session);
+  console.log("session-server : ", session);
 
   if (!session) {
     return {
@@ -96,6 +112,10 @@ export async function getServerSideProps(context: any) {
   }
 
   if (session) {
+    // @ts-ignore
+    if (session?.error === "RefreshAccessTokenError") {
+      signOut({ callbackUrl: "/auth/signIn", redirect: true });
+    }
     // @ts-ignore
     if (session.data.user_status == "ACTIVE") {
       // @ts-ignore

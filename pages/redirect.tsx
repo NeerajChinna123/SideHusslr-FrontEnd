@@ -23,6 +23,11 @@ function Redirect() {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
+  // @ts-ignore
+  if (session?.error === "RefreshAccessTokenError") {
+    signOut({ callbackUrl: '/auth/signIn', redirect: true });
+  }
+
   if (session && status == "authenticated") {
     // @ts-ignore
     if (session.data.user_status == "ACTIVE") {

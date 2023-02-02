@@ -59,7 +59,10 @@ function UniversityFormModal(props: universityModalData) {
     const customConfig = {
       headers: {
         "Content-Type": "application/json",
+        // @ts-ignore
+        Authorization: `Bearer ${session.accessToken}`,
       },
+      withCredentials:true
     };
     console.log("s-c", success);
 
