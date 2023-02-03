@@ -41,7 +41,7 @@ function CourseDetails(props: propsData) {
   //@ts-ignore
 
   if (session?.error === "RefreshAccessTokenError") {
-    signOut({ callbackUrl: "/auth/signIn", redirect: true });
+    signOut({ callbackUrl: "/auth/signIn", redirect: false });
   }
 
   const myArray = [
