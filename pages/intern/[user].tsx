@@ -40,7 +40,7 @@ export default function Intern(props: propsData) {
 
   // @ts-ignore
   if (session?.error === "RefreshAccessTokenError") {
-    signOut({ callbackUrl: "/auth/signIn", redirect: true });
+    signOut({ callbackUrl: "/auth/signIn", redirect: false });
   }
 
   return (
@@ -99,7 +99,7 @@ export async function getServerSideProps(context: any) {
   if (session) {
     // @ts-ignore
     if (session?.error === "RefreshAccessTokenError") {
-      signOut({ callbackUrl: "/auth/signIn", redirect: true });
+      signOut({ callbackUrl: "/auth/signIn", redirect: false });
     }
     // @ts-ignore
     if (session.data.user_status == "ACTIVE") {
