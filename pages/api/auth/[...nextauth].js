@@ -13,6 +13,8 @@ async function refreshAccessToken(tokenObject) {
       refreshToken: tokenObject.refreshToken,
     };
 
+    console.log("tokenobj : ", tokenObject);
+
     const customConfig = {
       headers: {
         "Content-Type": "application/json",
@@ -28,6 +30,8 @@ async function refreshAccessToken(tokenObject) {
     );
 
     console.log("token-res : ", tokenResponse);
+
+
     return {
       ...tokenObject,
       accessToken: tokenResponse.data.token,

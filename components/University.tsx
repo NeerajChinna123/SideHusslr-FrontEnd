@@ -56,7 +56,7 @@ function University(props: UniversityData) {
         )}
         <div className="border-l self-center h-[6rem] ml-2 border-solid border-gray-200" />
         <div className="ml-5 mt-1 md:mt-0 w-[95%] space-y-2">
-          <p className="font-bold capitalize tracking-wide font-poppins text-[1.5rem] text-red-700">
+          <p className="font-bold capitalize tracking-wide w-[26rem] font-poppins text-[1.5rem] text-red-700">
             {props?.data?.name}
           </p>
           {/* <p className="tracking-wide text-sm font-poppins text-gray-700">

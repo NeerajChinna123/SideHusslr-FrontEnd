@@ -85,7 +85,7 @@ function UserFormModal(props: userModalData) {
     //@ts-ignore
     data.user_type = role;
 
-    data.password = "1234";
+    data.password = "1234"; //todo need to be a random string
 
     const payload = data;
 
@@ -432,7 +432,13 @@ function UserFormModal(props: userModalData) {
                       className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
                       type="email"
                       placeholder="Enter Email"
-                      {...register("email", { required: true })}
+                      {...register("email", {
+                        required: "Email is required",
+                        pattern: {
+                          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                          message: "Invalid email format",
+                        },
+                      })}
                     ></input>
                   </div>
                   <div>
@@ -444,16 +450,56 @@ function UserFormModal(props: userModalData) {
                       type="text"
                       placeholder="Enter Contact No."
                       {...register("contact", {
-                        required: true,
+                        required: "Phone number is required",
+                        pattern: {
+                          value: /^[0-9]{10}$/,
+                          message: "Phone number must be a 10-digit number",
+                        },
                       })}
                     ></input>
                   </div>
                 </div>
               </div>
+
+              <div>
+                {Object.keys(errors).length > 0 && (
+                  <div className="flex flex-col p-3">
+                    {errors.first_name && (
+                      <span className="text-red-500">
+                        - First Name is required
+                      </span>
+                    )}
+
+                    {errors.last_name && (
+                      <span className="text-red-500">
+                        - Last Name is required
+                      </span>
+                    )}
+
+                    {errors.email && (
+                      <span className="text-red-500">
+                        - {errors.email.message}
+                      </span>
+                    )}
+                    {errors.contact && (
+                      <span className="text-red-500">
+                        - {errors.contact.message}
+                      </span>
+                    )}
+                    {errors.location && (
+                      <span className="text-red-500">
+                        - Location is required
+                      </span>
+                    )}
+                  
+                  </div>
+                )}
+              </div>
+
               <motion.div className="mt-5 md:mt-6">
                 <motion.button
                   whileTap={{ scale: 0.97 }}
-                  onClick={role ? handleSubmit(onSubmit) : () => {}}
+                  onClick={handleSubmit(onSubmit)}
                   disabled={submitting}
                   className={
                     `mx-auto flex w-full cursor-pointer justify-center rounded-[0.2rem] h-[3rem] items-center bg-red-600 py-4 px-8 font-poppins text-md font-semibold tracking-wide text-gray-100 shadow-md  transition duration-500 ease-in-out lg:px-8 lg:hover:bg-red-800 lg:hover:text-white ` +
