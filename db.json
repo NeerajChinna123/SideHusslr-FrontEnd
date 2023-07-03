@@ -1,0 +1,335 @@
+{
+  "universities": [
+    {
+      "university_id": "1",
+      "name": "MIT",
+      "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+      "country": "United States",
+      "createdAt": 1666632563517,
+      "createdBy": "Ashween",
+      "modifiedAt": 1674295667000,
+      "modifiedBy": "Neeraj",
+      "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+    },
+    {
+        "university_id": "2",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+    },
+    {
+        "university_id": "3",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+    },
+    {
+        "university_id": "4",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+        
+    },
+    {
+        "university_id": "5",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+    },
+    {
+        "university_id": "6",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+    },
+    {
+        "university_id": "7",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+    },
+    {
+        "university_id": "8",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+    },
+    {
+        "university_id": "9",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+    },
+    {
+        "university_id": "10",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+    },
+    {
+        "university_id": "11",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "12",
+          "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "13",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "14",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "15",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "16",
+          "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "17",
+          "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "18",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "19",
+          "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "20",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+        "university_id": "21",
+        "name": "Stanford",
+        "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+        "country": "United States",
+        "createdAt": 1666632563517,
+        "createdBy": "Ashween",
+        "modifiedAt": 1674295667000,
+        "modifiedBy": "Neeraj",
+        "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "22",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "23",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "24",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "25",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "26",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "27",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "28",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "29",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      },
+      {
+          "university_id": "30",
+          "name": "Stanford",
+          "description": "The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world. The Massachusetts Institute of Technology is a private land-grant research university in Cambridge, Massachusetts. Established in 1861, MIT has played a key role in the development of modern technology and science, and is one of the most prestigious and highly ranked academic institutions in the world.",
+          "country": "United States",
+          "createdAt": 1666632563517,
+          "createdBy": "Ashween",
+          "modifiedAt": 1674295667000,
+          "modifiedBy": "Neeraj",
+          "image":"https://www.logo.wine/a/logo/Massachusetts_Institute_of_Technology/Massachusetts_Institute_of_Technology-Logo.wine.svg"
+      }
+  ]
+}

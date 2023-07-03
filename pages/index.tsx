@@ -26,7 +26,7 @@ export default function Home() {
               <Banner />
             </div>
           </div>
-          <div className="max-w-[82rem] mx-auto px-[1.2rem] md:px-6">
+          <div className="max-w-[82rem] mx-auto px-[1.2rem] md:px-6 mb-[4rem] lg:mb-[8rem]">
             <AboutUs />
             <Services />
             <PartneredUniversities />

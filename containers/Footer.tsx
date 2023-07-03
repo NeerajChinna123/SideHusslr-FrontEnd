@@ -12,7 +12,7 @@ function Footer() {
   return (
     <div>
       <div
-        className="mt-[4rem] lg:mt-[8rem] py-10 lg:py-14 px-[0.8rem] lg:pl-2 lg:pr-0"
+        className=" py-10 lg:py-14 px-[0.8rem] lg:pl-2 lg:pr-0"
       >
         <div className="flex flex-col space-y-4 lg:flex-row items-center">
           <div className="justify-start relative h-[6rem] w-[6rem]">
@@ -27,6 +27,7 @@ function Footer() {
           <div className="flex mx-auto lg:pl-[7rem] space-x-4">
             {urls.map((url) => (
               <motion.div
+                key={url}
                 whileTap={{ scale: 0.96 }}
                 className="flex items-center tracking-wide space-x-1 border rounded-full  p-1 cursor-pointer justify-center shadow-md shadow-red-800 border-[#f9004d] transition duration-300 ease-in-out border-solid  hover:bg-[#f9004d] hover:text-white "
               >

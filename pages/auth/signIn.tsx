@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signIn, getCsrfToken } from "next-auth/react";
+import { signIn, getCsrfToken, getSession,signOut } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
@@ -212,6 +212,7 @@ export default function SignIn({ csrfToken }: any) {
 }
 
 export async function getServerSideProps(context: any) {
+  
   return {
     props: {
       csrfToken: await getCsrfToken(context),
