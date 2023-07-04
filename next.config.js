@@ -5,7 +5,7 @@ const nextConfig = {
     domains : ['images.unsplash.com','plus.unsplash.com'],
   },
   env: {
-    SIDEHUSSLR_TEST_API: 'http://localhost:5000',
+    SIDEHUSSLR_TEST_API: 'http://localhost:5001',
     SIDEHUSSLR_API:'https://sidehusslr.cleverapps.io'
   }
 }
