@@ -53,8 +53,6 @@ export default function Student(props: propsData) {
     (state) => state.studentData.studentsData
   );
 
-  console.log("s-d-t-st : ", studentDataSt);
-
   return (
     <>
       {session &&
