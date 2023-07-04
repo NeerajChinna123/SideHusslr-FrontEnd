@@ -27,7 +27,7 @@ function University(props: UniversityData) {
   //   const diffD = Math.round(diffDays);
   return (
     <div className="px-4 py-8 relative  border-[0.05rem] rounded-sm shadow-md shadow-gray-300 border-gray-300">
-      {isDesktop && (
+      {/* {isDesktop && (
         <div className="absolute right-3 top-4">
           <motion.div
             whileTap={{ scale: 0.96 }}
@@ -45,7 +45,7 @@ function University(props: UniversityData) {
             <ArrowsPointingOutIcon className="h-6 w-6 text-red-600 animate-pulse" />
           </motion.div>
         </div>
-      )}
+      )} */}
       <div className="flex flex-row">
         {props.data.image ? (
           <div className=" relative self-center">
@@ -55,8 +55,8 @@ function University(props: UniversityData) {
           <BuildingLibraryIcon className="h-[5rem] w-[5rem] text-red-600 md:h-[6rem] md:w-[6rem]" />
         )}
         <div className="border-l self-center h-[6rem] ml-2 border-solid border-gray-200" />
-        <div className="ml-5 mt-1 md:mt-0 w-[95%] space-y-2">
-          <p className="font-bold capitalize tracking-wide font-poppins text-[1.5rem] text-red-700">
+        <div  className="ml-5 mt-1 md:mt-0 w-[95%] space-y-2">
+          <p onClick={()=>console.log('ok')} className="font-semibold capitalize cursor-pointer hover:underline font-poppins text-[1.5rem] text-black hover:text-red-600">
             {props?.data?.name}
           </p>
           {/* <p className="tracking-wide text-sm font-poppins text-gray-700">

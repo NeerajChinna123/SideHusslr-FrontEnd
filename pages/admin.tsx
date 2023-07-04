@@ -45,9 +45,6 @@ export default function Admin(props: propsData) {
 
   // console.log("universi-d", universityDataSt);
 
-  if (!session && status == "unauthenticated") {
-    router.push("/auth/signIn");
-  }
 
   // @ts-ignore
   if (session?.error === "RefreshAccessTokenError") {

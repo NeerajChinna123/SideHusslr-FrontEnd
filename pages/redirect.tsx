@@ -25,7 +25,7 @@ function Redirect() {
 
   // @ts-ignore
   if (session?.error === "RefreshAccessTokenError") {
-    signOut({ callbackUrl: '/auth/signIn', redirect: false });
+    signOut({ callbackUrl: "/auth/signIn", redirect: false });
   }
 
   if (session && status == "authenticated") {
