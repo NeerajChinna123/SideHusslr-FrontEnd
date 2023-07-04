@@ -13,7 +13,6 @@ async function refreshAccessToken(tokenObject) {
       refreshToken: tokenObject.refreshToken,
     };
 
-    console.log('dnas ',Date.now());
 
     const customConfig = {
       headers: {
@@ -30,6 +29,8 @@ async function refreshAccessToken(tokenObject) {
     );
 
     console.log("token-res : ", tokenResponse);
+
+
     return {
       ...tokenObject,
       accessToken: tokenResponse.data.token,

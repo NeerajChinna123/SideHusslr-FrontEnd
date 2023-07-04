@@ -190,6 +190,32 @@ function UniversityFormModal(props: universityModalData) {
                   {...register("image")}
                 ></input>
               </div>
+
+              <div>
+                {Object.keys(errors).length > 0 && (
+                  <div className="flex flex-col p-3">
+                    {errors.name && (
+                      <span className="text-red-500">
+                        - University Name is required
+                      </span>
+                    )}
+
+                    {errors.country && (
+                      <span className="text-red-500">
+                        - Country is required
+                      </span>
+                    )}
+
+                    {errors.description && (
+                      <span className="text-red-500">
+                        - Description is required
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+
+
               <motion.div className="mt-5 md:mt-6">
                 <motion.button
                   whileTap={{ scale: 0.97 }}
