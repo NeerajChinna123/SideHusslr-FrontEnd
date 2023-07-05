@@ -140,18 +140,20 @@ export async function getServerSideProps(context: any) {
     headers: {
       "Content-Type": "application/json",
       // @ts-ignore
-      // Authorization: `Bearer ${session.accessToken}`,
+      Authorization: `Bearer ${session.accessToken}`,
     },
   };
   try {
     const internRes = await axios.get(
-      `${process.env.SIDEHUSSLR_TEST_API}/university/course/assignment/intern/${user}`,
+      `${process.env.SIDEHUSSLR_TEST_API}/assignment/intern/assignments/assigned/${user}`,
       customConfig
     );
 
     console.log("uni :", internRes);
     if (internRes?.data?.status < "300") {
-      internData = await internRes.data.data;
+      if (internRes?.data?.success) {
+        internData = await internRes.data.data;
+      }
     }
   } catch (err) {
     // Handle error
