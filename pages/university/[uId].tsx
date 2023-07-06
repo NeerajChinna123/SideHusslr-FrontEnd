@@ -7,9 +7,12 @@ import Header from "../../components/Header";
 import Footer from "../../containers/Footer";
 import UniversityBanner from "../../containers/UniversityBanner";
 import { universityDetailsType } from "../../typings";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { setUniversitiesCoursesData } from "../../slice/uniCourseSlice";
+import UniCourses from "../../containers/UniCourses";
 
 export interface propsData {
-  uniData: [universityDetailsType];
+  uniData: universityDetailsType;
 }
 
 function UniversityDetails(props: propsData) {
@@ -33,6 +36,12 @@ function UniversityDetails(props: propsData) {
   //       router.push("/");
   //     }
   //   }
+
+  console.log("uni-data", props.uniData);
+
+  const dispatch = useAppDispatch();
+
+  dispatch(setUniversitiesCoursesData(props?.uniData));
 
   if (!session && status == "unauthenticated") {
     router.push("/auth/signIn");
@@ -67,7 +76,13 @@ function UniversityDetails(props: propsData) {
               </div>
 
               <div>
-                <UniversityBanner />
+                {props?.uniData && (
+                  <UniversityBanner universityData={props?.uniData} />
+                )}
+              </div>
+
+              <div className="max-w-7xl mx-auto mt-8">
+                <UniCourses />
               </div>
 
               <motion.div

@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import useWindowSize from "../lib/hooks/use-window-size";
+import Link from "next/link";
 
 export interface UniversityData {
   data: universityDataType;
@@ -63,7 +64,9 @@ function University(props: UniversityData) {
         <div className="border-l self-center h-[6rem] ml-2 border-solid border-gray-200" />
         <div className="ml-5 mt-1 md:mt-0 w-[95%] space-y-2">
           <p
-            onClick={() => router.push(`/university/${props?.data?.university_id}`)}
+            onClick={() =>
+              router.push(`/university/${props?.data?.university_id}`)
+            }
             className="font-semibold capitalize cursor-pointer hover:underline font-poppins text-[1.5rem] text-black hover:text-red-600"
           >
             {props?.data?.name}

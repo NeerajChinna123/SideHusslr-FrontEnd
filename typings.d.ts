@@ -97,7 +97,7 @@ export interface CourseDataType {
   university_id: string;
 }
 
-export interface universityDetailsType {
+export interface courseAssignmentUsersType {
   code: string;
   course_id: string;
   createdAt: string;
@@ -113,4 +113,18 @@ export interface universityDetailsType {
   university_id: string;
   Assignments: [AssignmentDataType];
   Users: [usersDataType];
+}
+
+export interface universityDetailsType {
+  university_id: string;
+  name: string;
+  description: string;
+  country: string;
+  is_delete: boolean;
+  createdAt: number;
+  createdBy: string;
+  modifiedAt: number;
+  modifiedBy: string;
+  image: string;
+  Courses: courseAssignmentUsersType;
 }
