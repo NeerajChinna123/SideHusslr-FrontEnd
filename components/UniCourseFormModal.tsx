@@ -22,7 +22,7 @@ interface UniversityCourseFormInput {
   description: string;
   duration: string;
   university_id: string;
-//   image: string;
+  //   image: string;
 }
 
 function UniversityCourseFormModal(props: universityCourseModalData) {
@@ -54,7 +54,7 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
 
   const onSubmit: SubmitHandler<UniversityCourseFormInput> = async (data) => {
     setSubmitting(true);
-    console.log("data -> ", data);
+    console.log("data uni -> ", data);
     //post request
 
     const payload = data;
@@ -113,13 +113,11 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
         showModal={props.showUniversityCourseModal}
         setShowModal={props.setShowUniversityCourseModal}
         successData={success}
-       
         resetData={() => {
           reset({
             name: "",
             description: "",
             duration: "",
-            university_id: "",
             // image: "",
           });
         }}
@@ -211,7 +209,6 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
                 ></input>
               </div> */}
 
-
               <div>
                 {Object.keys(errors).length > 0 && (
                   <div className="flex flex-col p-3">
@@ -236,7 +233,6 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
                 )}
               </div>
 
-          
               <motion.div className="mt-5 md:mt-6">
                 <motion.button
                   whileTap={{ scale: 0.97 }}

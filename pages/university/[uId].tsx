@@ -37,7 +37,7 @@ function UniversityDetails(props: propsData) {
   //     }
   //   }
 
-  console.log("uni-data", props.uniData);
+
 
   const dispatch = useAppDispatch();
 
@@ -81,7 +81,7 @@ function UniversityDetails(props: propsData) {
                 )}
               </div>
 
-              <div className="max-w-7xl mx-auto mt-8">
+              <div className="max-w-7xl mx-auto mt-8 mb-10">
                 <UniCourses />
               </div>
 
