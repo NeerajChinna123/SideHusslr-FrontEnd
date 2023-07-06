@@ -1,34 +1,35 @@
 import { signIn, signOut, useSession, getSession } from "next-auth/react";
-import Header from "../../components/Header";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { useAppSelector, useAppDispatch } from "../../hooks";
-import { setStudentsData } from "../../slice/studentSlice";
-import { motion, AnimateSharedLayout } from "framer-motion";
 import { studentDataType } from "../../typings";
-import StudentBanner from "../../containers/StudentBanner";
-import CourseAssignmentTabs from "../../containers/CourseAssignmentTabs";
+import { motion, AnimateSharedLayout } from "framer-motion";
+import axios from "axios";
+import { useRouter } from "next/router";
+import Header from "../../components/Header";
 import Footer from "../../containers/Footer";
+import UniversityBanner from "../../containers/UniversityBanner";
+import { universityDetailsType } from "../../typings";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { setUniversitiesCoursesData } from "../../slice/uniCourseSlice";
+import UniCourses from "../../containers/UniCourses";
 
 export interface propsData {
-  studentData: [studentDataType];
+  uniData: universityDetailsType;
 }
 
-export default function Student(props: propsData) {
-  const { data: session, status } = useSession();
-
+function UniversityDetails(props: propsData) {
   const router = useRouter();
+
+  const { data: session, status } = useSession();
 
   //   if (session && status == "authenticated") {
   //     // @ts-ignore
   //     if (session.data.user_status == "ACTIVE") {
   //       // @ts-ignore
-  //       if (session.data.user_type == "ADMIN") {
-  //         router.push("/admin");
+  //       if (session.data.user_type == "STUDENT") {
+  //         router.push("/student");
   //       }
   //       // @ts-ignore
   //       if (session.data.user_type == "INTERN") {
-  //           //@ts-ignore
+  //         // @ts-ignore
   //         router.push(`/intern/${session.data.user_id}`);
   //       }
   //     } else {
@@ -36,22 +37,21 @@ export default function Student(props: propsData) {
   //     }
   //   }
 
+  console.log("uni-data", props.uniData);
+
+  const dispatch = useAppDispatch();
+
+  dispatch(setUniversitiesCoursesData(props?.uniData));
+
   if (!session && status == "unauthenticated") {
     router.push("/auth/signIn");
   }
 
-  // @ts-ignore
+  //@ts-ignore
+
   if (session?.error === "RefreshAccessTokenError") {
     signOut({ callbackUrl: "/auth/signIn", redirect: false });
   }
-
-  const dispatch = useAppDispatch();
-
-  dispatch(setStudentsData(props?.studentData));
-
-  const studentDataSt = useAppSelector(
-    (state) => state.studentData.studentsData
-  );
 
   return (
     <>
@@ -60,7 +60,7 @@ export default function Student(props: propsData) {
         // @ts-ignore
         session.data.user_status == "ACTIVE" &&
         // @ts-ignore
-        session.data.user_type == "STUDENT" && (
+        session.data.user_type == "ADMIN" && (
           <AnimateSharedLayout>
             <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
               <div className="">
@@ -73,13 +73,18 @@ export default function Student(props: propsData) {
                     </div>
                   </div>
                 </div>
-                <div className="">
-                  <StudentBanner />
-                </div>
-                <div>
-                  <CourseAssignmentTabs />
-                </div>
               </div>
+
+              <div>
+                {props?.uniData && (
+                  <UniversityBanner universityData={props?.uniData} />
+                )}
+              </div>
+
+              <div className="max-w-7xl mx-auto mt-8">
+                <UniCourses />
+              </div>
+
               <motion.div
                 layout
                 className="bg-gradient-to-br from-black via-black  to-[#85002a] "
@@ -94,6 +99,8 @@ export default function Student(props: propsData) {
     </>
   );
 }
+
+export default UniversityDetails;
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
@@ -114,10 +121,10 @@ export async function getServerSideProps(context: any) {
     // @ts-ignore
     if (session.data.user_status == "ACTIVE") {
       // @ts-ignore
-      if (session.data.user_type == "ADMIN") {
+      if (session.data.user_type == "STUDENT") {
         return {
           redirect: {
-            destination: "/admin",
+            destination: "/student",
             permanent: false,
           },
         };
@@ -126,7 +133,7 @@ export async function getServerSideProps(context: any) {
       if (session.data.user_type == "INTERN") {
         return {
           redirect: {
-            //@ts-ignore
+            // @ts-ignore
             destination: `/intern/${session.data.user_id}`,
             permanent: false,
           },
@@ -142,9 +149,9 @@ export async function getServerSideProps(context: any) {
     }
   }
 
-  let studentData = null;
+  let universityData = null;
 
-  const { user } = context.query;
+  const { uId } = context.query;
 
   const customConfig = {
     headers: {
@@ -154,15 +161,14 @@ export async function getServerSideProps(context: any) {
     },
   };
   try {
-    const studentRes = await axios.get(
-      `${process.env.SIDEHUSSLR_TEST_API}/course/student/assignments/${user}`,
+    const uniRes = await axios.get(
+      `${process.env.SIDEHUSSLR_TEST_API}/course/${uId}`,
       customConfig
     );
 
-    console.log("uni :", studentRes);
-    if (studentRes?.data?.status < "300") {
-      if (studentRes?.data?.success) {
-        studentData = await studentRes.data.data;
+    if (uniRes?.data?.status < "300") {
+      if (uniRes?.data?.success) {
+        universityData = await uniRes.data.data;
       }
     }
   } catch (err) {
@@ -172,7 +178,7 @@ export async function getServerSideProps(context: any) {
 
   return {
     props: {
-      studentData,
+      uniData: universityData,
     },
   };
 }

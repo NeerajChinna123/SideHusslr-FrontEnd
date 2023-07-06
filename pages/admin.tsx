@@ -45,7 +45,6 @@ export default function Admin(props: propsData) {
 
   // console.log("universi-d", universityDataSt);
 
-
   // @ts-ignore
   if (session?.error === "RefreshAccessTokenError") {
     signOut({ callbackUrl: "/auth/signIn", redirect: false });
@@ -165,7 +164,9 @@ export async function getServerSideProps(context: any) {
         );
 
         if (userRes?.data?.status < "300") {
-          usersData = await userRes.data.data;
+          // if (userRes?.data?.success) {
+            usersData = await userRes.data.data;
+          // }
         }
       } catch (err) {
         // Handle error
@@ -188,20 +189,17 @@ export async function getServerSideProps(context: any) {
           customConfig1
         );
 
-        
-
         if (uniRes?.data?.status < "300") {
           if (uniRes?.data?.success) {
             universitiesData = await uniRes.data.data;
           } else if (uniRes?.data?.refresh) {
             universitiesData = null;
-            
           }
         }
       } catch (err) {
         // Handle error
         signOut({ callbackUrl: "/auth/signIn", redirect: false });
-        console.log('univer - err');
+        console.log("univer - err");
         console.log(err);
       }
 

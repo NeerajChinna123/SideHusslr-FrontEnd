@@ -16,6 +16,7 @@ export interface usersDataType {
   modifiedBy: string;
   user_status: string;
   image: string;
+  status: string;
 }
 
 export interface universityDataType {
@@ -45,8 +46,7 @@ export interface studentDataType {
   course_id: string;
   StudentAssignmentInstructors: [StudentAssignmentInstructorsType];
   Assignments: [Assignment];
-  Course:CourseDataType
-
+  Course: CourseDataType;
 }
 
 export interface StudentAssignmentInstructorsType {
@@ -72,10 +72,10 @@ export interface AssignmentDataType {
   name: string;
   description: string;
   status: string;
-  assignment_type:string;
+  assignment_type: string;
   start_date: string;
-  primary_tag:string;
-  tags:Array;
+  primary_tag: string;
+  tags: Array;
   end_date: string;
   createdAt: string;
   createdBy: string;
@@ -85,14 +85,46 @@ export interface AssignmentDataType {
 }
 
 export interface CourseDataType {
-  course_id: string,
-  name: string,
-  description: string,
-  duration: string,
-  is_delete: boolean,
-  createdAt: string,
-  createdBy: string,
-  modifiedAt: string,
-  modifiedBy: string,
-  university_id: string
+  course_id: string;
+  name: string;
+  description: string;
+  duration: string;
+  is_delete: boolean;
+  createdAt: string;
+  createdBy: string;
+  modifiedAt: string;
+  modifiedBy: string;
+  university_id: string;
+}
+
+export interface courseAssignmentUsersType {
+  code: string;
+  course_id: string;
+  createdAt: string;
+  createdBy: string;
+  description: string;
+  duration: string;
+  is_delete: boolean;
+  modifiedAt: string;
+  modifiedBy: string;
+  name: string;
+  primary_tag: string;
+  tags: Array;
+  university_id: string;
+  Assignments: [AssignmentDataType];
+  Users: [usersDataType];
+}
+
+export interface universityDetailsType {
+  university_id: string;
+  name: string;
+  description: string;
+  country: string;
+  is_delete: boolean;
+  createdAt: number;
+  createdBy: string;
+  modifiedAt: number;
+  modifiedBy: string;
+  image: string;
+  Courses: courseAssignmentUsersType;
 }
