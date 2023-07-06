@@ -17,8 +17,6 @@ function UniversityDetails(props: propsData) {
 
   const { data: session, status } = useSession();
 
-  console.log("uni-data : ", props.uniData);
-
   //   if (session && status == "authenticated") {
   //     // @ts-ignore
   //     if (session.data.user_status == "ACTIVE") {
@@ -71,6 +69,7 @@ function UniversityDetails(props: propsData) {
               <div>
                 <UniversityBanner />
               </div>
+
               <motion.div
                 layout
                 className="bg-gradient-to-br from-black via-black  to-[#85002a] "
