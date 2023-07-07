@@ -2,7 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import userDataReducer from "../slice/usersSlice";
 import universityReducer from "../slice/universitySlice";
 import studentReducer from "../slice/studentSlice";
-import uniCoursesReducer from "../slice/uniCourseSlice"
+import uniCoursesReducer from "../slice/uniCourseSlice";
+import courseDetailReducer from "../slice/courseDetailsSlice";
 
 
 
@@ -11,7 +12,8 @@ export const store = configureStore({
     userData: userDataReducer,
     universityData:universityReducer,
     studentData:studentReducer,
-    uniCourseData:uniCoursesReducer
+    uniCourseData:uniCoursesReducer,
+    courseDetailData:courseDetailReducer
   },
 });
 

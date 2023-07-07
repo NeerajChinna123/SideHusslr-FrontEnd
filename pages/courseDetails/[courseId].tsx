@@ -1,42 +1,22 @@
-import { useAppSelector } from "../../hooks";
-import { signIn, signOut, useSession, getSession } from "next-auth/react";
-import { studentDataType } from "../../typings";
-import { motion, AnimateSharedLayout } from "framer-motion";
-import axios from "axios";
+import { courseAssignmentUsersType } from "../../typings";
 import { useRouter } from "next/router";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { signIn, signOut, useSession, getSession } from "next-auth/react";
+import { motion, AnimateSharedLayout } from "framer-motion";
 import Header from "../../components/Header";
 import Footer from "../../containers/Footer";
-import CourseBanner from "../../containers/CourseBanner";
-import CourseAssignments from "../../containers/CourseAssignments";
+import { setCourseDetailsData } from "../../slice/courseDetailsSlice";
+import UniCourseBanner from "../../containers/UniCourseBanner";
+import UsersTable from "../../containers/UsersTable";
 
-
-export interface propsData {
-  courseDetails: studentDataType;
+export interface courseDetailsType {
+  courseDetails: courseAssignmentUsersType;
 }
 
-function CourseDetails(props: propsData) {
-
-
+function courseDetails() {
   const router = useRouter();
 
   const { data: session, status } = useSession();
-
-  // if (session && status == "authenticated") {
-  //   // @ts-ignore
-  //   if (session.data.user_status == "ACTIVE") {
-  //     // @ts-ignore
-  //     if (session.data.user_type == "ADMIN") {
-  //       router.push("/admin");
-  //     }
-  //     // @ts-ignore
-  //     if (session.data.user_type == "INTERN") {
-  //       router.push(`/intern/${session.data.user_id}`);
-  //     }
-  //   } else {
-  //     router.push("/");
-  //   }
-  // }
-
   if (!session && status == "unauthenticated") {
     router.push("/auth/signIn");
   }
@@ -46,6 +26,15 @@ function CourseDetails(props: propsData) {
   if (session?.error === "RefreshAccessTokenError") {
     signOut({ callbackUrl: "/auth/signIn", redirect: false });
   }
+
+  const courseID = router.query.courseId;
+
+  const uniData = useAppSelector((state) => state.uniCourseData.uniCoursesData);
+
+  //@ts-ignore
+  const courseData = uniData?.Courses?.find(
+    (course: courseAssignmentUsersType) => course.course_id == courseID
+  );
 
   const myArray = [
     "https://images.unsplash.com/photo-1661961110671-77b71b929d52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
@@ -58,6 +47,14 @@ function CourseDetails(props: propsData) {
 
   const image = myArray[Math.floor(Math.random() * myArray.length)];
 
+  const dispatch = useAppDispatch();
+
+  dispatch(setCourseDetailsData(courseData));
+
+  const coData = useAppSelector(
+    (state) => state.courseDetailData.courseDetailsData
+  );
+
   return (
     <>
       {session &&
@@ -65,7 +62,7 @@ function CourseDetails(props: propsData) {
         // @ts-ignore
         session.data.user_status == "ACTIVE" &&
         // @ts-ignore
-        session.data.user_type == "STUDENT" && (
+        session.data.user_type == "ADMIN" && (
           <AnimateSharedLayout>
             <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
               <div className="">
@@ -79,14 +76,10 @@ function CourseDetails(props: propsData) {
                   </div>
                 </div>
                 <div className="">
-                  <CourseBanner data={props?.courseDetails} image={image} />
+                  <UniCourseBanner courseDetails={coData} image={image} />
                 </div>
-                <div className="mb-0 md:mb-12 md:px-4 lg:px-0">
-                  {/* @ts-ignore */}
-                  <CourseAssignments
-                    data={props?.courseDetails?.StudentAssignmentInstructors}
-                    heading="Assignments / Projects"
-                  />
+                <div>
+                  <UsersTable />
                 </div>
               </div>
               <motion.div
@@ -104,85 +97,4 @@ function CourseDetails(props: propsData) {
   );
 }
 
-export default CourseDetails;
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/signIn",
-        permanent: false,
-      },
-    };
-  }
-
-  if (session) {
-    // @ts-ignore
-    if (session?.error === "RefreshAccessTokenError") {
-      signOut({ callbackUrl: "/auth/signIn", redirect: true });
-    }
-    // @ts-ignore
-    if (session.data.user_status == "ACTIVE") {
-      // @ts-ignore
-      if (session.data.user_type == "ADMIN") {
-        return {
-          redirect: {
-            destination: "/admin",
-            permanent: false,
-          },
-        };
-      }
-      // @ts-ignore
-      if (session.data.user_type == "INTERN") {
-        return {
-          redirect: {
-            // @ts-ignore
-            destination: `/intern/${session.data.user_id}`,
-            permanent: false,
-          },
-        };
-      }
-    } else {
-      return {
-        redirect: {
-          destination: "/",
-          permanent: false,
-        },
-      };
-    }
-  }
-
-  let courseDetails = null;
-
-  const { studCour } = context.query;
-
-  const customConfig = {
-    headers: {
-      "Content-Type": "application/json",
-      // @ts-ignore
-      Authorization: `Bearer ${session.accessToken}`,
-    },
-  };
-  try {
-    const courseDetailsRes = await axios.get(
-      `${process.env.SIDEHUSSLR_TEST_API}/course/student/assignment/detail/${studCour}`,
-      customConfig
-    );
-
-    if (courseDetailsRes?.data?.status < "300") {
-      if (courseDetailsRes?.data?.success) {
-        courseDetails = await courseDetailsRes.data.data;
-      }
-    }
-  } catch (err) {
-    // Handle error
-    console.log("", err);
-  }
-
-  return {
-    props: {
-      courseDetails,
-    },
-  };
-}
+export default courseDetails;

@@ -36,11 +36,11 @@ function UniCourse(props: StudentData) {
     <motion.div
       variants={scaleVariants}
       whileInView={scaleVariants.whileInView}
-      //   onClick={() => {
-      //     router.push(`/course/${props?.data?.student_course_id}`);
-      //   }}
+      onClick={() => {
+        router.push(`/courseDetails/${props?.data?.course_id}`);
+      }}
     >
-      <motion.div className="bg-white md:h-[30rem] md:max-h-[30rem] shadow-lg shadow-gray-300 px-[1.1rem] py-6 group flex flex-col rounded-2xl cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 border border-gray-200">
+      <motion.div className="bg-white  md:h-[30rem] md:max-h-[30rem] shadow-lg shadow-gray-300 px-[1.1rem] py-6 group flex flex-col rounded-2xl cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 border border-gray-200">
         <div className="relative w-full h-64 md:h-64 ">
           <Image
             alt=""
