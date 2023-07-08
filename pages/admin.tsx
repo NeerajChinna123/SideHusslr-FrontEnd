@@ -153,7 +153,7 @@ export async function getServerSideProps(context: any) {
         headers: {
           "Content-Type": "application/json",
           // @ts-ignore
-          // Authorization: `Bearer ${session.accessToken}`,
+          Authorization: `Bearer ${session.accessToken}`,
         },
       };
 
@@ -164,9 +164,9 @@ export async function getServerSideProps(context: any) {
         );
 
         if (userRes?.data?.status < "300") {
-          // if (userRes?.data?.success) {
+          if (userRes?.data?.success) {
             usersData = await userRes.data.data;
-          // }
+          }
         }
       } catch (err) {
         // Handle error
@@ -199,8 +199,6 @@ export async function getServerSideProps(context: any) {
       } catch (err) {
         // Handle error
         signOut({ callbackUrl: "/auth/signIn", redirect: false });
-        console.log("univer - err");
-        console.log(err);
       }
 
       return {
