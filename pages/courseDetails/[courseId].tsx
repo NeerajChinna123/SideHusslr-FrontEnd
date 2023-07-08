@@ -16,11 +16,12 @@ export interface courseDetailsType {
   students: usersDataType;
 }
 
-const router = useRouter();
-
-const { data: session, status } = useSession();
-
 function courseDetails(props: courseDetailsType) {
+  const router = useRouter();
+
+  const { data: session, status } = useSession();
+
+  const dispatch = useAppDispatch();
 
   if (!session && status == "unauthenticated") {
     router.push("/auth/signIn");
@@ -46,8 +47,6 @@ function courseDetails(props: courseDetailsType) {
 
   const image = myArray[Math.floor(Math.random() * myArray.length)];
 
-  const dispatch = useAppDispatch();
-
   dispatch(setCourseDetailsData(courseData));
 
   dispatch(setStudentsRoleData(props?.students));
@@ -55,7 +54,6 @@ function courseDetails(props: courseDetailsType) {
   const coData = useAppSelector(
     (state) => state.courseDetailData.courseDetailsData
   );
-
 
   return (
     <>
@@ -203,7 +201,7 @@ export async function getServerSideProps(context: any) {
         // Handle error
         console.log(err);
       }
-     
+
       return {
         props: {
           courseDetails: courseDetailsData,
