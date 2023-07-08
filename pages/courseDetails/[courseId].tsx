@@ -1,19 +1,22 @@
-import { courseAssignmentUsersType } from "../../typings";
+import { courseAssignmentUsersType, usersDataType } from "../../typings";
 import { useRouter } from "next/router";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { signIn, signOut, useSession, getSession } from "next-auth/react";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import Header from "../../components/Header";
 import Footer from "../../containers/Footer";
+import axios from "axios";
 import { setCourseDetailsData } from "../../slice/courseDetailsSlice";
 import UniCourseBanner from "../../containers/UniCourseBanner";
-import UsersTable from "../../containers/UsersTable";
+import UserAssignmentTabs from "../../containers/UserAssignmentTabs";
+import { setStudentsRoleData } from "../../slice/studentsDataSlice";
 
 export interface courseDetailsType {
   courseDetails: courseAssignmentUsersType;
+  students: usersDataType;
 }
 
-function courseDetails() {
+function courseDetails(props: courseDetailsType) {
   const router = useRouter();
 
   const { data: session, status } = useSession();
@@ -27,14 +30,8 @@ function courseDetails() {
     signOut({ callbackUrl: "/auth/signIn", redirect: false });
   }
 
-  const courseID = router.query.courseId;
-
-  const uniData = useAppSelector((state) => state.uniCourseData.uniCoursesData);
-
   //@ts-ignore
-  const courseData = uniData?.Courses?.find(
-    (course: courseAssignmentUsersType) => course.course_id == courseID
-  );
+  const courseData = props?.courseDetails;
 
   const myArray = [
     "https://images.unsplash.com/photo-1661961110671-77b71b929d52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
@@ -51,9 +48,12 @@ function courseDetails() {
 
   dispatch(setCourseDetailsData(courseData));
 
+  dispatch(setStudentsRoleData(props?.students));
+
   const coData = useAppSelector(
     (state) => state.courseDetailData.courseDetailsData
   );
+
 
   return (
     <>
@@ -78,8 +78,9 @@ function courseDetails() {
                 <div className="">
                   <UniCourseBanner courseDetails={coData} image={image} />
                 </div>
-                <div>
-                  <UsersTable />
+
+                <div className="mb-[2rem] lg:mb-[4rem]">
+                  <UserAssignmentTabs />
                 </div>
               </div>
               <motion.div
@@ -98,3 +99,115 @@ function courseDetails() {
 }
 
 export default courseDetails;
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signIn",
+        permanent: false,
+      },
+    };
+  }
+
+  if (session) {
+    // @ts-ignore
+    if (session?.error === "RefreshAccessTokenError") {
+      signOut({ callbackUrl: "/auth/signIn", redirect: true });
+    }
+    // @ts-ignore
+    if (session.data.user_status == "ACTIVE") {
+      // @ts-ignore
+      if (session.data.user_type == "STUDENT") {
+        return {
+          redirect: {
+            destination: "/student",
+            permanent: false,
+          },
+        };
+      }
+      // @ts-ignore
+      if (session.data.user_type == "INTERN") {
+        return {
+          redirect: {
+            // @ts-ignore
+            destination: `/intern/${session.data.user_id}`,
+            permanent: false,
+          },
+        };
+      }
+    } else {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
+  }
+
+  if (session) {
+    // @ts-ignore
+    if (session.data.user_status == "ACTIVE") {
+      let courseDetailsData = null;
+
+      const { courseId } = context.query;
+
+      const customConfig = {
+        headers: {
+          "Content-Type": "application/json",
+          // @ts-ignore
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      };
+      try {
+        const cDRes = await axios.get(
+          `${process.env.SIDEHUSSLR_TEST_API}/course/details/${courseId}`,
+          customConfig
+        );
+
+        if (cDRes?.data?.status < "300") {
+          if (cDRes?.data?.success) {
+            courseDetailsData = await cDRes.data.data;
+          }
+        }
+      } catch (err) {
+        // Handle error
+        console.log(err);
+      }
+
+      let studentsData = null;
+      const customConfig1 = {
+        headers: {
+          "Content-Type": "application/json",
+          // @ts-ignore
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      };
+
+      try {
+        const studRes = await axios.get(
+          `${process.env.SIDEHUSSLR_TEST_API}/users/students`,
+          customConfig1
+        );
+
+        if (studRes?.data?.status < "300") {
+          if (studRes?.data?.success) {
+            studentsData = await studRes.data.data;
+          }
+        }
+      } catch (err) {
+        // Handle error
+        console.log(err);
+      }
+     
+      return {
+        props: {
+          courseDetails: courseDetailsData,
+          students: studentsData,
+        },
+      };
+    }
+  }
+}
