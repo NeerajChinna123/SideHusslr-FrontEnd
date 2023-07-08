@@ -307,7 +307,7 @@ function UserEnrollmentFormModal(props: universityModalData) {
               {addUserList.length > 0 && (
                 <div className="flex flex-row flex-wrap space-x-3 mt-6">
                   {addUserList?.map((userToAdd: usersDataType) => (
-                    <div className="p-2 rounded-xl mb-2 flex items-center space-x-2 flex-row text-black border border-red-600">
+                    <div key={userToAdd?.username} className="p-2 rounded-xl mb-2 flex items-center space-x-2 flex-row text-black border border-red-600">
                       <p> {userToAdd?.username}</p>
                       <div
                         onClick={() => removeUser(userToAdd?.user_id)}
