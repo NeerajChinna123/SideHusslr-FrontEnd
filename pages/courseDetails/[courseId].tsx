@@ -16,10 +16,12 @@ export interface courseDetailsType {
   students: usersDataType;
 }
 
-function courseDetails(props: courseDetailsType) {
-  const router = useRouter();
+const router = useRouter();
 
-  const { data: session, status } = useSession();
+const { data: session, status } = useSession();
+
+function courseDetails(props: courseDetailsType) {
+
   if (!session && status == "unauthenticated") {
     router.push("/auth/signIn");
   }
