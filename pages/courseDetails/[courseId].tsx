@@ -1,41 +1,27 @@
-import { useAppSelector } from "../../hooks";
-import { signIn, signOut, useSession, getSession } from "next-auth/react";
-import { studentDataType } from "../../typings";
-import { motion, AnimateSharedLayout } from "framer-motion";
-import axios from "axios";
+import { courseAssignmentUsersType, usersDataType } from "../../typings";
 import { useRouter } from "next/router";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { signIn, signOut, useSession, getSession } from "next-auth/react";
+import { motion, AnimateSharedLayout } from "framer-motion";
 import Header from "../../components/Header";
 import Footer from "../../containers/Footer";
-import CourseBanner from "../../containers/CourseBanner";
-import CourseAssignments from "../../containers/CourseAssignments";
+import axios from "axios";
+import { setCourseDetailsData } from "../../slice/courseDetailsSlice";
+import UniCourseBanner from "../../containers/UniCourseBanner";
+import UserAssignmentTabs from "../../containers/UserAssignmentTabs";
+import { setStudentsRoleData } from "../../slice/studentsDataSlice";
 
-
-export interface propsData {
-  courseDetails: studentDataType;
+export interface courseDetailsType {
+  courseDetails: courseAssignmentUsersType;
+  students: usersDataType;
 }
 
-function CourseDetails(props: propsData) {
-
-
+function CourseDetails(props: courseDetailsType) {
   const router = useRouter();
 
   const { data: session, status } = useSession();
 
-  // if (session && status == "authenticated") {
-  //   // @ts-ignore
-  //   if (session.data.user_status == "ACTIVE") {
-  //     // @ts-ignore
-  //     if (session.data.user_type == "ADMIN") {
-  //       router.push("/admin");
-  //     }
-  //     // @ts-ignore
-  //     if (session.data.user_type == "INTERN") {
-  //       router.push(`/intern/${session.data.user_id}`);
-  //     }
-  //   } else {
-  //     router.push("/");
-  //   }
-  // }
+  const dispatch = useAppDispatch();
 
   if (!session && status == "unauthenticated") {
     router.push("/auth/signIn");
@@ -46,6 +32,9 @@ function CourseDetails(props: propsData) {
   if (session?.error === "RefreshAccessTokenError") {
     signOut({ callbackUrl: "/auth/signIn", redirect: false });
   }
+
+  //@ts-ignore
+  const courseData = props?.courseDetails;
 
   const myArray = [
     "https://images.unsplash.com/photo-1661961110671-77b71b929d52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
@@ -58,6 +47,14 @@ function CourseDetails(props: propsData) {
 
   const image = myArray[Math.floor(Math.random() * myArray.length)];
 
+  dispatch(setCourseDetailsData(courseData));
+
+  dispatch(setStudentsRoleData(props?.students));
+
+  const coData = useAppSelector(
+    (state) => state.courseDetailData.courseDetailsData
+  );
+
   return (
     <>
       {session &&
@@ -65,7 +62,7 @@ function CourseDetails(props: propsData) {
         // @ts-ignore
         session.data.user_status == "ACTIVE" &&
         // @ts-ignore
-        session.data.user_type == "STUDENT" && (
+        session.data.user_type == "ADMIN" && (
           <AnimateSharedLayout>
             <main className="h-screen scroll-smooth bg-gradient-to-br from-red-50 via-white to-red-50  scrollbar-w-[5px] scrollbar-thin md:scrollbar-w-[8px] z-100 scrollbar-thumb-red-600  scrollbar-thumb-rounded-full  scrollbar-thumb-h-[2rem]">
               <div className="">
@@ -79,14 +76,11 @@ function CourseDetails(props: propsData) {
                   </div>
                 </div>
                 <div className="">
-                  <CourseBanner data={props?.courseDetails} image={image} />
+                  <UniCourseBanner courseDetails={coData} image={image} />
                 </div>
-                <div className="mb-0 md:mb-12 md:px-4 lg:px-0">
-                  {/* @ts-ignore */}
-                  <CourseAssignments
-                    data={props?.courseDetails?.StudentAssignmentInstructors}
-                    heading="Assignments / Projects"
-                  />
+
+                <div className="mb-[2rem] lg:mb-[4rem]">
+                  <UserAssignmentTabs />
                 </div>
               </div>
               <motion.div
@@ -125,10 +119,10 @@ export async function getServerSideProps(context: any) {
     // @ts-ignore
     if (session.data.user_status == "ACTIVE") {
       // @ts-ignore
-      if (session.data.user_type == "ADMIN") {
+      if (session.data.user_type == "STUDENT") {
         return {
           redirect: {
-            destination: "/admin",
+            destination: "/student",
             permanent: false,
           },
         };
@@ -153,36 +147,67 @@ export async function getServerSideProps(context: any) {
     }
   }
 
-  let courseDetails = null;
+  if (session) {
+    // @ts-ignore
+    if (session.data.user_status == "ACTIVE") {
+      let courseDetailsData = null;
 
-  const { studCour } = context.query;
+      const { courseId } = context.query;
 
-  const customConfig = {
-    headers: {
-      "Content-Type": "application/json",
-      // @ts-ignore
-      Authorization: `Bearer ${session.accessToken}`,
-    },
-  };
-  try {
-    const courseDetailsRes = await axios.get(
-      `${process.env.SIDEHUSSLR_TEST_API}/course/student/assignment/detail/${studCour}`,
-      customConfig
-    );
+      const customConfig = {
+        headers: {
+          "Content-Type": "application/json",
+          // @ts-ignore
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      };
+      try {
+        const cDRes = await axios.get(
+          `${process.env.SIDEHUSSLR_TEST_API}/course/details/${courseId}`,
+          customConfig
+        );
 
-    if (courseDetailsRes?.data?.status < "300") {
-      if (courseDetailsRes?.data?.success) {
-        courseDetails = await courseDetailsRes.data.data;
+        if (cDRes?.data?.status < "300") {
+          if (cDRes?.data?.success) {
+            courseDetailsData = await cDRes.data.data;
+          }
+        }
+      } catch (err) {
+        // Handle error
+        console.log(err);
       }
-    }
-  } catch (err) {
-    // Handle error
-    console.log("", err);
-  }
 
-  return {
-    props: {
-      courseDetails,
-    },
-  };
+      let studentsData = null;
+      const customConfig1 = {
+        headers: {
+          "Content-Type": "application/json",
+          // @ts-ignore
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      };
+
+      try {
+        const studRes = await axios.get(
+          `${process.env.SIDEHUSSLR_TEST_API}/users/students`,
+          customConfig1
+        );
+
+        if (studRes?.data?.status < "300") {
+          if (studRes?.data?.success) {
+            studentsData = await studRes.data.data;
+          }
+        }
+      } catch (err) {
+        // Handle error
+        console.log(err);
+      }
+
+      return {
+        props: {
+          courseDetails: courseDetailsData,
+          students: studentsData,
+        },
+      };
+    }
+  }
 }

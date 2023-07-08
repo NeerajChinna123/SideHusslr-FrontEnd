@@ -7,17 +7,18 @@ import Header from "../../components/Header";
 import Footer from "../../containers/Footer";
 import UniversityBanner from "../../containers/UniversityBanner";
 import { universityDetailsType } from "../../typings";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { setUniversitiesCoursesData } from "../../slice/uniCourseSlice";
+import UniCourses from "../../containers/UniCourses";
 
 export interface propsData {
-  uniData: [universityDetailsType];
+  uniData: universityDetailsType;
 }
 
 function UniversityDetails(props: propsData) {
   const router = useRouter();
 
   const { data: session, status } = useSession();
-
-  console.log("uni-data : ", props.uniData);
 
   //   if (session && status == "authenticated") {
   //     // @ts-ignore
@@ -35,6 +36,12 @@ function UniversityDetails(props: propsData) {
   //       router.push("/");
   //     }
   //   }
+
+
+
+  const dispatch = useAppDispatch();
+
+  dispatch(setUniversitiesCoursesData(props?.uniData));
 
   if (!session && status == "unauthenticated") {
     router.push("/auth/signIn");
@@ -69,8 +76,15 @@ function UniversityDetails(props: propsData) {
               </div>
 
               <div>
-                <UniversityBanner />
+                {props?.uniData && (
+                  <UniversityBanner universityData={props?.uniData} />
+                )}
               </div>
+
+              <div className="max-w-7xl mx-auto mt-8 mb-10">
+                <UniCourses />
+              </div>
+
               <motion.div
                 layout
                 className="bg-gradient-to-br from-black via-black  to-[#85002a] "

@@ -17,6 +17,7 @@ export default function Modal({
   resetData,
   successData,
   setSuccessData,
+
 }: {
   children: React.ReactNode;
   showModal: boolean;
@@ -40,6 +41,7 @@ export default function Modal({
   if (successData) {
     setShowModal(false);
     resetData();
+    
     setSuccessData(false);
   }
 
