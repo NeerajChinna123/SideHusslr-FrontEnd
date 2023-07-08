@@ -16,7 +16,7 @@ export interface courseDetailsType {
   students: usersDataType;
 }
 
-function courseDetails(props: courseDetailsType) {
+function CourseDetails(props: courseDetailsType) {
   const router = useRouter();
 
   const { data: session, status } = useSession();
@@ -98,7 +98,7 @@ function courseDetails(props: courseDetailsType) {
   );
 }
 
-export default courseDetails;
+export default CourseDetails;
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);

@@ -251,7 +251,7 @@ function UserEnrollmentFormModal(props: universityModalData) {
 
               <div className="scroll-smooth space-y-8 w-[90%] px-4 mx-auto flex-col max-h-[14rem] overflow-scroll overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-full scrollbar-track-rounded-full  scrollbar-thumb-h-[2rem]  scrollbar-w-[0.3rem] md:scrollbar-w-[0.2rem] mt-6">
                 {filteredD?.map((user: usersDataType) => (
-                  <div className="flex flex-row space-x-8 items-center">
+                  <div key={user?.username} className="flex flex-row space-x-8 items-center">
                     {user?.image ? (
                       <img
                         className="rounded-full h-10 w-10 object-contain"
