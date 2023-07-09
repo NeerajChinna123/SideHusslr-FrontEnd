@@ -10,20 +10,22 @@ import "react-toastify/dist/ReactToastify.css";
 import { FADE_IN_ANIMATION_SETTINGS } from "../lib/constants";
 import { useRouter } from "next/router";
 
-export interface universityModalData {
-  showUniversityModal: boolean;
-  setShowUniversityModal: Dispatch<SetStateAction<boolean>>;
+export interface assignmentModalData {
+  showAssignmentModal: boolean;
+  setShowAssignmentModal: Dispatch<SetStateAction<boolean>>;
+  courseId: string;
 }
 
-interface UniversityFormInput {
+interface AssignmentFormInput {
   jwtToken: string;
   name: string;
   description: string;
-  country: string;
-  image: string;
+  start_date: string;
+  end_date: string;
+  course_id: string;
 }
 
-function UniversityFormModal(props: universityModalData) {
+function AssignmentFormModal(props: assignmentModalData) {
   const [error, setError] = useState<any>();
 
   const { data: session } = useSession();
@@ -33,7 +35,7 @@ function UniversityFormModal(props: universityModalData) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<UniversityFormInput>();
+  } = useForm<AssignmentFormInput>();
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -50,25 +52,74 @@ function UniversityFormModal(props: universityModalData) {
     router.replace(router.asPath);
   };
 
-  const onSubmit: SubmitHandler<UniversityFormInput> = async (data) => {
+  function getTimezoneOffsetString(offset: any) {
+    const sign = offset > 0 ? "-" : "+";
+    const absoluteOffset = Math.abs(offset);
+    const hours = String(Math.floor(absoluteOffset / 60)).padStart(2, "0");
+    const minutes = String(absoluteOffset % 60).padStart(2, "0");
+    return `${sign}${hours}:${minutes}`;
+  }
+
+  const onSubmit: SubmitHandler<AssignmentFormInput> = async (data) => {
     setSubmitting(true);
     console.log("data", data);
     //post request
 
-    const payload = data;
+    let startDateString = "";
+    let endDateString = "";
+
+    if (data) {
+      const startDate = new Date(data?.start_date);
+      const year = startDate.getFullYear();
+      const month = String(startDate.getMonth() + 1).padStart(2, "0");
+      const day = String(startDate.getDate()).padStart(2, "0");
+      const hours = String(startDate.getHours()).padStart(2, "0");
+      const minutes = String(startDate.getMinutes()).padStart(2, "0");
+      const seconds = String(startDate.getSeconds()).padStart(2, "0");
+      const milliseconds = String(startDate.getMilliseconds()).padStart(3, "0");
+      const timezoneOffset = startDate.getTimezoneOffset();
+
+      startDateString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds} ${getTimezoneOffsetString(
+        timezoneOffset
+      )}`;
+
+      const endDate = new Date(data?.end_date);
+
+      const yearE = endDate.getFullYear();
+      const monthE = String(endDate.getMonth() + 1).padStart(2, "0");
+      const dayE = String(endDate.getDate()).padStart(2, "0");
+      const hoursE = String(endDate.getHours()).padStart(2, "0");
+      const minutesE = String(endDate.getMinutes()).padStart(2, "0");
+      const secondsE = String(endDate.getSeconds()).padStart(2, "0");
+      const millisecondsE = String(endDate.getMilliseconds()).padStart(3, "0");
+      const timezoneOffsetE = endDate.getTimezoneOffset();
+
+      endDateString = `${yearE}-${monthE}-${dayE} ${hoursE}:${minutesE}:${secondsE}.${millisecondsE} ${getTimezoneOffsetString(
+        timezoneOffsetE
+      )}`;
+    }
+
+    const payload = {
+      name: data?.name,
+      description: data?.description,
+      course_id: props?.courseId,
+      status: "OPEN",
+      start_date: startDateString,
+      end_date: endDateString,
+    };
     const customConfig = {
       headers: {
         "Content-Type": "application/json",
         // @ts-ignore
         Authorization: `Bearer ${session.accessToken}`,
       },
-      withCredentials:true
+      withCredentials: true,
     };
     console.log("s-c", success);
 
     try {
       const res = await axios.post(
-        `${process.env.SIDEHUSSLR_TEST_API}/university`,
+        `${process.env.SIDEHUSSLR_TEST_API}/university/course/assignment`,
         payload,
         customConfig
       );
@@ -77,7 +128,7 @@ function UniversityFormModal(props: universityModalData) {
         delay(1000).then(() => {
           setSuccess(true);
           //   notify();
-          toast.success("University Created Successfully!", {
+          toast.success("Assignment Created Successfully!", {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: false,
@@ -108,15 +159,16 @@ function UniversityFormModal(props: universityModalData) {
     <>
       <ToastContainer className="font-bold text-sm text-black tracking-wide font-poppins" />
       <Modal
-        showModal={props.showUniversityModal}
-        setShowModal={props.setShowUniversityModal}
+        showModal={props.showAssignmentModal}
+        setShowModal={props.setShowAssignmentModal}
         successData={success}
         resetData={() => {
           reset({
             name: "",
             description: "",
-            country: "",
-            image: "",
+            start_date: "",
+            end_date: "",
+            // status: "",
           });
         }}
         setSuccessData={setSuccess}
@@ -125,7 +177,7 @@ function UniversityFormModal(props: universityModalData) {
           <div className="flex flex-col  justify-center bg-white py-6 px-6">
             <div className="pb-4">
               <p className="text-gray-600 font-semibold text-3xl font-sanSerif">
-                Create University
+                Create Assignment
               </p>
             </div>
             <div className="text-red-600 font-semibold text-md text-center  p-2">
@@ -140,9 +192,16 @@ function UniversityFormModal(props: universityModalData) {
                 //@ts-ignore
                 value={`${session?.accessToken}`}
               />
+              <input
+                {...register("course_id")}
+                name="course_id"
+                type="hidden"
+                //@ts-ignore
+                value={`${props?.courseId}`}
+              />
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  University Name *
+                  Assignment Name *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
@@ -155,7 +214,7 @@ function UniversityFormModal(props: universityModalData) {
               </div>
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  Description *
+                  Assignment Description *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
@@ -168,26 +227,28 @@ function UniversityFormModal(props: universityModalData) {
               </div>
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  Country *
+                  Start Date *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
-                  type="text"
+                  type="datetime-local"
                   placeholder="Enter Country Name"
-                  {...register("country", {
+                  {...register("start_date", {
                     required: true,
                   })}
                 ></input>
               </div>
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  Image
+                  End Date *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
-                  type="text"
+                  type="datetime-local"
                   placeholder="Enter Logo URL"
-                  {...register("image")}
+                  {...register("end_date", {
+                    required: true,
+                  })}
                 ></input>
               </div>
 
@@ -196,25 +257,30 @@ function UniversityFormModal(props: universityModalData) {
                   <div className="flex flex-col p-3">
                     {errors.name && (
                       <span className="text-red-500">
-                        - University Name is required
-                      </span>
-                    )}
-
-                    {errors.country && (
-                      <span className="text-red-500">
-                        - Country is required
+                        - Assignment Name is required
                       </span>
                     )}
 
                     {errors.description && (
                       <span className="text-red-500">
-                        - Description is required
+                        - Assignment Description is required
+                      </span>
+                    )}
+
+                    {errors.start_date && (
+                      <span className="text-red-500">
+                        - Start Date is required
+                      </span>
+                    )}
+
+                    {errors.end_date && (
+                      <span className="text-red-500">
+                        - End Date is required
                       </span>
                     )}
                   </div>
                 )}
               </div>
-
 
               <motion.div className="mt-5 md:mt-6">
                 <motion.button
@@ -230,7 +296,7 @@ function UniversityFormModal(props: universityModalData) {
                   {submitting ? (
                     <LoadingDots color="#ffffff" />
                   ) : (
-                    "Create University"
+                    "Create Assignment"
                   )}
                 </motion.button>
               </motion.div>
@@ -242,4 +308,4 @@ function UniversityFormModal(props: universityModalData) {
   );
 }
 
-export default UniversityFormModal;
+export default AssignmentFormModal;

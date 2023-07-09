@@ -100,7 +100,7 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
     } catch (err) {
       // Handle error
       //@ts-ignore
-      setError(err.message);
+      setError(err?.response?.data?.message);
       setSuccess(false);
       setSubmitting(false);
     }

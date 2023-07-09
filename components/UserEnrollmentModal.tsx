@@ -7,6 +7,7 @@ import axios from "axios";
 import LoadingDots from "../icons/loading-dots";
 import { ToastContainer, toast } from "react-toastify";
 import { usersDataType } from "../typings";
+import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { UserIcon, XMarkIcon } from "@heroicons/react/24/solid";
@@ -111,7 +112,9 @@ function UserEnrollmentFormModal(props: universityModalData) {
           refreshData();
         });
       } else {
+
         //@ts-ignore
+        
         setError(res?.message);
         setSuccess(false);
         setSubmitting(false);
@@ -119,8 +122,9 @@ function UserEnrollmentFormModal(props: universityModalData) {
       // Work with the response...
     } catch (err) {
       // Handle error
+
       //@ts-ignore
-      setError(err.message);
+      setError(err?.response?.data?.message);
       setSuccess(false);
       setSubmitting(false);
     }
@@ -152,8 +156,6 @@ function UserEnrollmentFormModal(props: universityModalData) {
     setFilteredD(filteredData);
   }
 
- 
-
   function addUser(userId: string) {
     const filteredAddUSerData = userDataSt.filter((userD: usersDataType) => {
       const { user_id } = userD;
@@ -180,7 +182,6 @@ function UserEnrollmentFormModal(props: universityModalData) {
 
     setAddUserList(filteredAddUSerData);
   }
-
 
   return (
     <>
@@ -231,7 +232,7 @@ function UserEnrollmentFormModal(props: universityModalData) {
                       filterUsers(e);
                     }}
                     type="text"
-                    placeholder="Search Users"
+                    placeholder="Search Students"
                     value={searchUserText}
                     className="flex-1 outline-none"
                   />
@@ -251,7 +252,10 @@ function UserEnrollmentFormModal(props: universityModalData) {
 
               <div className="scroll-smooth space-y-8 w-[90%] px-4 mx-auto flex-col max-h-[14rem] overflow-scroll overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-full scrollbar-track-rounded-full  scrollbar-thumb-h-[2rem]  scrollbar-w-[0.3rem] md:scrollbar-w-[0.2rem] mt-6">
                 {filteredD?.map((user: usersDataType) => (
-                  <div key={user?.username} className="flex flex-row space-x-8 items-center">
+                  <div
+                    key={user?.username}
+                    className="flex flex-row space-x-8 items-center"
+                  >
                     {user?.image ? (
                       <img
                         className="rounded-full h-10 w-10 object-contain"
@@ -307,7 +311,10 @@ function UserEnrollmentFormModal(props: universityModalData) {
               {addUserList.length > 0 && (
                 <div className="flex flex-row flex-wrap space-x-3 mt-6">
                   {addUserList?.map((userToAdd: usersDataType) => (
-                    <div key={userToAdd?.username} className="p-2 rounded-xl mb-2 flex items-center space-x-2 flex-row text-black border border-red-600">
+                    <div
+                      key={userToAdd?.username}
+                      className="p-2 rounded-xl mb-2 flex items-center space-x-2 flex-row text-black border border-red-600"
+                    >
                       <p> {userToAdd?.username}</p>
                       <div
                         onClick={() => removeUser(userToAdd?.user_id)}
