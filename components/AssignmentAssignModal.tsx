@@ -100,12 +100,12 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
     // }));
 
     const payload = {
-        assignment_status:"OPEN",
-        //@ts-ignore
-        student_course_id:selectStudent?.user_id,
-        assignment_id:props?.assignmentId,
-        //@ts-ignore
-        user_id:selectIntern?.user_id
+      assignment_status: "OPEN",
+      //@ts-ignore
+      student_course_id: selectStudent?.user_id,
+      assignment_id: props?.assignmentId,
+      //@ts-ignore
+      user_id: selectIntern?.user_id,
     };
 
     const customConfig = {
@@ -313,6 +313,7 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
                       setSearchUserText("");
                       setFilteredD(userDataSt);
                     }}
+                    className="cursor-pointer"
                   >
                     {searchUserText.length > 0 && (
                       <XCircleIcon className="h-6 w-6" />
@@ -402,6 +403,7 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
                         setSearchUserTextI("");
                         setFilteredDI(userDataStI);
                       }}
+                      className="cursor-pointer"
                     >
                       {searchUserTextI.length > 0 && (
                         <XCircleIcon className="h-6 w-6" />
@@ -495,7 +497,7 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-row space-x-2 mt-4 pr-3 ">
+                  <div className="flex flex-row space-x-2 mt-4 pr-4  ">
                     <ArrowLeftIcon className="h-3 w-3" />{" "}
                     <ArrowRightIcon className="h-3 w-3" />
                   </div>
