@@ -242,6 +242,7 @@ function UserEnrollmentFormModal(props: universityModalData) {
                       setSearchUserText("");
                       setFilteredD(userDataSt);
                     }}
+                    className="cursor-pointer"
                   >
                     {searchUserText.length > 0 && (
                       <XCircleIcon className="h-6 w-6" />

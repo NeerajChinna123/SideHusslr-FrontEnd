@@ -20,7 +20,7 @@ function Assignments() {
 
   const [assignmentAssignModal, setAssignmentAssignModal] = useState(false);
 
-  console.log("cde ->", courseDe);
+  const [more, setMore] = useState(false);
 
   const formatDate = (dateString: any) => {
     const date = new Date(dateString);
@@ -36,11 +36,21 @@ function Assignments() {
     return date.toLocaleString("en-US", options);
   };
 
-  const [assignmentId,setAssignmentId] = useState("");
+  const [assignmentId, setAssignmentId] = useState("");
 
-  function showAssignmentAssignPopUp(assignmentID:string){
-     setAssignmentId(assignmentID);
-     setAssignmentAssignModal(true);
+
+  const [showMoreStates, setShowMoreStates] = useState(courseDe?.Assignments?.map(() => false));
+
+  const handleShowMoreClick = (index:number) => {
+    // Create a copy of the showMoreStates array and set the clicked element to true
+    const newShowMoreStates = [...showMoreStates];
+    newShowMoreStates[index] = true;
+    setShowMoreStates(newShowMoreStates);
+  };
+
+  function showAssignmentAssignPopUp(assignmentID: string) {
+    setAssignmentId(assignmentID);
+    setAssignmentAssignModal(true);
   }
 
   return (
@@ -104,16 +114,33 @@ function Assignments() {
               </thead>
               <tbody>
                 {courseDe?.Assignments?.map(
-                  (Assignment: AssignmentDataType) => (
-                    <tr key={Assignment?.assignment_id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  (Assignment: AssignmentDataType,index:number) => (
+                    <tr
+                      key={Assignment?.assignment_id}
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                    >
                       <td
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         {Assignment?.name}
                       </td>
-                      <td className="px-6 py-4  h-[6rem] max-h-[2rem] overflow-y-scroll">
-                        {Assignment?.description}
+                      <td className="px-6 py-4 ">
+                        {!showMoreStates[index] ? (
+                          Assignment?.description?.length > 99 ? (
+                            <p className="max-h-[4rem] pr-4 overflow-y-scroll">
+                              {Assignment?.description?.slice(0, 100)}{" "}
+                              <span onClick={()=>handleShowMoreClick(index)} className="text-gray-700 font-bold cursor-pointer">
+                                {" "}
+                                more ..
+                              </span>
+                            </p>
+                          ) : (
+                            <p className="max-h-[4rem] pr-4 overflow-y-scroll">{Assignment?.description}</p>
+                          )
+                        ) : (
+                          <p className="max-h-[4rem] pr-4 overflow-y-scroll">{Assignment?.description}</p>
+                        )}
                       </td>
 
                       <td className="px-6 py-4">
@@ -131,7 +158,11 @@ function Assignments() {
                       <td className="">
                         <div className="rounded-full px-3 py-4 ">
                           <motion.div
-                              onClick={() => showAssignmentAssignPopUp(Assignment?.assignment_id)}
+                            onClick={() =>
+                              showAssignmentAssignPopUp(
+                                Assignment?.assignment_id
+                              )
+                            }
                             whileTap={{ scale: 0.96 }}
                             className="bg-red-600 p-4 shadow-md shadow-gray-400 flex justify-center cursor-pointer self-end rounded-full"
                           >
