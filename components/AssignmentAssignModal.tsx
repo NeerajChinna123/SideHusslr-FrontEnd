@@ -48,7 +48,7 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
   //learnerStates
 
   const userDataSt = useAppSelector(
-    (state) => state.studentRoleData.studentsRoleData
+    (state) => state.courseDetailData.courseDetailsData.Users
   );
 
   const [errorT, setErrorT] = useState(false);
@@ -62,7 +62,7 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
   //InternStates
 
   const userDataStI = useAppSelector(
-    (state) => state.studentRoleData.studentsRoleData
+    (state) => state.internRoleData.internsRoleData
   );
 
   const [errorTI, setErrorTI] = useState(false);
@@ -102,7 +102,9 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
     const payload = {
       assignment_status: "OPEN",
       //@ts-ignore
-      student_course_id: selectStudent?.user_id,
+      student_course_id:
+        //@ts-ignore
+        selectStudent?.StudentCourseEnrollment?.student_course_id,
       assignment_id: props?.assignmentId,
       //@ts-ignore
       user_id: selectIntern?.user_id,
@@ -119,7 +121,7 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
 
     try {
       const res = await axios.post(
-        `${process.env.SIDEHUSSLR_TEST_API}/university/course/assignment/assign`,
+        `${process.env.SIDEHUSSLR_TEST_API}/assignment/assign`,
         payload,
         customConfig
       );
@@ -128,7 +130,7 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
         delay(1000).then(() => {
           setSuccess(true);
           //   notify();
-          toast.success("User Enrolled Successfully!", {
+          toast.success("Assignment Assigned Successfully!", {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: false,
@@ -275,12 +277,12 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
               </p>
             </div>
             <div className="text-red-600 font-semibold text-md text-center  p-2">
-              {errorTI &&
+              {/* {errorTI &&
                 errorT &&
-                "Please Select a Student and an Intern To Procced"}
+                "Please Select a Student and an Intern To Procced"} */}
               {!errorTI && errorT && "Please Select Student To Procced"}
 
-              {errorTI && !errorT && "Please Select Intern To Procced"}
+              {/* {errorTI && !errorT && "Please Select Intern To Procced"} */}
 
               {error?.length > 0 && error}
             </div>
@@ -534,24 +536,33 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
                   <motion.button
                     whileTap={{ scale: 0.97 }}
                     onClick={
-                      Object.values(selectStudent).length > 0 &&
-                      Object.values(selectIntern).length > 0
+                      // Object.values(selectStudent).length > 0 &&
+                      // Object.values(selectIntern).length > 0
+                      //   ? //@ts-ignore
+                      //     () => {
+                      //       onSubmit();
+                      //     }
+                      //   : Object.values(selectStudent).length == 0 &&
+                      //     Object.values(selectIntern).length == 0
+                      //   ? () => {
+                      //       setErrorT(true);
+                      //       setErrorTI(true);
+                      //     }
+                      //   : Object.values(selectStudent).length == 0
+                      //   ? () => {
+                      //       setErrorT(true);
+                      //     }
+                      //   : () => {
+                      //       setErrorTI(true);
+                      //     }
+
+                      Object.values(selectStudent).length > 0
                         ? //@ts-ignore
                           () => {
                             onSubmit();
                           }
-                        : Object.values(selectStudent).length == 0 &&
-                          Object.values(selectIntern).length == 0
-                        ? () => {
-                            setErrorT(true);
-                            setErrorTI(true);
-                          }
-                        : Object.values(selectStudent).length == 0
-                        ? () => {
-                            setErrorT(true);
-                          }
                         : () => {
-                            setErrorTI(true);
+                            setErrorT(true);
                           }
                     }
                     disabled={submitting}

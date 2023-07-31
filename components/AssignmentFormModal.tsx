@@ -119,7 +119,7 @@ function AssignmentFormModal(props: assignmentModalData) {
 
     try {
       const res = await axios.post(
-        `${process.env.SIDEHUSSLR_TEST_API}/university/course/assignment`,
+        `${process.env.SIDEHUSSLR_TEST_API}/assignment`,
         payload,
         customConfig
       );

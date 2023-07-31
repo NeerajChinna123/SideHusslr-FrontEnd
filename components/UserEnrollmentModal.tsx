@@ -33,6 +33,12 @@ function UserEnrollmentFormModal(props: universityModalData) {
     (state) => state.studentRoleData.studentsRoleData
   );
 
+  const courseDetailsUserData = useAppSelector(
+    (state) => state.courseDetailData.courseDetailsData.Users
+  );
+
+  const filteredUsers = userDataSt.filter((user1:usersDataType) => !courseDetailsUserData.some((user2:usersDataType) => user2.user_id === user1.user_id));
+
   const { data: session } = useSession();
 
   const [errorT, setErrorT] = useState(false);
@@ -50,7 +56,7 @@ function UserEnrollmentFormModal(props: universityModalData) {
 
   const [success, setSuccess] = useState(false);
 
-  const [filteredD, setFilteredD] = useState(userDataSt);
+  const [filteredD, setFilteredD] = useState(filteredUsers);
 
   function delay(time: number) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -112,9 +118,8 @@ function UserEnrollmentFormModal(props: universityModalData) {
           refreshData();
         });
       } else {
-
         //@ts-ignore
-        
+
         setError(res?.message);
         setSuccess(false);
         setSubmitting(false);

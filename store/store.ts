@@ -5,6 +5,7 @@ import studentReducer from "../slice/studentSlice";
 import uniCoursesReducer from "../slice/uniCourseSlice";
 import courseDetailReducer from "../slice/courseDetailsSlice";
 import studentsDataReducer from "../slice/studentsDataSlice";
+import internsDataReducer from "../slice/internDataSlice";
 
 
 
@@ -15,7 +16,8 @@ export const store = configureStore({
     studentData:studentReducer,
     uniCourseData:uniCoursesReducer,
     courseDetailData:courseDetailReducer,
-    studentRoleData:studentsDataReducer
+    studentRoleData:studentsDataReducer,
+    internRoleData:internsDataReducer
   },
 });
 
