@@ -17,6 +17,11 @@ export interface usersDataType {
   user_status: string;
   image: string;
   status: string;
+  StudentCourseEnrollment: StudentCourseEnrollment;
+}
+
+export interface StudentCourseEnrollment {
+  student_course_id: string;
 }
 
 export interface universityDataType {

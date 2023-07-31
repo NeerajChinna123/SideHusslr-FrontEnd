@@ -7,6 +7,7 @@ import Header from "../../components/Header";
 import Footer from "../../containers/Footer";
 import axios from "axios";
 import { setCourseDetailsData } from "../../slice/courseDetailsSlice";
+import { setInternsRoleData } from "../../slice/internDataSlice";
 import UniCourseBanner from "../../containers/UniCourseBanner";
 import UserAssignmentTabs from "../../containers/UserAssignmentTabs";
 import { setStudentsRoleData } from "../../slice/studentsDataSlice";
@@ -14,6 +15,7 @@ import { setStudentsRoleData } from "../../slice/studentsDataSlice";
 export interface courseDetailsType {
   courseDetails: courseAssignmentUsersType;
   students: usersDataType;
+  internsData:usersDataType
 }
 
 function CourseDetails(props: courseDetailsType) {
@@ -50,6 +52,8 @@ function CourseDetails(props: courseDetailsType) {
   dispatch(setCourseDetailsData(courseData));
 
   dispatch(setStudentsRoleData(props?.students));
+
+  dispatch(setInternsRoleData(props?.internsData));
 
   const coData = useAppSelector(
     (state) => state.courseDetailData.courseDetailsData
@@ -202,10 +206,37 @@ export async function getServerSideProps(context: any) {
         console.log(err);
       }
 
+
+      let internsData = null;
+      const customConfig2 = {
+        headers: {
+          "Content-Type": "application/json",
+          // @ts-ignore
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      };
+
+      try {
+        const internRes = await axios.get(
+          `${process.env.SIDEHUSSLR_TEST_API}/users/intern`,
+          customConfig1
+        );
+
+        if (internRes?.data?.status < "300") {
+          if (internRes?.data?.success) {
+            internsData = await internRes.data.data;
+          }
+        }
+      } catch (err) {
+        // Handle error
+        console.log(err);
+      }
+
       return {
         props: {
           courseDetails: courseDetailsData,
           students: studentsData,
+          internsData:internsData
         },
       };
     }
