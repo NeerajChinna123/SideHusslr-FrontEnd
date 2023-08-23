@@ -89,8 +89,6 @@ function UserFormModal(props: userModalData) {
 
     const payload = data;
 
-    console.log("data", data);
-
     const customConfig = {
       headers: {
         "Content-Type": "application/json",
@@ -129,7 +127,7 @@ function UserFormModal(props: userModalData) {
     } catch (err) {
       // Handle error
       //@ts-ignore
-      setError(err.message);
+      setError(err?.response?.data?.message);
       setSuccess(false);
       setSubmitting(false);
     }
@@ -491,7 +489,6 @@ function UserFormModal(props: userModalData) {
                         - Location is required
                       </span>
                     )}
-                  
                   </div>
                 )}
               </div>

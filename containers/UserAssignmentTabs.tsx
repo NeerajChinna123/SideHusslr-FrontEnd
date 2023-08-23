@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import Universities from "./Universities";
-import Users from "./Users";
+import Assignments from "./Assignments";
 import UsersTable from "./UsersTable";
 
 const tabsData = [
-  
   {
     label: "Users",
     content: "Users",
@@ -72,8 +70,7 @@ export default function UserAssignmentTabs() {
         {tabsData[activeTabIndex].content == "Users" ? (
           <UsersTable />
         ) : (
-        //   <Users />
-        <p>assignments</p>
+          <Assignments />
         )}
       </div>
     </div>

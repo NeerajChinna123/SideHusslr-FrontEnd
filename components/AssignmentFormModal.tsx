@@ -10,22 +10,22 @@ import "react-toastify/dist/ReactToastify.css";
 import { FADE_IN_ANIMATION_SETTINGS } from "../lib/constants";
 import { useRouter } from "next/router";
 
-export interface universityCourseModalData {
-  universityID: string;
-  showUniversityCourseModal: boolean;
-  setShowUniversityCourseModal: Dispatch<SetStateAction<boolean>>;
+export interface assignmentModalData {
+  showAssignmentModal: boolean;
+  setShowAssignmentModal: Dispatch<SetStateAction<boolean>>;
+  courseId: string;
 }
 
-interface UniversityCourseFormInput {
+interface AssignmentFormInput {
   jwtToken: string;
   name: string;
   description: string;
-  duration: string;
-  university_id: string;
-  //   image: string;
+  start_date: string;
+  end_date: string;
+  course_id: string;
 }
 
-function UniversityCourseFormModal(props: universityCourseModalData) {
+function AssignmentFormModal(props: assignmentModalData) {
   const [error, setError] = useState<any>();
 
   const { data: session } = useSession();
@@ -35,7 +35,7 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<UniversityCourseFormInput>();
+  } = useForm<AssignmentFormInput>();
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -52,11 +52,60 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
     router.replace(router.asPath);
   };
 
-  const onSubmit: SubmitHandler<UniversityCourseFormInput> = async (data) => {
+  function getTimezoneOffsetString(offset: any) {
+    const sign = offset > 0 ? "-" : "+";
+    const absoluteOffset = Math.abs(offset);
+    const hours = String(Math.floor(absoluteOffset / 60)).padStart(2, "0");
+    const minutes = String(absoluteOffset % 60).padStart(2, "0");
+    return `${sign}${hours}:${minutes}`;
+  }
+
+  const onSubmit: SubmitHandler<AssignmentFormInput> = async (data) => {
     setSubmitting(true);
     //post request
 
-    const payload = data;
+    let startDateString = "";
+    let endDateString = "";
+
+    if (data) {
+      const startDate = new Date(data?.start_date);
+      const year = startDate.getFullYear();
+      const month = String(startDate.getMonth() + 1).padStart(2, "0");
+      const day = String(startDate.getDate()).padStart(2, "0");
+      const hours = String(startDate.getHours()).padStart(2, "0");
+      const minutes = String(startDate.getMinutes()).padStart(2, "0");
+      const seconds = String(startDate.getSeconds()).padStart(2, "0");
+      const milliseconds = String(startDate.getMilliseconds()).padStart(3, "0");
+      const timezoneOffset = startDate.getTimezoneOffset();
+
+      startDateString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds} ${getTimezoneOffsetString(
+        timezoneOffset
+      )}`;
+
+      const endDate = new Date(data?.end_date);
+
+      const yearE = endDate.getFullYear();
+      const monthE = String(endDate.getMonth() + 1).padStart(2, "0");
+      const dayE = String(endDate.getDate()).padStart(2, "0");
+      const hoursE = String(endDate.getHours()).padStart(2, "0");
+      const minutesE = String(endDate.getMinutes()).padStart(2, "0");
+      const secondsE = String(endDate.getSeconds()).padStart(2, "0");
+      const millisecondsE = String(endDate.getMilliseconds()).padStart(3, "0");
+      const timezoneOffsetE = endDate.getTimezoneOffset();
+
+      endDateString = `${yearE}-${monthE}-${dayE} ${hoursE}:${minutesE}:${secondsE}.${millisecondsE} ${getTimezoneOffsetString(
+        timezoneOffsetE
+      )}`;
+    }
+
+    const payload = {
+      name: data?.name,
+      description: data?.description,
+      course_id: props?.courseId,
+      status: "OPEN",
+      start_date: startDateString,
+      end_date: endDateString,
+    };
     const customConfig = {
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +117,7 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
 
     try {
       const res = await axios.post(
-        `${process.env.SIDEHUSSLR_TEST_API}/university/course`,
+        `${process.env.SIDEHUSSLR_TEST_API}/assignment`,
         payload,
         customConfig
       );
@@ -77,7 +126,7 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
         delay(1000).then(() => {
           setSuccess(true);
           //   notify();
-          toast.success("Course Created Successfully!", {
+          toast.success("Assignment Created Successfully!", {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: false,
@@ -108,15 +157,16 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
     <>
       <ToastContainer className="font-bold text-sm text-black tracking-wide font-poppins" />
       <Modal
-        showModal={props.showUniversityCourseModal}
-        setShowModal={props.setShowUniversityCourseModal}
+        showModal={props.showAssignmentModal}
+        setShowModal={props.setShowAssignmentModal}
         successData={success}
         resetData={() => {
           reset({
             name: "",
             description: "",
-            duration: "",
-            // image: "",
+            start_date: "",
+            end_date: "",
+            // status: "",
           });
         }}
         setSuccessData={setSuccess}
@@ -125,7 +175,7 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
           <div className="flex flex-col  justify-center bg-white py-6 px-6">
             <div className="pb-4">
               <p className="text-gray-600 font-semibold text-3xl font-sanSerif">
-                Create Course
+                Create Assignment
               </p>
             </div>
             <div className="text-red-600 font-semibold text-md text-center  p-2">
@@ -141,28 +191,20 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
                 value={`${session?.accessToken}`}
               />
               <input
-                {...register("university_id")}
-                name="jwtToken"
+                {...register("course_id")}
+                name="course_id"
                 type="hidden"
                 //@ts-ignore
-                value={`${props?.universityID}`}
-              />
-
-              <input
-                {...register("university_id")}
-                name="uniersityId"
-                type="hidden"
-                //@ts-ignore
-                value={``}
+                value={`${props?.courseId}`}
               />
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  Course Name *
+                  Assignment Name *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
                   type="text"
-                  placeholder="Enter Course Name"
+                  placeholder="Enter University Name"
                   {...register("name", {
                     required: true,
                   })}
@@ -170,12 +212,12 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
               </div>
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  Course Description *
+                  Assignment Description *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
                   type="text"
-                  placeholder="Enter Course Description"
+                  placeholder="Enter Description"
                   {...register("description", {
                     required: true,
                   })}
@@ -183,48 +225,55 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
               </div>
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  Course Duration *
+                  Start Date *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
-                  type="text"
-                  placeholder="Enter Course Duration"
-                  {...register("duration", {
+                  type="datetime-local"
+                  placeholder="Enter Country Name"
+                  {...register("start_date", {
                     required: true,
                   })}
                 ></input>
               </div>
-
-              {/* <div className="mt-3">
+              <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
-                  Image
+                  End Date *
                 </p>
                 <input
                   className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
-                  type="text"
+                  type="datetime-local"
                   placeholder="Enter Logo URL"
-                  {...register("image")}
+                  {...register("end_date", {
+                    required: true,
+                  })}
                 ></input>
-              </div> */}
+              </div>
 
               <div>
                 {Object.keys(errors).length > 0 && (
                   <div className="flex flex-col p-3">
                     {errors.name && (
                       <span className="text-red-500">
-                        - Course Name is required
-                      </span>
-                    )}
-
-                    {errors.duration && (
-                      <span className="text-red-500">
-                        - Course Duration is required
+                        - Assignment Name is required
                       </span>
                     )}
 
                     {errors.description && (
                       <span className="text-red-500">
-                        - Course Description is required
+                        - Assignment Description is required
+                      </span>
+                    )}
+
+                    {errors.start_date && (
+                      <span className="text-red-500">
+                        - Start Date is required
+                      </span>
+                    )}
+
+                    {errors.end_date && (
+                      <span className="text-red-500">
+                        - End Date is required
                       </span>
                     )}
                   </div>
@@ -245,7 +294,7 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
                   {submitting ? (
                     <LoadingDots color="#ffffff" />
                   ) : (
-                    "Create Course"
+                    "Create Assignment"
                   )}
                 </motion.button>
               </motion.div>
@@ -257,4 +306,4 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
   );
 }
 
-export default UniversityCourseFormModal;
+export default AssignmentFormModal;

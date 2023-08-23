@@ -6,9 +6,6 @@ import LoadingBar from "react-top-loading-bar";
 function Redirect() {
   const { data: session, status } = useSession();
 
-  console.log("sess-new ", session);
-  console.log("status-new ", status);
-
   const router = useRouter();
   const ref = useRef(null);
 

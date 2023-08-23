@@ -148,8 +148,6 @@ export async function getServerSideProps(context: any) {
       `${process.env.SIDEHUSSLR_TEST_API}/assignment/intern/assignments/assigned/${user}`,
       customConfig
     );
-
-    console.log("uni :", internRes);
     if (internRes?.data?.status < "300") {
       if (internRes?.data?.success) {
         internData = await internRes.data.data;

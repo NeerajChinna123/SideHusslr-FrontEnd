@@ -22,7 +22,6 @@ function UniCourses() {
   ];
 
   //@ts-ignore
-  console.log("uni-cou : ", universityCoursesDataSt?.Courses);
 
   const [pageSize, setPageSize] = useState(12);
 

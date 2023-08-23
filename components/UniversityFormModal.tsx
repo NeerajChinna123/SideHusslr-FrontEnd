@@ -52,7 +52,6 @@ function UniversityFormModal(props: universityModalData) {
 
   const onSubmit: SubmitHandler<UniversityFormInput> = async (data) => {
     setSubmitting(true);
-    console.log("data", data);
     //post request
 
     const payload = data;
@@ -64,7 +63,6 @@ function UniversityFormModal(props: universityModalData) {
       },
       withCredentials:true
     };
-    console.log("s-c", success);
 
     try {
       const res = await axios.post(
@@ -98,7 +96,7 @@ function UniversityFormModal(props: universityModalData) {
     } catch (err) {
       // Handle error
       //@ts-ignore
-      setError(err.message);
+      setError(err?.response?.data?.message);
       setSuccess(false);
       setSubmitting(false);
     }

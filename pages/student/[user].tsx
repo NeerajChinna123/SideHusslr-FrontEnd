@@ -159,7 +159,6 @@ export async function getServerSideProps(context: any) {
       customConfig
     );
 
-    console.log("uni :", studentRes);
     if (studentRes?.data?.status < "300") {
       if (studentRes?.data?.success) {
         studentData = await studentRes.data.data;

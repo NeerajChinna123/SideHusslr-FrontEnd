@@ -36,7 +36,6 @@ export default function SignIn({ csrfToken }: any) {
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setSubmitting(true);
-    console.log("data : ", data);
     const res = await signIn("credentials", {
       redirect: false,
       username: data.username,

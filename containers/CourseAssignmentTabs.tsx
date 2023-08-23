@@ -48,7 +48,6 @@ export default function CourseAssignmentTabs() {
     );
   });
   //@ts-ignore
-  console.log("ass : ", assignmentsOngoing);
 
   const tabsData = [
     {

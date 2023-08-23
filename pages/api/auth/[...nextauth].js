@@ -28,8 +28,6 @@ async function refreshAccessToken(tokenObject) {
       customConfig
     );
 
-    console.log("token-res : ", tokenResponse);
-
 
     return {
       ...tokenObject,
@@ -38,7 +36,6 @@ async function refreshAccessToken(tokenObject) {
       refreshToken: tokenResponse.data.refreshToken,
     };
   } catch (error) {
-    console.log("err - message", error.message);
     return {
       ...tokenObject,
       error: "RefreshAccessTokenError",
@@ -72,8 +69,6 @@ const nextAuthOptions = (req, res) => {
 
             res.setHeader("Set-Cookie", cookies);
 
-            console.log("re", response);
-
             const user = await response.data;
 
             if (response?.data?.success == false) {
@@ -86,7 +81,6 @@ const nextAuthOptions = (req, res) => {
             // Work with the response...
           } catch (err) {
             // Handle error
-            console.log("err", err.response);
             throw new Error(err.response.data.message);
           }
 
@@ -102,7 +96,6 @@ const nextAuthOptions = (req, res) => {
     },
     callbacks: {
       async jwt({ token, user, account }) {
-        console.log("acc-to-u :", user);
         if (account && user) {
           return {
             ...token,
