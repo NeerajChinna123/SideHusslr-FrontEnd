@@ -197,7 +197,7 @@ function UserEnrollmentFormModal(props: universityModalData) {
         successData={success}
         resetData={() => {
           setSearchUserText("");
-          setFilteredD(userDataSt);
+          setFilteredD(filteredUsers);
           setErrorT(false);
           setAddUserList([]);
           setError("");
