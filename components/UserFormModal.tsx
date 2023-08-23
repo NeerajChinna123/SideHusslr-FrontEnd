@@ -89,8 +89,6 @@ function UserFormModal(props: userModalData) {
 
     const payload = data;
 
-    console.log("data", data);
-
     const customConfig = {
       headers: {
         "Content-Type": "application/json",

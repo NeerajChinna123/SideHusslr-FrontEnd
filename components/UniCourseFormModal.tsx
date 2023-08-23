@@ -54,7 +54,6 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
 
   const onSubmit: SubmitHandler<UniversityCourseFormInput> = async (data) => {
     setSubmitting(true);
-    console.log("data uni -> ", data);
     //post request
 
     const payload = data;
@@ -66,7 +65,6 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
       },
       withCredentials: true,
     };
-    console.log("s-c", success);
 
     try {
       const res = await axios.post(

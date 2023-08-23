@@ -55,8 +55,6 @@ function AssignmentProject(props: AssignmentProjectData) {
 
   var AssignmentCompletionPer = (status / 5) * 100;
 
-  console.log("interndata prop :", props);
-
   return (
     <motion.div layout className="py-6">
       <motion.div layout className="flex justify-center mb-6">

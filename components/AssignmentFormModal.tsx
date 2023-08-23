@@ -62,7 +62,6 @@ function AssignmentFormModal(props: assignmentModalData) {
 
   const onSubmit: SubmitHandler<AssignmentFormInput> = async (data) => {
     setSubmitting(true);
-    console.log("data", data);
     //post request
 
     let startDateString = "";
@@ -115,7 +114,6 @@ function AssignmentFormModal(props: assignmentModalData) {
       },
       withCredentials: true,
     };
-    console.log("s-c", success);
 
     try {
       const res = await axios.post(

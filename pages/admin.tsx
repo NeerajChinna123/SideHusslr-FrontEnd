@@ -96,7 +96,6 @@ export async function getServerSideProps(context: any) {
   // security at server side to check the authentication status of the user
 
   //@ts-ignore
-  console.log("session-server : ", session);
 
   if (!session) {
     return {

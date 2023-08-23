@@ -27,8 +27,6 @@ function Course(props: StudentData) {
       assign?.assignment_status == "COMPLETED"
   );
 
-  console.log("comp : ", assignmentCompleted);
-
   const assignmentPending = props?.data?.StudentAssignmentInstructors?.filter(
     (assign: StudentAssignmentInstructorsType) =>
       assign?.assignment_status == "OPEN"
