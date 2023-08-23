@@ -13,7 +13,6 @@ async function refreshAccessToken(tokenObject) {
       refreshToken: tokenObject.refreshToken,
     };
 
-
     const customConfig = {
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +26,6 @@ async function refreshAccessToken(tokenObject) {
       payload,
       customConfig
     );
-
 
     return {
       ...tokenObject,
@@ -60,8 +58,8 @@ const nextAuthOptions = (req, res) => {
 
           try {
             const response = await axios.post(
-              `http://localhost:5001/auth/login`,
-              payload,
+              `${process.env.SIDEHUSSLR_TEST_API}/auth/refresh`,
+              process.env.payload,
               customConfig
             );
 
@@ -110,8 +108,9 @@ const nextAuthOptions = (req, res) => {
         //   token.accessTokenExpiry - Date.now()
         // );
 
-        const shouldRefreshTime = Math.round((token.accessTokenExpiry - 60 * 60 * 1000) - Date.now());
-
+        const shouldRefreshTime = Math.round(
+          token.accessTokenExpiry - 60 * 60 * 1000 - Date.now()
+        );
 
         if (shouldRefreshTime > 0) {
           return token;
