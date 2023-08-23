@@ -92,8 +92,8 @@ function Assignments() {
           ))} */}
 
           <div className="relative overflow-x-auto  shadow-md border border-gray-100  sm:rounded-lg">
-            <table className="w-full text-sm text-left  text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+            <table className="w-full text-sm text-left  text-gray-500 ">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-100">
                 <tr>
                   <th scope="col" className="px-6 py-3">
                     Assignment Name
@@ -117,11 +117,11 @@ function Assignments() {
                   (Assignment: AssignmentDataType,index:number) => (
                     <tr
                       key={Assignment?.assignment_id}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                      className="bg-white border-b   hover:bg-gray-50 "
                     >
                       <td
                         scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
                       >
                         {Assignment?.name}
                       </td>
@@ -164,7 +164,7 @@ function Assignments() {
                               )
                             }
                             whileTap={{ scale: 0.96 }}
-                            className="bg-red-600 p-4 shadow-md shadow-gray-400 flex justify-center cursor-pointer self-end rounded-full"
+                            className="bg-red-600 px-2 py-4 shadow-md shadow-gray-400 flex justify-center cursor-pointer self-end rounded-full"
                           >
                             <UserPlusIcon className="text-white h-5 w-5 md:h-7 md:w-7" />
                           </motion.div>
