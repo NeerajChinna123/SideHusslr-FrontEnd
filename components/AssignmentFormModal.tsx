@@ -20,6 +20,7 @@ interface AssignmentFormInput {
   jwtToken: string;
   name: string;
   description: string;
+  assignmentResource: string;
   start_date: string;
   end_date: string;
   course_id: string;
@@ -101,6 +102,7 @@ function AssignmentFormModal(props: assignmentModalData) {
     const payload = {
       name: data?.name,
       description: data?.description,
+      assignment_resource_link:data?.assignmentResource,
       course_id: props?.courseId,
       status: "OPEN",
       start_date: startDateString,
@@ -117,7 +119,7 @@ function AssignmentFormModal(props: assignmentModalData) {
 
     try {
       const res = await axios.post(
-        `${process.env.SIDEHUSSLR_TEST_API}/assignment`,
+        `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/assignment`,
         payload,
         customConfig
       );
@@ -223,6 +225,21 @@ function AssignmentFormModal(props: assignmentModalData) {
                   })}
                 ></input>
               </div>
+
+              <div className="mt-3">
+                <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
+                  Assignment Resource Link *
+                </p>
+                <input
+                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
+                  type="text"
+                  placeholder="Enter Assignment Link"
+                  {...register("assignmentResource", {
+                    required: true,
+                  })}
+                ></input>
+              </div>
+
               <div className="mt-3">
                 <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
                   Start Date *

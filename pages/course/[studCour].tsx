@@ -166,7 +166,7 @@ export async function getServerSideProps(context: any) {
   };
   try {
     const courseDetailsRes = await axios.get(
-      `${process.env.SIDEHUSSLR_TEST_API}/course/student/assignment/detail/${studCour}`,
+      `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/course/student/assignment/detail/${studCour}`,
       customConfig
     );
 
