@@ -22,7 +22,7 @@ async function refreshAccessToken(tokenObject) {
     };
 
     const tokenResponse = await axios.post(
-      `${process.env.SIDEHUSSLR_TEST_API}/auth/refresh`,
+      `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/auth/refresh`,
       payload,
       customConfig
     );
@@ -58,7 +58,7 @@ const nextAuthOptions = (req, res) => {
 
           try {
             const response = await axios.post(
-              `${process.env.SIDEHUSSLR_TEST_API}/auth/login`,
+              `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/auth/login`,
               payload,
               customConfig
             );

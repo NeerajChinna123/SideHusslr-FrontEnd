@@ -97,7 +97,7 @@ function UserEnrollmentFormModal(props: universityModalData) {
 
     try {
       const res = await axios.post(
-        `${process.env.SIDEHUSSLR_TEST_API}/course/bulk/enroll`,
+        `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/course/bulk/enroll`,
         payload,
         customConfig
       );

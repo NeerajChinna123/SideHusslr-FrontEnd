@@ -162,7 +162,7 @@ export async function getServerSideProps(context: any) {
   };
   try {
     const uniRes = await axios.get(
-      `${process.env.SIDEHUSSLR_TEST_API}/course/${uId}`,
+      `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/course/${uId}`,
       customConfig
     );
 

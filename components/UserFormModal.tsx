@@ -97,7 +97,7 @@ function UserFormModal(props: userModalData) {
 
     try {
       const res = await axios.post(
-        `${process.env.SIDEHUSSLR_TEST_API}/users`,
+        `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/users`,
         payload,
         customConfig
       );

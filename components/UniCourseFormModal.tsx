@@ -68,7 +68,7 @@ function UniversityCourseFormModal(props: universityCourseModalData) {
 
     try {
       const res = await axios.post(
-        `${process.env.SIDEHUSSLR_TEST_API}/university/course`,
+        `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/university/course`,
         payload,
         customConfig
       );

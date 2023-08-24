@@ -167,7 +167,7 @@ export async function getServerSideProps(context: any) {
       };
       try {
         const cDRes = await axios.get(
-          `${process.env.SIDEHUSSLR_TEST_API}/course/details/${courseId}`,
+          `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/course/details/${courseId}`,
           customConfig
         );
 
@@ -192,7 +192,7 @@ export async function getServerSideProps(context: any) {
 
       try {
         const studRes = await axios.get(
-          `${process.env.SIDEHUSSLR_TEST_API}/users/students`,
+          `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/users/students`,
           customConfig1
         );
 
@@ -218,7 +218,7 @@ export async function getServerSideProps(context: any) {
 
       try {
         const internRes = await axios.get(
-          `${process.env.SIDEHUSSLR_TEST_API}/users/intern`,
+          `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/users/intern`,
           customConfig1
         );
 

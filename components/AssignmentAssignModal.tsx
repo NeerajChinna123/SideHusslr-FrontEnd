@@ -28,11 +28,14 @@ interface UserEnrollmentFormInput {
   jwtToken: string;
   user_id: string;
   course_id: string;
+  assignmentLink:string;
   status: string;
 }
 
 function AssignmentAssignModal(props: AssignmentAssignModalData) {
   const { data: session } = useSession();
+
+  const [assignmentLink, setAssignmentLink] = useState('');
 
   const [error, setError] = useState<any>();
 
@@ -106,6 +109,7 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
         //@ts-ignore
         selectStudent?.StudentCourseEnrollment?.student_course_id,
       assignment_id: props?.assignmentId,
+      assignment_link:assignmentLink,
       //@ts-ignore
       user_id: selectIntern?.user_id,
     };
@@ -121,7 +125,7 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
 
     try {
       const res = await axios.post(
-        `${process.env.SIDEHUSSLR_TEST_API}/assignment/assign`,
+        `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/assignment/assign`,
         payload,
         customConfig
       );
@@ -286,7 +290,23 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
 
               {error?.length > 0 && error}
             </div>
+
+            <div className="mt-3">
+                <p className="text-gray-600 text-lg font-poppins font-semibold tracking-wide mb-1 opacity-70">
+                  Assignment Link *
+                </p>
+                <input
+                  className={`form-input mt-1 w-full  rounded-md border border-gray-300 bg-transparent py-3  pl-3 pr-4 font-ubuntu text-black shadow outline-none ring-red-500 focus:ring `}
+                  type="text"
+                  value={assignmentLink}
+                  onChange={(e)=>{setAssignmentLink(e.target.value)}}
+                  placeholder="Enter Assignment Link"
+                  required={true}
+                ></input>
+              </div>
+
             <div className="border-t border-gray-300"></div>
+            
             <div className="flex flex-col gap-2">
               {/* <input
                 {...register("jwtToken")}

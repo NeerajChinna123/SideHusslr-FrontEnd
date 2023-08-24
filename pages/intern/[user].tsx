@@ -145,7 +145,7 @@ export async function getServerSideProps(context: any) {
   };
   try {
     const internRes = await axios.get(
-      `${process.env.SIDEHUSSLR_TEST_API}/assignment/intern/assignments/assigned/${user}`,
+      `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/assignment/intern/assignments/assigned/${user}`,
       customConfig
     );
     if (internRes?.data?.status < "300") {

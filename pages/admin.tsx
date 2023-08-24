@@ -158,7 +158,7 @@ export async function getServerSideProps(context: any) {
 
       try {
         const userRes = await axios.get(
-          `${process.env.SIDEHUSSLR_TEST_API}/users`,
+          `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/users`,
           customConfig
         );
 
@@ -184,7 +184,7 @@ export async function getServerSideProps(context: any) {
       };
       try {
         const uniRes = await axios.get(
-          `${process.env.SIDEHUSSLR_TEST_API}/university`,
+          `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/university`,
           customConfig1
         );
 

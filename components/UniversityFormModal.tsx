@@ -66,10 +66,11 @@ function UniversityFormModal(props: universityModalData) {
 
     try {
       const res = await axios.post(
-        `${process.env.SIDEHUSSLR_TEST_API}/university`,
+        `${process.env.NEXT_PUBLIC_SIDEHUSSLR_TEST_API}/university`,  
         payload,
         customConfig
       );
+
       //@ts-ignore
       if (res?.status < "300") {
         delay(1000).then(() => {
