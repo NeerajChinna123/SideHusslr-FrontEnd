@@ -59,7 +59,7 @@ const nextAuthOptions = (req, res) => {
           try {
             const response = await axios.post(
               `${process.env.SIDEHUSSLR_TEST_API}/auth/login`,
-              process.env.payload,
+              payload,
               customConfig
             );
 
