@@ -92,7 +92,7 @@ function UserEnrollmentFormModal(props: universityModalData) {
         // @ts-ignore
         Authorization: `Bearer ${session.accessToken}`,
       },
-      withCredentials: true,
+      withCredentials: true
     };
 
     try {

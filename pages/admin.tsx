@@ -97,6 +97,7 @@ export async function getServerSideProps(context: any) {
 
   //@ts-ignore
 
+
   if (!session) {
     return {
       redirect: {
@@ -151,6 +152,7 @@ export async function getServerSideProps(context: any) {
       const customConfig = {
         headers: {
           "Content-Type": "application/json",
+          Cookie: context.req.headers.cookie,
           // @ts-ignore
           Authorization: `Bearer ${session.accessToken}`,
         },
@@ -199,6 +201,7 @@ export async function getServerSideProps(context: any) {
         // Handle error
         signOut({ callbackUrl: "/auth/signIn", redirect: false });
       }
+
 
       return {
         props: {

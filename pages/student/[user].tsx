@@ -149,6 +149,7 @@ export async function getServerSideProps(context: any) {
   const customConfig = {
     headers: {
       "Content-Type": "application/json",
+      Cookie: context.req.headers.cookie,
       // @ts-ignore
       Authorization: `Bearer ${session.accessToken}`,
     },
