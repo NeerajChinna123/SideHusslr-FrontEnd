@@ -114,6 +114,7 @@ function AssignmentAssignModal(props: AssignmentAssignModalData) {
       user_id: selectIntern?.user_id,
     };
 
+
     const customConfig = {
       headers: {
         "Content-Type": "application/json",
